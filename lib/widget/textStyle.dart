@@ -20,9 +20,7 @@ class TextWidget extends StatelessWidget {
       text1.toString(),
       textAlign: textAlign1 ?? TextAlign.start,
       style: TextStyle(
-          color: color1 ?? Colors.black,
-          fontSize: size1,
-          fontWeight: fontWeight1),
+          color: color1 ?? colortext, fontSize: size1, fontWeight: fontWeight1),
     );
   }
 }

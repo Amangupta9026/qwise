@@ -1,19 +1,14 @@
 import '../../utils/file_collection.dart';
-import '../sign_in/sign_in.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignInScreen extends StatefulWidget {
+  const SignInScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
-  bool agree = false;
-
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+class _SignInScreenState extends State<SignInScreen> {
+  TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   // Initially password is obscure
@@ -28,6 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         height: double.infinity,
         decoration: AppUtils.decoration1(),
@@ -35,14 +31,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 50.0),
-            child: signUp(),
+            child: signIn(),
           ),
         )),
       ),
     );
   }
 
-  Column signUp() {
+  Column signIn() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,7 +46,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              'Sign Up',
+              'Sign in',
               style: TextStyle(
                 color: primaryColor,
                 fontSize: 24.0,
@@ -79,43 +75,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'Create your QWise account to continue',
+          text1: 'Welcome back to QWise!',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'First Name',
-          size1: 18.0,
-          fontWeight1: FontWeight.w400,
-        ),
-        const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: firstNameController,
-        ),
-        const SizedBox(height: 20.0),
-        const TextWidget(
-          text1: 'Last Name',
+          text1: 'User Name',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
         TextFormFieldWidget(
-          controller1: lastNameController,
+          controller1: userNameController,
         ),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'Email Name',
-          size1: 18.0,
-          fontWeight1: FontWeight.w400,
-        ),
-        const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: emailController,
-        ),
-        const SizedBox(height: 20.0),
-        const TextWidget(
-          text1: 'Create Password',
+          text1: 'Password',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),
@@ -131,30 +107,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
             onPressed: toggle,
           ),
         ),
-        const SizedBox(height: 30.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Checkbox(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              checkColor: Colors.white,
-              fillColor: MaterialStateProperty.all(primaryColor),
-              value: agree,
-              onChanged: (value) {
-                setState(() {
-                  agree = value ?? false;
-                });
-              },
-            ),
-            const Flexible(
-              child: TextWidget(
-                text1: 'I have read and accept terms and conditions',
-                size1: 18.0,
-                fontWeight1: FontWeight.w400,
-              ),
-            ),
-          ],
+        const SizedBox(height: 20.0),
+        const Align(
+          alignment: Alignment.centerRight,
+          child: TextWidget(
+            textAlign1: TextAlign.end,
+            text1: 'Forgot Password?',
+            size1: 18.0,
+            fontWeight1: FontWeight.w400,
+          ),
         ),
         const SizedBox(height: 30.0),
         SizedBox(
@@ -167,12 +128,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   )),
                   foregroundColor: MaterialStateProperty.all(primaryColor),
                   backgroundColor: MaterialStateProperty.all(
-                      agree ? primaryColor : Colors.grey)),
+                      userNameController.text.isNotEmpty &&
+                              passwordController.text.isNotEmpty
+                          ? primaryColor
+                          : Colors.grey)),
               onPressed: () {
-                if (agree &&
-                    firstNameController.text.isNotEmpty &&
-                    lastNameController.text.isNotEmpty &&
-                    emailController.text.isNotEmpty &&
+                if (userNameController.text.isNotEmpty &&
                     passwordController.text.isNotEmpty) {
                   Navigator.push(
                     context,
@@ -180,9 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       builder: (context) => const SignInScreen(),
                     ),
                   );
-                } else if (firstNameController.text.isEmpty &&
-                    lastNameController.text.isEmpty &&
-                    emailController.text.isEmpty &&
+                } else if (userNameController.text.isEmpty &&
                     passwordController.text.isEmpty) {
                   showMyDialog(
                     context,
@@ -192,29 +151,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Navigator.of(context).pop();
                     },
                   );
-                } else if (firstNameController.text.isEmpty) {
+                } else if (userNameController.text.isEmpty) {
                   showMyDialog(
                     context,
-                    'Please fill first name field',
-                    'first name are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (lastNameController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill last name field',
-                    'last name are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (emailController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill email field',
-                    'email are required to fill',
+                    'Please fill user name field',
+                    'user name are required to fill',
                     () {
                       Navigator.of(context).pop();
                     },
@@ -228,15 +169,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Navigator.of(context).pop();
                     },
                   );
-                } else if (!agree) {
-                  showMyDialog(
-                    context,
-                    'Please accept terms and conditions',
-                    'checkbox are required to check',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
                 }
               },
 
@@ -245,7 +177,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0),
                 child: TextWidget(
-                  text1: 'Sign Up',
+                  text1: 'Sign in',
                   size1: 18.0,
                   color1: Colors.white,
                   fontWeight1: FontWeight.w400,
@@ -256,7 +188,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const Center(
           child: TextWidget(
             textAlign1: TextAlign.center,
-            text1: 'or Sign Up with',
+            text1: 'or Sign in with',
             size1: 18.0,
             fontWeight1: FontWeight.w400,
           ),
@@ -268,7 +200,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             iconReplaceFun(MdiIcons.google, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use “google.com” to sign up',
+                '“Wiseup” Wants to use “google.com” to sign in',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();
@@ -279,7 +211,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             iconReplaceFun(MdiIcons.facebook, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use facebook.com” to sign up',
+                '“Wiseup” Wants to use facebook.com” to sign in',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();
@@ -290,7 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             iconReplaceFun(MdiIcons.twitter, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use twitter.com” to sign up',
+                '“Wiseup” Wants to use twitter.com” to sign in',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();
@@ -301,7 +233,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             iconReplaceFun(MdiIcons.linkedin, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use linkedin.com” to sign up',
+                '“Wiseup” Wants to use linkedin.com” to sign in',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();

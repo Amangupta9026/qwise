@@ -14,6 +14,8 @@ Future<void> showMyDialog(BuildContext context, String? labelText1,
           fontWeight1: FontWeight.w600,
         ),
         content: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
             TextWidget(

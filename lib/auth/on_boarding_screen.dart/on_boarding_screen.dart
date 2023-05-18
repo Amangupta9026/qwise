@@ -109,7 +109,6 @@ class _OnBoardingState extends State<OnBoarding> {
                             shape: BoxShape.circle,
                           ),
                           child: const Icon(
-                            
                             Icons.arrow_back_ios,
                             color: Colors.white,
                           )),
@@ -152,38 +151,32 @@ class _OnBoardingState extends State<OnBoarding> {
               topRight: Radius.circular(30.0),
             ),
             child: Container(
+              decoration: AppUtils.decoration1(),
               width: double.infinity,
-              color: Colors.white,
               padding: const EdgeInsets.all(32.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   // Title
-                  Text(
-                    getTitle(contentState),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: "Sofia",
-                      color: Colors.black,
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  TextWidget(
+                    text1: getTitle(contentState),
+                    textAlign1: TextAlign.center,
+                    size1: 22,
+                    fontWeight1: FontWeight.w700,
                   ),
+
                   const SizedBox(
                     height: 16.0,
                   ),
                   // Description
-                  Text(
-                    getDescription(contentState),
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontFamily: "Sofia",
-                      color: Colors.black45,
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.w300,
-                    ),
+                  TextWidget(
+                    text1: getDescription(contentState),
+                    textAlign1: TextAlign.center,
+                    size1: 18,
+                    fontWeight1: FontWeight.w400,
                   ),
+
                   const SizedBox(
                     height: 40.0,
                   ),

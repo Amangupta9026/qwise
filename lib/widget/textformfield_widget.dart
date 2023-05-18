@@ -4,12 +4,14 @@ class TextFormFieldWidget extends StatelessWidget {
   final String? hinttext1;
   final Widget? iconButton1;
   final bool? obsecureText1;
+  final TextEditingController? controller1;
   const TextFormFieldWidget(
-      {super.key, this.hinttext1, this.iconButton1, this.obsecureText1});
+      {super.key, this.hinttext1, this.iconButton1, this.obsecureText1, this.controller1});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller1,
         style: const TextStyle(
           fontSize: 18,
         ),
