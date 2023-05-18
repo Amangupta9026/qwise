@@ -1,5 +1,5 @@
 import '../../utils/file_collection.dart';
-import '../../widget/textformfield_widget.dart';
+import '../../widget/alertdialogbox.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -62,13 +62,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ],
         ),
         const SizedBox(height: 20.0),
-        const TextStyleWidget(
+        const TextWidget(
           text1: 'Create your Wiseup account to continue',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 20.0),
-        const TextStyleWidget(
+        const TextWidget(
           text1: 'First Name',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
@@ -76,7 +76,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(height: 10.0),
         const TextFormFieldWidget(),
         const SizedBox(height: 20.0),
-        const TextStyleWidget(
+        const TextWidget(
           text1: 'Last Name',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
@@ -84,7 +84,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(height: 10.0),
         const TextFormFieldWidget(),
         const SizedBox(height: 20.0),
-        const TextStyleWidget(
+        const TextWidget(
           text1: 'Email Name',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
@@ -92,7 +92,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         const SizedBox(height: 10.0),
         const TextFormFieldWidget(),
         const SizedBox(height: 20.0),
-        const TextStyleWidget(
+        const TextWidget(
           text1: 'Create Password',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
@@ -127,7 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               },
             ),
             const Flexible(
-              child: TextStyleWidget(
+              child: TextWidget(
                 text1: 'I have read and accept terms and conditions',
                 size1: 18.0,
                 fontWeight1: FontWeight.w400,
@@ -152,7 +152,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               // agree ? _doSomething : null,
               child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0),
-                child: TextStyleWidget(
+                child: TextWidget(
                   text1: 'Sign Up',
                   size1: 18.0,
                   color1: Colors.white,
@@ -160,7 +160,79 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
               )),
         ),
+        const SizedBox(height: 25.0),
+        const Center(
+          child: TextWidget(
+            textAlign1: TextAlign.center,
+            text1: 'or Sign Up with',
+            size1: 18.0,
+            fontWeight1: FontWeight.w400,
+          ),
+        ),
+        const SizedBox(height: 10.0),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            iconReplaceFun(MdiIcons.google, () {
+              showMyDialog(
+                context,
+                '“Wiseup” Wants to use “google.com” to sign up',
+                'This allows the app and website to share information about you.',
+                () {
+                  Navigator.of(context).pop();
+                },
+              );
+            }),
+            const SizedBox(width: 20.0),
+            iconReplaceFun(MdiIcons.facebook, () {
+              showMyDialog(
+                context,
+                '“Wiseup” Wants to use facebook.com” to sign up',
+                'This allows the app and website to share information about you.',
+                () {
+                  Navigator.of(context).pop();
+                },
+              );
+            }),
+            const SizedBox(width: 20.0),
+            iconReplaceFun(MdiIcons.twitter, () {
+              showMyDialog(
+                context,
+                '“Wiseup” Wants to use twitter.com” to sign up',
+                'This allows the app and website to share information about you.',
+                () {
+                  Navigator.of(context).pop();
+                },
+              );
+            }),
+            const SizedBox(width: 20.0),
+            iconReplaceFun(MdiIcons.linkedin, () {
+              showMyDialog(
+                context,
+                '“Wiseup” Wants to use linkedin.com” to sign up',
+                'This allows the app and website to share information about you.',
+                () {
+                  Navigator.of(context).pop();
+                },
+              );
+            }),
+          ],
+        ),
       ],
+    );
+  }
+
+  Widget iconReplaceFun(IconData? icon1, onPressed1) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: IconButton(
+          color: primaryColor,
+          iconSize: 35,
+          icon: Icon(icon1),
+          onPressed: onPressed1),
     );
   }
 }

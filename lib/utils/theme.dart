@@ -6,7 +6,7 @@ import 'file_collection.dart';
 
 ThemeData themeData = ThemeData(
     useMaterial3: true,
-    fontFamily: GoogleFonts.aboreto().fontFamily,
+    fontFamily: GoogleFonts.poppins().fontFamily,
     colorSchemeSeed: primaryColor,
     appBarTheme: const AppBarTheme(
         surfaceTintColor: primaryColor,

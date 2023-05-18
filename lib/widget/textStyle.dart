@@ -1,12 +1,12 @@
 import '../utils/file_collection.dart';
 
-class TextStyleWidget extends StatelessWidget {
+class TextWidget extends StatelessWidget {
   final String? text1;
   final double? size1;
   final Color? color1;
   final FontWeight? fontWeight1;
   final TextAlign? textAlign1;
-  const TextStyleWidget(
+  const TextWidget(
       {super.key,
       this.text1,
       this.size1,

@@ -14,10 +14,10 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-
   #G
   google_fonts: ^4.0.4
-
+  #M
+  material_design_icons_flutter: ^6.0.7096
   #P
   permission_handler: ^10.2.0
 
