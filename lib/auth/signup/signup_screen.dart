@@ -1,32 +1,22 @@
+import 'dart:developer';
+
+import 'package:provider/provider.dart';
+
+import '../../rivorpod/signup_notifier.dart';
 import '../../utils/file_collection.dart';
 import '../sign_in/sign_in.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignUpScreen extends StatelessWidget {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  bool agree = false;
-
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  // Initially password is obscure
-  bool _obscureText = true;
-
-  void toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
+  SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    log('SignUpScreen');
     return Scaffold(
       body: Container(
         height: double.infinity,
@@ -35,14 +25,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 50.0),
-            child: signUp(),
+            child: signUp(context),
           ),
         )),
       ),
     );
   }
 
-  Column signUp() {
+  Column signUp(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -120,33 +110,40 @@ class _SignUpScreenState extends State<SignUpScreen> {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: passwordController,
-          obsecureText1: _obscureText,
-          iconButton1: IconButton(
-            icon: Icon(
-              color: primaryColor,
-              !_obscureText ? Icons.visibility : Icons.visibility_off,
+        Consumer<SignUpNotifier>(// type for showing hint
+            builder: (_, ref, child) {
+          return TextFormFieldWidget(
+            controller1: passwordController,
+            obsecureText1: ref.obscureText,
+            iconButton1: IconButton(
+              icon: Icon(
+                color: primaryColor,
+                !ref.obscureText ? Icons.visibility : Icons.visibility_off,
+              ),
+              onPressed: ref.toggle,
             ),
-            onPressed: toggle,
-          ),
-        ),
+          );
+        }),
         const SizedBox(height: 30.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Checkbox(
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              checkColor: Colors.white,
-              fillColor: MaterialStateProperty.all(primaryColor),
-              value: agree,
-              onChanged: (value) {
-                setState(() {
-                  agree = value ?? false;
-                });
-              },
-            ),
+            Consumer<SignUpNotifier>(builder: (context, ref, child) {
+              return Checkbox(
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                checkColor: Colors.white,
+                fillColor: MaterialStateProperty.all(primaryColor),
+                value: ref.agree,
+                onChanged: (value) {
+                  ref.toggleAgree();
+
+                  // setState(() {
+                  //   agree = value ?? false;
+                  // });
+                },
+              );
+            }),
             const Flexible(
               child: TextWidget(
                 text1: 'I have read and accept terms and conditions',
@@ -157,101 +154,103 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ],
         ),
         const SizedBox(height: 30.0),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  )),
-                  foregroundColor: MaterialStateProperty.all(primaryColor),
-                  backgroundColor: MaterialStateProperty.all(
-                      agree ? primaryColor : Colors.grey)),
-              onPressed: () {
-                if (agree &&
-                    firstNameController.text.isNotEmpty &&
-                    lastNameController.text.isNotEmpty &&
-                    emailController.text.isNotEmpty &&
-                    passwordController.text.isNotEmpty) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignInScreen(),
-                    ),
-                  );
-                } else if (firstNameController.text.isEmpty &&
-                    lastNameController.text.isEmpty &&
-                    emailController.text.isEmpty &&
-                    passwordController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill all the fields',
-                    'All fields are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (firstNameController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill first name field',
-                    'first name are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (lastNameController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill last name field',
-                    'last name are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (emailController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill email field',
-                    'email are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (passwordController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill password field',
-                    'password are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (!agree) {
-                  showMyDialog(
-                    context,
-                    'Please accept terms and conditions',
-                    'checkbox are required to check',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                }
-              },
+        Consumer<SignUpNotifier>(builder: (context, ref, child) {
+          return SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    )),
+                    foregroundColor: MaterialStateProperty.all(primaryColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        ref.agree ? primaryColor : Colors.grey)),
+                onPressed: () {
+                  if (ref.agree &&
+                      firstNameController.text.isNotEmpty &&
+                      lastNameController.text.isNotEmpty &&
+                      emailController.text.isNotEmpty &&
+                      passwordController.text.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignInScreen(),
+                      ),
+                    );
+                  } else if (firstNameController.text.isEmpty &&
+                      lastNameController.text.isEmpty &&
+                      emailController.text.isEmpty &&
+                      passwordController.text.isEmpty) {
+                    showMyDialog(
+                      context,
+                      'Please fill all the fields',
+                      'All fields are required to fill',
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  } else if (firstNameController.text.isEmpty) {
+                    showMyDialog(
+                      context,
+                      'Please fill first name field',
+                      'first name are required to fill',
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  } else if (lastNameController.text.isEmpty) {
+                    showMyDialog(
+                      context,
+                      'Please fill last name field',
+                      'last name are required to fill',
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  } else if (emailController.text.isEmpty) {
+                    showMyDialog(
+                      context,
+                      'Please fill email field',
+                      'email are required to fill',
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  } else if (passwordController.text.isEmpty) {
+                    showMyDialog(
+                      context,
+                      'Please fill password field',
+                      'password are required to fill',
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  } else if (!ref.agree) {
+                    showMyDialog(
+                      context,
+                      'Please accept terms and conditions',
+                      'checkbox are required to check',
+                      () {
+                        Navigator.of(context).pop();
+                      },
+                    );
+                  }
+                },
 
-              // agree ? _doSomething : null,
+                // agree ? _doSomething : null,
 
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0),
-                child: TextWidget(
-                  text1: 'Sign Up',
-                  size1: 18.0,
-                  color1: Colors.white,
-                  fontWeight1: FontWeight.w400,
-                ),
-              )),
-        ),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  child: TextWidget(
+                    text1: 'Sign Up',
+                    size1: 18.0,
+                    color1: Colors.white,
+                    fontWeight1: FontWeight.w400,
+                  ),
+                )),
+          );
+        }),
         const SizedBox(height: 25.0),
         const Center(
           child: TextWidget(

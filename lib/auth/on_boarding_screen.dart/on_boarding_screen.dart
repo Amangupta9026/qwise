@@ -125,7 +125,7 @@ class _OnBoardingState extends State<OnBoarding> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const SignUpScreen()));
+                                  builder: (context) => SignUpScreen()));
                         },
                         child: const Text(
                           'Skip',
@@ -240,7 +240,7 @@ class _OnBoardingState extends State<OnBoarding> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const SignUpScreen()));
+                                           SignUpScreen()));
                             }
                           });
                         },
