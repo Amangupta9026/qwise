@@ -1,24 +1,7 @@
 import '../../utils/file_collection.dart';
 
-class SignInScreen extends StatefulWidget {
+class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
-
-  @override
-  State<SignInScreen> createState() => _SignInScreenState();
-}
-
-class _SignInScreenState extends State<SignInScreen> {
-  TextEditingController userNameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-
-  // Initially password is obscure
-  bool _obscureText = true;
-
-  void toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +14,14 @@ class _SignInScreenState extends State<SignInScreen> {
             child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 50.0),
-            child: signIn(),
+            child: signIn(context),
           ),
         )),
       ),
     );
   }
 
-  Column signIn() {
+  Column signIn(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -55,12 +38,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  ),
-                );
+                context.pushNamed(RouteNames.signInScreen);
               },
               child: const Text(
                 'Skip',
@@ -86,9 +64,14 @@ class _SignInScreenState extends State<SignInScreen> {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: userNameController,
-        ),
+        Consumer<SigninNotifer>(builder: (context, ref, child) {
+          return TextFormFieldWidget(
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+            controller1: ref.userNameController,
+          );
+        }),
         const SizedBox(height: 20.0),
         const TextWidget(
           text1: 'Password',
@@ -96,94 +79,64 @@ class _SignInScreenState extends State<SignInScreen> {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: passwordController,
-          obsecureText1: _obscureText,
-          iconButton1: IconButton(
-            icon: Icon(
-              color: primaryColor,
-              !_obscureText ? Icons.visibility : Icons.visibility_off,
+        Consumer<SigninNotifer>(builder: (context, ref, child) {
+          return TextFormFieldWidget(
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+            controller1: ref.passwordController,
+            obsecureText1: ref.obscureText,
+            iconButton1: IconButton(
+              icon: Icon(
+                color: primaryColor,
+                !ref.obscureText ? Icons.visibility : Icons.visibility_off,
+              ),
+              onPressed: ref.toggle,
             ),
-            onPressed: toggle,
-          ),
-        ),
+          );
+        }),
         const SizedBox(height: 20.0),
-        const Align(
-          alignment: Alignment.centerRight,
-          child: TextWidget(
-            textAlign1: TextAlign.end,
-            text1: 'Forgot Password?',
-            size1: 18.0,
-            fontWeight1: FontWeight.w400,
+        InkWell(
+          onTap: () {
+            context.pushNamed(RouteNames.forgotPasswordScreen);
+          },
+          child: const Align(
+            alignment: Alignment.centerRight,
+            child: TextWidget(
+              textAlign1: TextAlign.end,
+              text1: 'Forgot Password?',
+              size1: 18.0,
+              fontWeight1: FontWeight.w400,
+            ),
           ),
         ),
         const SizedBox(height: 30.0),
-        SizedBox(
-          width: double.infinity,
-          child: ElevatedButton(
-              style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  )),
-                  foregroundColor: MaterialStateProperty.all(primaryColor),
-                  backgroundColor: MaterialStateProperty.all(
-                      userNameController.text.isNotEmpty &&
-                              passwordController.text.isNotEmpty
-                          ? primaryColor
-                          : Colors.grey)),
-              onPressed: () {
-                if (userNameController.text.isNotEmpty &&
-                    passwordController.text.isNotEmpty) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignInScreen(),
-                    ),
-                  );
-                } else if (userNameController.text.isEmpty &&
-                    passwordController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill all the fields',
-                    'All fields are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (userNameController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill user name field',
-                    'user name are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                } else if (passwordController.text.isEmpty) {
-                  showMyDialog(
-                    context,
-                    'Please fill password field',
-                    'password are required to fill',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                  );
-                }
-              },
-
-              // agree ? _doSomething : null,
-
-              child: const Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0),
-                child: TextWidget(
-                  text1: 'Sign in',
-                  size1: 18.0,
-                  color1: Colors.white,
-                  fontWeight1: FontWeight.w400,
-                ),
-              )),
-        ),
+        Consumer<SigninNotifer>(builder: (context, ref, child) {
+          return SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    )),
+                    foregroundColor: MaterialStateProperty.all(primaryColor),
+                    backgroundColor: MaterialStateProperty.all(
+                        ref.colorChange ? primaryColor : Colors.grey)),
+                onPressed: () {
+                  ref.nextScreen(context);
+                },
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 15.0),
+                  child: TextWidget(
+                    text1: 'Sign in',
+                    size1: 18.0,
+                    color1: Colors.white,
+                    fontWeight1: FontWeight.w400,
+                  ),
+                )),
+          );
+        }),
         const SizedBox(height: 25.0),
         const Center(
           child: TextWidget(
@@ -194,69 +147,57 @@ class _SignInScreenState extends State<SignInScreen> {
           ),
         ),
         const SizedBox(height: 10.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            iconReplaceFun(MdiIcons.google, () {
-              showMyDialog(
-                context,
-                '“Wiseup” Wants to use “google.com” to sign in',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
-            }),
-            const SizedBox(width: 20.0),
-            iconReplaceFun(MdiIcons.facebook, () {
-              showMyDialog(
-                context,
-                '“Wiseup” Wants to use facebook.com” to sign in',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
-            }),
-            const SizedBox(width: 20.0),
-            iconReplaceFun(MdiIcons.twitter, () {
-              showMyDialog(
-                context,
-                '“Wiseup” Wants to use twitter.com” to sign in',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
-            }),
-            const SizedBox(width: 20.0),
-            iconReplaceFun(MdiIcons.linkedin, () {
-              showMyDialog(
-                context,
-                '“Wiseup” Wants to use linkedin.com” to sign in',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
-            }),
-          ],
-        ),
+        Consumer<SigninNotifer>(builder: (context, ref, child) {
+          return Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ref.iconReplaceFun(MdiIcons.google, () {
+                showMyDialog(
+                  context,
+                  '“Wiseup” Wants to use “google.com” to sign in',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                );
+              }),
+              const SizedBox(width: 20.0),
+              ref.iconReplaceFun(MdiIcons.facebook, () {
+                showMyDialog(
+                  context,
+                  '“Wiseup” Wants to use facebook.com” to sign in',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                );
+              }),
+              const SizedBox(width: 20.0),
+              ref.iconReplaceFun(MdiIcons.twitter, () {
+                showMyDialog(
+                  context,
+                  '“Wiseup” Wants to use twitter.com” to sign in',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                );
+              }),
+              const SizedBox(width: 20.0),
+              ref.iconReplaceFun(MdiIcons.linkedin, () {
+                showMyDialog(
+                  context,
+                  '“Wiseup” Wants to use linkedin.com” to sign in',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                );
+              }),
+            ],
+          );
+        }),
       ],
-    );
-  }
-
-  Widget iconReplaceFun(IconData? icon1, onPressed1) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.grey[100],
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: IconButton(
-          color: primaryColor,
-          iconSize: 35,
-          icon: Icon(icon1),
-          onPressed: onPressed1),
     );
   }
 }

@@ -1,19 +1,8 @@
 import 'dart:developer';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:qwise/riverpod/is_agree_to_terms.dart';
-
-import '../../riverpod/obscure_text_notifier.dart';
 import '../../utils/file_collection.dart';
-import '../sign_in/sign_in.dart';
 
 class SignUpScreen extends StatelessWidget {
-  final TextEditingController firstNameController = TextEditingController();
-  final TextEditingController lastNameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-
-  SignUpScreen({super.key});
+  const SignUpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +39,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  ),
-                );
+                context.pushNamed(RouteNames.signInScreen);
               },
               child: const Text(
                 'Skip',
@@ -81,9 +65,14 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: firstNameController,
-        ),
+        Consumer<SignUpNotifier>(builder: (context, ref, child) {
+          return TextFormFieldWidget(
+            controller1: ref.firstNameController,
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+          );
+        }),
         const SizedBox(height: 20.0),
         const TextWidget(
           text1: 'Last Name',
@@ -91,9 +80,14 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: lastNameController,
-        ),
+        Consumer<SignUpNotifier>(builder: (context, ref, child) {
+          return TextFormFieldWidget(
+            controller1: ref.lastNameController,
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+          );
+        }),
         const SizedBox(height: 20.0),
         const TextWidget(
           text1: 'Email Name',
@@ -101,9 +95,14 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        TextFormFieldWidget(
-          controller1: emailController,
-        ),
+        Consumer<SignUpNotifier>(builder: (context, ref, child) {
+          return TextFormFieldWidget(
+            controller1: ref.emailController,
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+          );
+        }),
         const SizedBox(height: 20.0),
         const TextWidget(
           text1: 'Create Password',
@@ -111,18 +110,20 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        Consumer(builder: (_, ref, child) {
-          final obscureText = ref.watch(obscureTextProvider);
+        Consumer<SignUpNotifier>(builder: (_, ref, child) {
           return TextFormFieldWidget(
-            controller1: passwordController,
-            obsecureText1: obscureText,
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+            controller1: ref.passwordController,
+            obsecureText1: !ref.obscureText,
             iconButton1: IconButton(
               icon: Icon(
                 color: primaryColor,
-                !obscureText ? Icons.visibility : Icons.visibility_off,
+                !ref.obscureText ? Icons.visibility_off : Icons.visibility,
               ),
               onPressed: () {
-                ref.read(obscureTextProvider.notifier).toggle();
+                ref.toggle();
               },
             ),
           );
@@ -132,15 +133,14 @@ class SignUpScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Consumer(builder: (context, ref, child) {
-              final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
+            Consumer<SignUpNotifier>(builder: (context, ref, child) {
               return Checkbox(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.all(primaryColor),
-                value: isAgreeToTerms,
+                value: ref.agree,
                 onChanged: (value) {
-                  ref.read(isAgreeToTermsProvider.notifier).toggle();
+                  ref.toggleAgree();
                 },
               );
             }),
@@ -154,8 +154,7 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 30.0),
-        Consumer(builder: (context, ref, child) {
-          final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
+        Consumer<SignUpNotifier>(builder: (context, ref, child) {
           return SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -166,81 +165,13 @@ class SignUpScreen extends StatelessWidget {
                     )),
                     foregroundColor: MaterialStateProperty.all(primaryColor),
                     backgroundColor: MaterialStateProperty.all(
-                        isAgreeToTerms ? primaryColor : Colors.grey)),
+                        // ref.agree
+                        ref.colorChange && ref.agree
+                            ? primaryColor
+                            : Colors.grey)),
                 onPressed: () {
-                  if (isAgreeToTerms &&
-                      firstNameController.text.isNotEmpty &&
-                      lastNameController.text.isNotEmpty &&
-                      emailController.text.isNotEmpty &&
-                      passwordController.text.isNotEmpty) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SignInScreen(),
-                      ),
-                    );
-                  } else if (firstNameController.text.isEmpty &&
-                      lastNameController.text.isEmpty &&
-                      emailController.text.isEmpty &&
-                      passwordController.text.isEmpty) {
-                    showMyDialog(
-                      context,
-                      'Please fill all the fields',
-                      'All fields are required to fill',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  } else if (firstNameController.text.isEmpty) {
-                    showMyDialog(
-                      context,
-                      'Please fill first name field',
-                      'first name are required to fill',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  } else if (lastNameController.text.isEmpty) {
-                    showMyDialog(
-                      context,
-                      'Please fill last name field',
-                      'last name are required to fill',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  } else if (emailController.text.isEmpty) {
-                    showMyDialog(
-                      context,
-                      'Please fill email field',
-                      'email are required to fill',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  } else if (passwordController.text.isEmpty) {
-                    showMyDialog(
-                      context,
-                      'Please fill password field',
-                      'password are required to fill',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  } else if (!isAgreeToTerms) {
-                    showMyDialog(
-                      context,
-                      'Please accept terms and conditions',
-                      'checkbox are required to check',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  }
+                  ref.onNextScreen(context);
                 },
-
-                // agree ? _doSomething : null,
-
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15.0),
                   child: TextWidget(
