@@ -1,5 +1,3 @@
-import 'package:qwise/auth/password/password_update.dart';
-
 import '../../utils/file_collection.dart';
 
 class CreateNewPassword extends StatelessWidget {
@@ -97,19 +95,14 @@ class CreateNewPassword extends StatelessWidget {
                   // ref.nextScreen(context);
                   if (ref.userNameController.text ==
                       ref.passwordController.text) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PasswordUpdateScreen(),
-                      ),
-                    );
+                    context.pushNamed(RouteNames.updatePassword);
                   } else {
                     showMyDialog(
                       context,
                       'Password not match',
                       'New and Confirm Password must be match',
                       () {
-                        Navigator.of(context).pop();
+                        context.pop();
                       },
                     );
                   }

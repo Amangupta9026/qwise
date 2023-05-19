@@ -39,12 +39,7 @@ class SignUpScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SignInScreen(),
-                  ),
-                );
+                context.pushNamed(RouteNames.signInScreen);
               },
               child: const Text(
                 'Skip',
@@ -115,37 +110,35 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        // Consumer(builder: (_, ref, child) {
-        //   final obscureText = ref.watch(obscureTextProvider);
-        //   return TextFormFieldWidget(
-        //     onChanged1: (value) {
-        //       ref.buttonColorChange();
-        //     },
-        //     controller1: ref.passwordController,
-        //     obsecureText1: ref.obscureText,
-        //     iconButton1: IconButton(
-        //       icon: Icon(
-        //         color: primaryColor,
-        //         !obscureText ? Icons.visibility : Icons.visibility_off,
-        //       ),
-        //       onPressed: () {
-        //         ref.read(obscureTextProvider.notifier).toggle();
-        //       },
-        //     ),
-        //   );
-        // }),
-
+        Consumer<SignUpNotifier>(builder: (_, ref, child) {
+          return TextFormFieldWidget(
+            onChanged1: (value) {
+              ref.buttonColorChange();
+            },
+            controller1: ref.passwordController,
+            obsecureText1: !ref.obscureText,
+            iconButton1: IconButton(
+              icon: Icon(
+                color: primaryColor,
+                !ref.obscureText ? Icons.visibility_off : Icons.visibility,
+              ),
+              onPressed: () {
+                ref.toggle();
+              },
+            ),
+          );
+        }),
+        const SizedBox(height: 30.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Consumer(builder: (context, ref, child) {
-              final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
+            Consumer<SignUpNotifier>(builder: (context, ref, child) {
               return Checkbox(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.all(primaryColor),
-                value: isAgreeToTerms,
+                value: ref.agree,
                 onChanged: (value) {
                   ref.toggleAgree();
                 },
@@ -161,8 +154,7 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 30.0),
-        Consumer(builder: (context, ref, child) {
-          final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
+        Consumer<SignUpNotifier>(builder: (context, ref, child) {
           return SizedBox(
             width: double.infinity,
             child: ElevatedButton(

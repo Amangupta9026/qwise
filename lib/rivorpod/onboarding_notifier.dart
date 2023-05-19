@@ -1,20 +1,13 @@
 import 'package:qwise/utils/file_collection.dart';
 
 class OnBoardingNotifier extends ChangeNotifier {
-  // int _contentState = 0;
-  // int get contentState => _contentState;
-  // void changeContentState(int value){
-  //   _contentState = value;
-  //   notifyListeners();
-  // }
-
   int contentState = 0;
 
   // List of images path
   List<String> images = [
     'assets/images/learning1.png',
-    'assets/images/learning1.png',
-    'assets/images/learning1.png',
+    'assets/images/learning2.png',
+    'assets/images/learning3.png',
   ];
 
   List<String> titles = [
@@ -71,12 +64,13 @@ class OnBoardingNotifier extends ChangeNotifier {
       contentState++;
     }
     if (contentState == 3) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => SignUpScreen()));
+      context.pushNamed(RouteNames.signUPScreen);
     }
+    notifyListeners();
   }
 
-  void nextPrevios(BuildContext context) {
+  void previos(BuildContext context) {
     contentState--;
+    notifyListeners();
   }
 }

@@ -36,7 +36,7 @@ class OnBoarding extends StatelessWidget {
                 ref.contentState != 0
                     ? GestureDetector(
                         onTap: () {
-                          ref.nextPrevios(context);
+                          ref.previos(context);
                           // setState(() {
                           //   contentState--;
                           //   log(contentState.toString());

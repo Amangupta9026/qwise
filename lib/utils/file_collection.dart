@@ -14,5 +14,8 @@ export '../../rivorpod/signin_notifier.dart';
 export '../auth/sign_in/sign_in.dart';
 export '../../rivorpod/signup_notifier.dart';
 export '../../rivorpod/onboarding_notifier.dart';
+export 'package:go_router/go_router.dart';
+export '../../router/routes_names.dart';
+export '../auth/password/forgot_password.dart';
 
 

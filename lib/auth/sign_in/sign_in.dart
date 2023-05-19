@@ -1,5 +1,4 @@
 import '../../utils/file_collection.dart';
-import '../password/forgot_password.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({super.key});
@@ -39,12 +38,7 @@ class SignInScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ForgotPasswordScreen(),
-                  ),
-                );
+                context.pushNamed(RouteNames.signInScreen);
               },
               child: const Text(
                 'Skip',
@@ -104,12 +98,7 @@ class SignInScreen extends StatelessWidget {
         const SizedBox(height: 20.0),
         InkWell(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const ForgotPasswordScreen(),
-              ),
-            );
+            context.pushNamed(RouteNames.forgotPasswordScreen);
           },
           child: const Align(
             alignment: Alignment.centerRight,

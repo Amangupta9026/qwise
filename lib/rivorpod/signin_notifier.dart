@@ -43,12 +43,7 @@ class SigninNotifer extends ChangeNotifier {
   void nextScreen(BuildContext context) {
     if (userNameController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignInScreen(),
-        ),
-      );
+      context.pushNamed(RouteNames.signInScreen);
     } else if (userNameController.text.isEmpty &&
         passwordController.text.isEmpty) {
       showMyDialog(

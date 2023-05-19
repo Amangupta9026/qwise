@@ -1,7 +1,7 @@
 import '../utils/file_collection.dart';
 
 class SignUpNotifier extends ChangeNotifier {
-  bool _obscureText = false;
+  bool _obscureText = true;
   bool agree = false;
   bool get obscureText => _obscureText;
 
@@ -37,17 +37,13 @@ class SignUpNotifier extends ChangeNotifier {
   }
 
   void onNextScreen(BuildContext context) {
-      if (agree &&
+    if (agree &&
         firstNameController.text.isNotEmpty &&
         lastNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SignInScreen(),
-        ),
-      );
+      context.pushReplacementNamed(RouteNames.signInScreen);
+      //  dispose();
     } else if (firstNameController.text.isEmpty &&
         lastNameController.text.isEmpty &&
         emailController.text.isEmpty &&
@@ -57,7 +53,7 @@ class SignUpNotifier extends ChangeNotifier {
         'Please fill all the fields',
         'All fields are required to fill',
         () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       );
     } else if (firstNameController.text.isEmpty) {
@@ -66,7 +62,7 @@ class SignUpNotifier extends ChangeNotifier {
         'Please fill first name field',
         'first name are required to fill',
         () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       );
     } else if (lastNameController.text.isEmpty) {
@@ -75,7 +71,7 @@ class SignUpNotifier extends ChangeNotifier {
         'Please fill last name field',
         'last name are required to fill',
         () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       );
     } else if (emailController.text.isEmpty) {
@@ -84,7 +80,7 @@ class SignUpNotifier extends ChangeNotifier {
         'Please fill email field',
         'email are required to fill',
         () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       );
     } else if (passwordController.text.isEmpty) {
@@ -93,7 +89,7 @@ class SignUpNotifier extends ChangeNotifier {
         'Please fill password field',
         'password are required to fill',
         () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       );
     } else if (!agree) {
@@ -102,9 +98,18 @@ class SignUpNotifier extends ChangeNotifier {
         'Please accept terms and conditions',
         'checkbox are required to check',
         () {
-          Navigator.of(context).pop();
+          context.pop();
         },
       );
     }
+  }
+
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }
