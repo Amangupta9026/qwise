@@ -1,13 +1,10 @@
-import 'package:provider/provider.dart';
-import 'package:qwise/rivorpod/signup_notifier.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await AppUtils.handleNotificationPermission(Permission.notification);
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => SignUpNotifier()),
-  ], child: const MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

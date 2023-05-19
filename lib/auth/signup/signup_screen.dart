@@ -1,8 +1,9 @@
 import 'dart:developer';
 
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:qwise/riverpod/is_agree_to_terms.dart';
 
-import '../../rivorpod/signup_notifier.dart';
+import '../../riverpod/obscure_text_notifier.dart';
 import '../../utils/file_collection.dart';
 import '../sign_in/sign_in.dart';
 
@@ -110,17 +111,19 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        Consumer<SignUpNotifier>(// type for showing hint
-            builder: (_, ref, child) {
+        Consumer(builder: (_, ref, child) {
+          final obscureText = ref.watch(obscureTextProvider);
           return TextFormFieldWidget(
             controller1: passwordController,
-            obsecureText1: ref.obscureText,
+            obsecureText1: obscureText,
             iconButton1: IconButton(
               icon: Icon(
                 color: primaryColor,
-                !ref.obscureText ? Icons.visibility : Icons.visibility_off,
+                !obscureText ? Icons.visibility : Icons.visibility_off,
               ),
-              onPressed: ref.toggle,
+              onPressed: () {
+                ref.read(obscureTextProvider.notifier).toggle();
+              },
             ),
           );
         }),
@@ -129,18 +132,15 @@ class SignUpScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Consumer<SignUpNotifier>(builder: (context, ref, child) {
+            Consumer(builder: (context, ref, child) {
+              final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
               return Checkbox(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.all(primaryColor),
-                value: ref.agree,
+                value: isAgreeToTerms,
                 onChanged: (value) {
-                  ref.toggleAgree();
-
-                  // setState(() {
-                  //   agree = value ?? false;
-                  // });
+                  ref.read(isAgreeToTermsProvider.notifier).toggle();
                 },
               );
             }),
@@ -154,7 +154,8 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 30.0),
-        Consumer<SignUpNotifier>(builder: (context, ref, child) {
+        Consumer(builder: (context, ref, child) {
+          final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
           return SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -165,9 +166,9 @@ class SignUpScreen extends StatelessWidget {
                     )),
                     foregroundColor: MaterialStateProperty.all(primaryColor),
                     backgroundColor: MaterialStateProperty.all(
-                        ref.agree ? primaryColor : Colors.grey)),
+                        isAgreeToTerms ? primaryColor : Colors.grey)),
                 onPressed: () {
-                  if (ref.agree &&
+                  if (isAgreeToTerms &&
                       firstNameController.text.isNotEmpty &&
                       lastNameController.text.isNotEmpty &&
                       emailController.text.isNotEmpty &&
@@ -226,7 +227,7 @@ class SignUpScreen extends StatelessWidget {
                         Navigator.of(context).pop();
                       },
                     );
-                  } else if (!ref.agree) {
+                  } else if (!isAgreeToTerms) {
                     showMyDialog(
                       context,
                       'Please accept terms and conditions',
