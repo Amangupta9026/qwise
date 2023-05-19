@@ -22,9 +22,9 @@ class _OnBoardingState extends State<OnBoarding> {
 
   // List of descriptions
   List<String> descriptions = [
-    'We are here to teach you \nOur mentor are available and \nmonitor your skills 24 hrs/Day',
-    'always attend online classes and Excel your career by gaining new skills.',
-    'to avoid the spread of covid 19. \nyou can do learn work from home and\nalways be close to your family',
+    'We are here to guide you \nOur mentors are available to help you accelerate your career.',
+    'Always attend live online classes and Excel your career by gaining new skills.',
+    'Live virtual classes with our advanced AR/VR solutions, you can learn from home.',
   ];
 
   // List of images path
@@ -77,171 +77,46 @@ class _OnBoardingState extends State<OnBoarding> {
     );
   }
 
-  Stack onBoarding(BuildContext context) {
-    return Stack(
-      children: [
-        // Image Illustration
-        Container(
-          margin: const EdgeInsets.only(top: 0.0),
-          child: Image(
-            height: 640.0,
-            image: AssetImage(getImage(contentState)),
-          ),
-        ),
-        // Top Components
-        Container(
-          padding: const EdgeInsets.all(24.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              contentState != 0
-                  ? GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          contentState--;
-                          log(contentState.toString());
-                        });
-                      },
-                      child: Container(
-                          padding: const EdgeInsets.all(12.0),
-                          decoration: const BoxDecoration(
-                            color: primaryColor,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.white,
-                          )),
-                    )
-                  : const SizedBox(),
-              contentState != 2
-                  ? Container(
-                      padding: const EdgeInsets.all(12.0),
-                      decoration: const BoxDecoration(),
-                      child: InkWell(
-                        // canRequestFocus: true,
-
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => SignUpScreen()));
-                        },
-                        child: const Text(
-                          'Skip',
-                          style: TextStyle(
-                            fontFamily: "Sofia",
-                            color: Colors.white,
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    )
-                  : const SizedBox(),
-            ],
-          ),
-        ),
-        // Content
-        Align(
-          alignment: FractionalOffset.bottomCenter,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
+  GestureDetector onBoarding(BuildContext context) {
+    return GestureDetector(
+      onHorizontalDragUpdate: (details) {
+        const sensitivity = 2;
+        if (details.delta.dx > sensitivity) {
+          setState(() {
+            if (contentState > 0) {
+              contentState--;
+            }
+          });
+        } else if (details.delta.dx < -sensitivity) {
+          setState(() {
+            if (contentState < 2) {
+              contentState++;
+            }
+          });
+        }
+      },
+      child: Stack(
+        children: [
+          // Image Illustration
+          Container(
+            margin: const EdgeInsets.only(top: 0.0),
+            child: Image(
+              height: 640.0,
+              image: AssetImage(getImage(contentState)),
             ),
-            child: Container(
-              decoration: AppUtils.decoration1(),
-              width: double.infinity,
-              padding: const EdgeInsets.all(32.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Title
-                  TextWidget(
-                    text1: getTitle(contentState),
-                    textAlign1: TextAlign.center,
-                    size1: 22,
-                    fontWeight1: FontWeight.w700,
-                  ),
-
-                  const SizedBox(
-                    height: 16.0,
-                  ),
-                  // Description
-                  TextWidget(
-                    text1: getDescription(contentState),
-                    textAlign1: TextAlign.center,
-                    size1: 18,
-                    fontWeight1: FontWeight.w400,
-                  ),
-
-                  const SizedBox(
-                    height: 40.0,
-                  ),
-                  // Bottom Components
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // Indicator
-                      Row(
-                        children: [
-                          // 0
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Container(
-                              height: 4.0,
-                              width: contentState == 0 ? 18.0 : 12.0,
-                              color: contentState == 0
-                                  ? const Color(0xFFD16ACF)
-                                  : const Color(0xFFCBD6F3),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 4.0,
-                          ),
-                          // 1
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Container(
-                              height: 4.0,
-                              width: contentState == 1 ? 18.0 : 12.0,
-                              color: contentState == 1
-                                  ? const Color(0xFFD16ACF)
-                                  : const Color(0xFFCBD6F3),
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 4.0,
-                          ),
-                          // 2
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Container(
-                              height: 4.0,
-                              width: contentState == 2 ? 18.0 : 12.0,
-                              color: contentState == 2
-                                  ? const Color(0xFFD16ACF)
-                                  : const Color(0xFFCBD6F3),
-                            ),
-                          ),
-                        ],
-                      ),
-                      // Button Next
-                      GestureDetector(
+          ),
+          // Top Components
+          Container(
+            padding: const EdgeInsets.all(24.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                contentState != 0
+                    ? GestureDetector(
                         onTap: () {
                           setState(() {
-                            if (contentState <= 2) {
-                              contentState++;
-                            }
-                            if (contentState == 3) {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                           SignUpScreen()));
-                            }
+                            contentState--;
+                            log(contentState.toString());
                           });
                         },
                         child: Container(
@@ -250,19 +125,165 @@ class _OnBoardingState extends State<OnBoarding> {
                               color: primaryColor,
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 20,
+                              ),
                             )),
-                      ),
-                    ],
-                  ),
-                ],
+                      )
+                    : const SizedBox(),
+                contentState != 2
+                    ? Container(
+                        padding: const EdgeInsets.all(12.0),
+                        decoration: const BoxDecoration(),
+                        child: InkWell(
+                          // canRequestFocus: true,
+
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignUpScreen()));
+                          },
+                          child: const Text(
+                            'Skip',
+                            style: TextStyle(
+                              fontFamily: "Sofia",
+                              color: Colors.white,
+                              fontSize: 19.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
+          ),
+          // Content
+          Align(
+            alignment: FractionalOffset.bottomCenter,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
+              ),
+              child: Container(
+                decoration: AppUtils.decoration1(),
+                width: double.infinity,
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Title
+                    TextWidget(
+                      text1: getTitle(contentState),
+                      textAlign1: TextAlign.center,
+                      size1: 22,
+                      fontWeight1: FontWeight.w700,
+                    ),
+
+                    const SizedBox(
+                      height: 16.0,
+                    ),
+                    // Description
+                    TextWidget(
+                      text1: getDescription(contentState),
+                      textAlign1: TextAlign.center,
+                      size1: 18,
+                      fontWeight1: FontWeight.w400,
+                    ),
+
+                    const SizedBox(
+                      height: 40.0,
+                    ),
+                    // Bottom Components
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        // Indicator
+                        Row(
+                          children: [
+                            // 0
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(30.0),
+                              child: Container(
+                                height: 4.0,
+                                width: contentState == 0 ? 18.0 : 12.0,
+                                color: contentState == 0
+                                    ? const Color(0xFFD16ACF)
+                                    : const Color(0xFFCBD6F3),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4.0,
+                            ),
+                            // 1
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(30.0),
+                              child: Container(
+                                height: 4.0,
+                                width: contentState == 1 ? 18.0 : 12.0,
+                                color: contentState == 1
+                                    ? const Color(0xFFD16ACF)
+                                    : const Color(0xFFCBD6F3),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4.0,
+                            ),
+                            // 2
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(30.0),
+                              child: Container(
+                                height: 4.0,
+                                width: contentState == 2 ? 18.0 : 12.0,
+                                color: contentState == 2
+                                    ? const Color(0xFFD16ACF)
+                                    : const Color(0xFFCBD6F3),
+                              ),
+                            ),
+                          ],
+                        ),
+                        // Button Next
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              if (contentState <= 2) {
+                                contentState++;
+                              }
+                              if (contentState == 3) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SignUpScreen()));
+                              }
+                            });
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.all(12.0),
+                              decoration: const BoxDecoration(
+                                color: primaryColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.arrow_forward,
+                                color: Colors.white,
+                              )),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
