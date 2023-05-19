@@ -115,34 +115,37 @@ class SignUpScreen extends StatelessWidget {
           fontWeight1: FontWeight.w400,
         ),
         const SizedBox(height: 10.0),
-        Consumer<SignUpNotifier>(// type for showing hint
-            builder: (_, ref, child) {
-          return TextFormFieldWidget(
-            onChanged1: (value) {
-              ref.buttonColorChange();
-            },
-            controller1: ref.passwordController,
-            obsecureText1: ref.obscureText,
-            iconButton1: IconButton(
-              icon: Icon(
-                color: primaryColor,
-                !ref.obscureText ? Icons.visibility : Icons.visibility_off,
-              ),
-              onPressed: ref.toggle,
-            ),
-          );
-        }),
-        const SizedBox(height: 30.0),
+        // Consumer(builder: (_, ref, child) {
+        //   final obscureText = ref.watch(obscureTextProvider);
+        //   return TextFormFieldWidget(
+        //     onChanged1: (value) {
+        //       ref.buttonColorChange();
+        //     },
+        //     controller1: ref.passwordController,
+        //     obsecureText1: ref.obscureText,
+        //     iconButton1: IconButton(
+        //       icon: Icon(
+        //         color: primaryColor,
+        //         !obscureText ? Icons.visibility : Icons.visibility_off,
+        //       ),
+        //       onPressed: () {
+        //         ref.read(obscureTextProvider.notifier).toggle();
+        //       },
+        //     ),
+        //   );
+        // }),
+
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Consumer<SignUpNotifier>(builder: (context, ref, child) {
+            Consumer(builder: (context, ref, child) {
+              final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
               return Checkbox(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.all(primaryColor),
-                value: ref.agree,
+                value: isAgreeToTerms,
                 onChanged: (value) {
                   ref.toggleAgree();
                 },
@@ -158,7 +161,8 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 30.0),
-        Consumer<SignUpNotifier>(builder: (context, ref, child) {
+        Consumer(builder: (context, ref, child) {
+          final isAgreeToTerms = ref.watch(isAgreeToTermsProvider);
           return SizedBox(
             width: double.infinity,
             child: ElevatedButton(

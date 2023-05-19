@@ -1,6 +1,3 @@
-import 'package:provider/provider.dart';
-import 'package:qwise/rivorpod/onboarding_notifier.dart';
-
 import '../../utils/file_collection.dart';
 
 class OnBoarding extends StatelessWidget {
@@ -68,7 +65,8 @@ class OnBoarding extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SignUpScreen()));
+                                    builder: (context) =>
+                                        const SignUpScreen()));
                           },
                           child: const Text(
                             'Skip',
@@ -88,114 +86,113 @@ class OnBoarding extends StatelessWidget {
         }),
         // Content
         Align(
-          alignment: FractionalOffset.bottomCenter,
-          child: ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30.0),
-              topRight: Radius.circular(30.0),
-            ),
-            child: Container(
-              decoration: AppUtils.decoration1(),
-              width: double.infinity,
-              padding: const EdgeInsets.all(32.0),
-              child:
-                  Consumer<OnBoardingNotifier>(builder: (context, ref, child) {
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Title
-                    TextWidget(
-                      text1: ref.getTitle(),
-                      // getTitle(contentState),
-                      textAlign1: TextAlign.center,
-                      size1: 22,
-                      fontWeight1: FontWeight.w700,
-                    ),
+            alignment: FractionalOffset.bottomCenter,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(30.0),
+                topRight: Radius.circular(30.0),
+              ),
+              child: Container(
+                decoration: AppUtils.decoration1(),
+                width: double.infinity,
+                padding: const EdgeInsets.all(32.0),
+                child: Consumer<OnBoardingNotifier>(
+                    builder: (context, ref, child) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // Title
+                      TextWidget(
+                        text1: ref.getTitle(),
+                        // getTitle(contentState),
+                        textAlign1: TextAlign.center,
+                        size1: 22,
+                        fontWeight1: FontWeight.w700,
+                      ),
 
-                    const SizedBox(
-                      height: 16.0,
-                    ),
-                    // Description
-                    TextWidget(
-                      text1: ref.getDescription(),
-                      textAlign1: TextAlign.center,
-                      size1: 18,
-                      fontWeight1: FontWeight.w400,
-                    ),
+                      const SizedBox(
+                        height: 16.0,
+                      ),
+                      // Description
+                      TextWidget(
+                        text1: ref.getDescription(),
+                        textAlign1: TextAlign.center,
+                        size1: 18,
+                        fontWeight1: FontWeight.w400,
+                      ),
 
-                    const SizedBox(
-                      height: 40.0,
-                    ),
-                    // Bottom Components
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Indicator
-                        Row(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(30.0),
-                              child: Container(
-                                height: 4.0,
-                                width: ref.contentState == 0 ? 18.0 : 12.0,
-                                color: ref.contentState == 0
-                                    ? const Color(0xFFD16ACF)
-                                    : const Color(0xFFCBD6F3),
+                      const SizedBox(
+                        height: 40.0,
+                      ),
+                      // Bottom Components
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Indicator
+                          Row(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.0),
+                                child: Container(
+                                  height: 4.0,
+                                  width: ref.contentState == 0 ? 18.0 : 12.0,
+                                  color: ref.contentState == 0
+                                      ? const Color(0xFFD16ACF)
+                                      : const Color(0xFFCBD6F3),
+                                ),
                               ),
-                            ),
-                            const SizedBox(width: 4.0),
-                            // 1
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(30.0),
-                              child: Container(
-                                height: 4.0,
-                                width: ref.contentState == 1 ? 18.0 : 12.0,
-                                color: ref.contentState == 1
-                                    ? const Color(0xFFD16ACF)
-                                    : const Color(0xFFCBD6F3),
+                              const SizedBox(width: 4.0),
+                              // 1
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.0),
+                                child: Container(
+                                  height: 4.0,
+                                  width: ref.contentState == 1 ? 18.0 : 12.0,
+                                  color: ref.contentState == 1
+                                      ? const Color(0xFFD16ACF)
+                                      : const Color(0xFFCBD6F3),
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 4.0,
-                            ),
-                            // 2
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(30.0),
-                              child: Container(
-                                height: 4.0,
-                                width: ref.contentState == 2 ? 18.0 : 12.0,
-                                color: ref.contentState == 2
-                                    ? const Color(0xFFD16ACF)
-                                    : const Color(0xFFCBD6F3),
+                              const SizedBox(
+                                width: 4.0,
                               ),
-                            ),
-                          ],
-                        ),
-                        // Button Next
-                        GestureDetector(
-                          onTap: () {
-                            ref.nextPage(context);
-                          },
-                          child: Container(
-                              padding: const EdgeInsets.all(12.0),
-                              decoration: const BoxDecoration(
-                                color: primaryColor,
-                                shape: BoxShape.circle,
+                              // 2
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30.0),
+                                child: Container(
+                                  height: 4.0,
+                                  width: ref.contentState == 2 ? 18.0 : 12.0,
+                                  color: ref.contentState == 2
+                                      ? const Color(0xFFD16ACF)
+                                      : const Color(0xFFCBD6F3),
+                                ),
                               ),
-                              child: const Icon(
-                                Icons.arrow_forward,
-                                color: Colors.white,
-                              )),
-                        ),
-                      ],
-                    ),
-                  ],
-                );
-              }),
-            ),
-          ),
-        ),
+                            ],
+                          ),
+                          // Button Next
+                          GestureDetector(
+                            onTap: () {
+                              ref.nextPage(context);
+                            },
+                            child: Container(
+                                padding: const EdgeInsets.all(12.0),
+                                decoration: const BoxDecoration(
+                                  color: primaryColor,
+                                  shape: BoxShape.circle,
+                                ),
+                                child: const Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                }),
+              ),
+            )),
       ],
     );
   }
