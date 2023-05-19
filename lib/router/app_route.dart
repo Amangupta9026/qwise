@@ -5,6 +5,7 @@ import 'package:qwise/auth/password/forgot_password.dart';
 import 'package:qwise/auth/password/verify_otp_screen.dart';
 import 'package:qwise/auth/sign_in/sign_in.dart';
 import 'package:qwise/auth/signup/signup_screen.dart';
+import 'package:qwise/home/home_screen.dart';
 import 'package:qwise/router/routes_names.dart';
 
 final appRoute = GoRouter(
@@ -60,6 +61,20 @@ final appRoute = GoRouter(
         name: RouteNames.updatePassword,
         builder: (context, state) {
           return const CreateNewPassword();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.main,
+        name: RouteNames.main,
+        builder: (context, state) {
+          return const CreateNewPassword();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.home,
+        name: RouteNames.home,
+        builder: (context, state) {
+          return const HomeScreen();
         },
       ),
     ]);
