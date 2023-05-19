@@ -9,5 +9,10 @@ export 'package:qwise/utils/theme.dart';
 export '../../widget/textformfield_widget.dart';
 export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 export '../../widget/alertdialogbox.dart';
+export 'package:provider/provider.dart';
+export '../../rivorpod/signin_notifier.dart';
+export '../auth/sign_in/sign_in.dart';
+export '../../rivorpod/signup_notifier.dart';
+export '../../rivorpod/onboarding_notifier.dart';
 
 

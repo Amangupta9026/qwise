@@ -1,5 +1,5 @@
-import 'package:provider/provider.dart';
-import 'package:qwise/rivorpod/signup_notifier.dart';
+import 'package:qwise/rivorpod/forgot_password_notifier.dart';
+import 'package:qwise/rivorpod/verify_otp_screen_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 Future<void> main() async {
@@ -7,6 +7,11 @@ Future<void> main() async {
   await AppUtils.handleNotificationPermission(Permission.notification);
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => SignUpNotifier()),
+    ChangeNotifierProvider(create: (_) => OnBoardingNotifier()),
+    ChangeNotifierProvider(create: (_) => SigninNotifer()),
+    ChangeNotifierProvider(create: (_) => ForgotPasswordNotifier()),
+    ChangeNotifierProvider(create: (_) => VerifyOTPNotifier()),
+
   ], child: const MyApp()));
 }
 
