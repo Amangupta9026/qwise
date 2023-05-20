@@ -1,4 +1,4 @@
-import 'package:qwise/rivorpod/forgot_password_notifier.dart';
+import 'package:qwise/provider/forgot_password_notifier.dart';
 
 import '../../utils/file_collection.dart';
 

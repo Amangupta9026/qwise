@@ -8,4 +8,5 @@ class RouteNames {
   static const String updatePassword = '/updatePassword';
   static const String main = '/main';
   static const String home = '/home';
+  static const String courseCategory = '/courseCategory';
 }

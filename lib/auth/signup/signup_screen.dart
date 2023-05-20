@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../rivorpod/google_sign_in.dart';
+import '../../provider/google_sign_in.dart';
 import '../../utils/file_collection.dart';
 
 class SignUpScreen extends StatelessWidget {

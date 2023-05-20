@@ -9,6 +9,8 @@ import 'package:qwise/home/home_screen.dart';
 import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/router/routes_names.dart';
 
+import '../home/course_category/course_category.dart';
+
 final appRoute = GoRouter(
     initialLocation: RouteNames.onBoarding,
     // agree ? RouteNames.onBoarding : RouteNames.welcomeScreen,
@@ -74,6 +76,14 @@ final appRoute = GoRouter(
         name: RouteNames.home,
         builder: (context, state) {
           return const HomeScreen();
+        },
+      ),
+
+      GoRoute(
+        path: RouteNames.courseCategory,
+        name: RouteNames.courseCategory,
+        builder: (context, state) {
+          return const CourseCategory();
         },
       ),
     ]);

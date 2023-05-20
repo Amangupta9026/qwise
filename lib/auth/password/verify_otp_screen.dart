@@ -1,5 +1,5 @@
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:qwise/rivorpod/verify_otp_screen_notifier.dart';
+import 'package:qwise/provider/verify_otp_screen_notifier.dart';
 
 import '../../utils/file_collection.dart';
 
