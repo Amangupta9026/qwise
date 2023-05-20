@@ -1,6 +1,6 @@
 import 'package:qwise/utils/file_collection.dart';
 
-import 'home_header.dart';
+import 'component/home_header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               HomeHeader(),
-              
+
             ],
           ),
         ),

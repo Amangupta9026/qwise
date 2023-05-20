@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../utils/colors.dart';
+import '../../utils/colors.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
