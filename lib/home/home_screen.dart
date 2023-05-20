@@ -1,5 +1,6 @@
 import 'package:qwise/utils/file_collection.dart';
 
+import 'component/banner.dart';
 import 'component/home_header.dart';
 import 'component/search_courses.dart';
 
@@ -14,14 +15,21 @@ class HomeScreen extends StatelessWidget {
         toolbarHeight: 10,
         backgroundColor: Colors.white,
       ),
-      body: const SafeArea(
+      body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HomeHeader(),
-              SearchCoursesTextField(),
+              const HomeHeader(),
+              const SizedBox(
+                height: 18,
+              ),
+              const SearchCoursesTextField(),
+              const SizedBox(
+                height: 18,
+              ),
+              HomeBanner(),
             ],
           ),
         ),

@@ -39,9 +39,6 @@ class HomeHeader extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(
-          height: 18,
-        ),
       ],
     );
   }

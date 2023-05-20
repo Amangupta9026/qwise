@@ -26,6 +26,7 @@ class SearchCoursesTextField extends StatelessWidget {
           child: const Icon(
             CupertinoIcons.search,
             color: pinkIconColor,
+            size: 28,
           ),
         ),
         fillColor: lightPinkColor,

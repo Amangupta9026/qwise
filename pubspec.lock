@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  carousel_animations:
+    dependency: "direct main"
+    description:
+      name: carousel_animations
+      sha256: "188eee17501a45ac8bba6ae6d246c31ffb75fe916baf6bbcf06f7ba84a3ef925"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   characters:
     dependency: transitive
     description:
