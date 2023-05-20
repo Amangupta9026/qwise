@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "486735345213",
+    "project_id": "qwise-learning",
+    "storage_bucket": "qwise-learning.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486735345213:android:a84a7f854ecd8f14401c54",
+        "android_client_info": {
+          "package_name": "com.example.qwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486735345213-arihh54gt580o44oud4osmb4tgapkj0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC6VGb8fGcLfWP-aqZj7WhHwuC-lKKMrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486735345213-arihh54gt580o44oud4osmb4tgapkj0r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486735345213-3qrkp5oddmdttg2dphlulkk6cki881qp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.qwise"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -90,7 +90,7 @@ class SignUpScreen extends StatelessWidget {
         }),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'Email Name',
+          text1: 'Email',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),

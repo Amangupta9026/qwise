@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>486735345213-3qrkp5oddmdttg2dphlulkk6cki881qp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.486735345213-3qrkp5oddmdttg2dphlulkk6cki881qp</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCH5Ju1Eco5JY3Jc_jgpAXsSOlChh7fzYM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>486735345213</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.qwise</string>
+	<key>PROJECT_ID</key>
+	<string>qwise-learning</string>
+	<key>STORAGE_BUCKET</key>
+	<string>qwise-learning.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:486735345213:ios:31632988994f8fc4401c54</string>
+</dict>
+</plist>
