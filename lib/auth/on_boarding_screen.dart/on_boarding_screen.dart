@@ -59,14 +59,8 @@ class OnBoarding extends StatelessWidget {
                         padding: const EdgeInsets.all(12.0),
                         decoration: const BoxDecoration(),
                         child: InkWell(
-                          // canRequestFocus: true,
-
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const SignUpScreen()));
+                            context.pushNamed(RouteNames.signInScreen);
                           },
                           child: const Text(
                             'Skip',

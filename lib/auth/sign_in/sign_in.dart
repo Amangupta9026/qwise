@@ -25,28 +25,15 @@ class SignInScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
+            Text(
               'Sign in',
               style: TextStyle(
                 color: primaryColor,
                 fontSize: 24.0,
                 fontWeight: FontWeight.bold,
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                context.pushNamed(RouteNames.signInScreen);
-              },
-              child: const Text(
-                'Skip',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w500,
-                  color: primaryColor,
-                ),
               ),
             ),
           ],
@@ -59,7 +46,7 @@ class SignInScreen extends StatelessWidget {
         ),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'User Name',
+          text1: 'Email',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),
@@ -124,7 +111,9 @@ class SignInScreen extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all(
                         ref.colorChange ? primaryColor : Colors.grey)),
                 onPressed: () {
-                  ref.nextScreen(context);
+                  if (ref.colorChange) {
+                    ref.nextScreen(context);
+                  }
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -141,7 +130,7 @@ class SignInScreen extends StatelessWidget {
         const Center(
           child: TextWidget(
             textAlign1: TextAlign.center,
-            text1: 'or Sign in with',
+            text1: 'Sign Up / Sign In with',
             size1: 18.0,
             fontWeight1: FontWeight.w400,
           ),
@@ -197,6 +186,30 @@ class SignInScreen extends StatelessWidget {
             ],
           );
         }),
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Don't have an account?"),
+            const SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                context.pushNamed(RouteNames.signUpScreen);
+              },
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
       ],
     );
   }

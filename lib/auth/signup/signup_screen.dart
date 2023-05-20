@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../provider/google_sign_in.dart';
@@ -17,7 +18,7 @@ class SignUpScreen extends StatelessWidget {
         child: SafeArea(
             child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 50.0),
+            padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 90.0),
             child: signUp(context),
           ),
         )),
@@ -173,7 +174,9 @@ class SignUpScreen extends StatelessWidget {
                             ? primaryColor
                             : Colors.grey)),
                 onPressed: () {
-                  ref.onNextScreen(context);
+                  if (ref.colorChange && ref.agree) {
+                    ref.onNextScreen(context);
+                  }
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -190,7 +193,7 @@ class SignUpScreen extends StatelessWidget {
         const Center(
           child: TextWidget(
             textAlign1: TextAlign.center,
-            text1: 'or Sign Up with',
+            text1: 'Sign Up / Sign In with',
             size1: 18.0,
             fontWeight1: FontWeight.w400,
           ),

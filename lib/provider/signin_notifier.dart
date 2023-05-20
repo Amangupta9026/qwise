@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class SigninNotifer extends ChangeNotifier {
@@ -39,11 +40,21 @@ class SigninNotifer extends ChangeNotifier {
     }
   }
 
+  void login(BuildContext context) async {
+    final UserCredential credential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+            email: userNameController.text, password: passwordController.text);
+    if (credential.user != null) {
+      // ignore: use_build_context_synchronously
+      context.pushNamed(RouteNames.home);
+    }
+  }
+
   // next Screen on Button Click
   void nextScreen(BuildContext context) {
     if (userNameController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      context.pushNamed(RouteNames.signInScreen);
+      login(context);
     } else if (userNameController.text.isEmpty &&
         passwordController.text.isEmpty) {
       showMyDialog(
