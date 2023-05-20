@@ -45,10 +45,10 @@ class SignUpNotifier extends ChangeNotifier {
       password: passwordController.text,
     );
     if (credentails.user != null) {
-      credentails.user?.updateDisplayName(
+      await credentails.user?.updateDisplayName(
           '${firstNameController.text} ${lastNameController.text}');
       // ignore: use_build_context_synchronously
-      context.pushReplacementNamed(RouteNames.signInScreen);
+      context.pushReplacementNamed(RouteNames.home);
     }
   }
 

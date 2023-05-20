@@ -175,7 +175,7 @@ class SignUpScreen extends StatelessWidget {
                             : Colors.grey)),
                 onPressed: () {
                   if (ref.colorChange && ref.agree) {
-                    ref.createUserWithEmailAndPassword(context);
+                    ref.onNextScreen(context);
                   }
                 },
                 child: const Padding(

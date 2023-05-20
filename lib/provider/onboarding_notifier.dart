@@ -64,7 +64,7 @@ class OnBoardingNotifier extends ChangeNotifier {
       contentState++;
     }
     if (contentState == 3) {
-      context.pushNamed(RouteNames.signUPScreen);
+      context.pushNamed(RouteNames.signInScreen);
     }
     notifyListeners();
   }
