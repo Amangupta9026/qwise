@@ -7,10 +7,19 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            
-          ],
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Text(
+                "Welcome, Aman",
+                style: TextStyle(
+                  fontSize: 14,
+                  color: lightBlueTextColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

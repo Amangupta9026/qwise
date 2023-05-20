@@ -1,7 +1,8 @@
 import 'package:qwise/utils/file_collection.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({super.key});
+  final int selectedIndex;
+  const MainScreen({this.selectedIndex = 0, super.key});
 
   @override
   Widget build(BuildContext context) {
