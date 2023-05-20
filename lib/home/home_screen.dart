@@ -1,23 +1,26 @@
 import 'package:qwise/utils/file_collection.dart';
 
+import 'home_header.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        toolbarHeight: 10,
+        backgroundColor: Colors.white,
+      ),
+      body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Welcome, Aman",
-                style: TextStyle(
-                  fontSize: 14,
-                  color: lightBlueTextColor,
-                ),
-              ),
+              HomeHeader(),
+              
             ],
           ),
         ),
