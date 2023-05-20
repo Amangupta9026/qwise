@@ -14,7 +14,7 @@ class HomeHeader extends StatelessWidget {
           "Welcome, Aman!",
           style: TextStyle(
             fontSize: 14,
-            color: lightBlueTextColor,
+            color: lightBlueColor,
           ),
         ),
         SizedBox(
@@ -28,7 +28,7 @@ class HomeHeader extends StatelessWidget {
                 "Discover, Enrol & Enhance",
                 style: TextStyle(
                   fontSize: 24,
-                  color: darkBlueTextColor,
+                  color: darkBlueColor,
                   fontWeight: FontWeight.bold,
                 ),
               ),
