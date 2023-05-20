@@ -10,7 +10,7 @@ import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/router/routes_names.dart';
 
 final appRoute = GoRouter(
-    initialLocation: RouteNames.home,
+    initialLocation: RouteNames.onBoarding,
     // agree ? RouteNames.onBoarding : RouteNames.welcomeScreen,
     routes: [
       GoRoute(

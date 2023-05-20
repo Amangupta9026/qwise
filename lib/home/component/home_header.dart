@@ -1,26 +1,26 @@
 import 'package:flutter/cupertino.dart';
-
 import '../../utils/colors.dart';
+import '../../utils/global.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Welcome, Aman!",
-          style: TextStyle(
+          "Welcome, ${currentUser?.displayName ?? ''}!",
+          style: const TextStyle(
             fontSize: 14,
             color: lightBlueColor,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 18,
         ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(

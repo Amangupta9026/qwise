@@ -1,4 +1,7 @@
 import 'dart:developer';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../rivorpod/google_sign_in.dart';
 import '../../utils/file_collection.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -131,26 +134,31 @@ class SignUpScreen extends StatelessWidget {
         const SizedBox(height: 30.0),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Consumer<SignUpNotifier>(builder: (context, ref, child) {
-              return Checkbox(
-                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                checkColor: Colors.white,
-                fillColor: MaterialStateProperty.all(primaryColor),
-                value: ref.agree,
-                onChanged: (value) {
-                  ref.toggleAgree();
-                },
+              return SizedBox(
+                width: double.infinity,
+                height: 30,
+                child: CheckboxListTile(
+                  controlAffinity: ListTileControlAffinity.leading,
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  checkColor: Colors.white,
+                  fillColor: MaterialStateProperty.all(primaryColor),
+                  value: ref.agree,
+                  onChanged: (value) {
+                    ref.toggleAgree();
+                  },
+                  title: TextWidget(
+                    text1: 'I have read and accept terms and conditions',
+                    size1: 12.sp,
+                    fontWeight1: FontWeight.w400,
+                  ),
+                ),
               );
             }),
-            const Flexible(
-              child: TextWidget(
-                text1: 'I have read and accept terms and conditions',
-                size1: 18.0,
-                fontWeight1: FontWeight.w400,
-              ),
-            ),
           ],
         ),
         const SizedBox(height: 30.0),
@@ -202,7 +210,7 @@ class SignUpScreen extends StatelessWidget {
                 '“QWise” Wants to use “google.com” to sign up',
                 'This allows the app and website to share information about you.',
                 () {
-                  Navigator.of(context).pop();
+                  onTapGoogle(context);
                 },
               );
             }),

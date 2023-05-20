@@ -1,9 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 import '../utils/file_collection.dart';
 
 void onTapGoogle(context) async {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final GoogleSignIn googleSignIn = GoogleSignIn();
+
   if (auth.currentUser != null) {
-    GoRouter.of(context).push(RouteNames.main);
+   GoRouter.of(context).pushReplacementNamed(RouteNames.home);
   } else {
     await googleSignIn.signIn();
     final GoogleSignInAccount? googleUser = googleSignIn.currentUser;
@@ -18,22 +23,7 @@ void onTapGoogle(context) async {
       UserCredential userCredential =
           await auth.signInWithCredential(credential);
       if (userCredential.user != null) {
-        UserModel? user;
-        try {
-          user = await UsersRepository.createUser(
-            userName: googleUser.email.split("@")[0],
-            email: googleUser.email,
-            fullName: googleUser.displayName ?? "",
-            photoUrl: googleUser.photoUrl ?? "",
-            mobileNumber: "",
-          );
-        } catch (e) {
-          user = await UsersRepository.getUserByEmail(googleUser.email);
-        } finally {
-          if (user?.email != null && user!.email!.isNotEmpty) {
-            GoRouter.of(context).push(RouteNames.mainScreen);
-          }
-        }
+        GoRouter.of(context).pushReplacementNamed(RouteNames.home);
       }
     }
   }

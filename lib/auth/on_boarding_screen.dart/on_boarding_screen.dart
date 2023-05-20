@@ -48,9 +48,12 @@ class OnBoarding extends StatelessWidget {
                               color: primaryColor,
                               shape: BoxShape.circle,
                             ),
-                            child: const Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.white,
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                              ),
                             )),
                       )
                     : const SizedBox(),
