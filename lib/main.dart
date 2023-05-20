@@ -10,7 +10,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // await SharedPreference.init();
-  await AppUtils.handleNotificationPermission(Permission.notification);
+  // await AppUtils.handleNotificationPermission(Permission.notification);
   
   runApp(MultiProvider(providers: multiProviderName, child: const MyApp()));
 }
