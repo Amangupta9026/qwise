@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../utils/file_collection.dart';
 
 class SignUpNotifier extends ChangeNotifier {
@@ -33,6 +35,15 @@ class SignUpNotifier extends ChangeNotifier {
     } else {
       colorChange = false;
       notifyListeners();
+    }
+  }
+
+  void createUserWithEmailAndPassword(context) async {
+    UserCredential? credentails = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+    if (credentails.user != null) {
+      onNextScreen(context);
     }
   }
 
