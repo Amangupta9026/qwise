@@ -193,7 +193,7 @@ class SignUpScreen extends StatelessWidget {
         const Center(
           child: TextWidget(
             textAlign1: TextAlign.center,
-            text1: 'or Sign Up with',
+            text1: 'Sign Up / Sign In with',
             size1: 18.0,
             fontWeight1: FontWeight.w400,
           ),

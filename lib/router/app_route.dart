@@ -23,8 +23,8 @@ final appRoute = GoRouter(
         },
       ),
       GoRoute(
-        path: RouteNames.signUPScreen,
-        name: RouteNames.signUPScreen,
+        path: RouteNames.signUpScreen,
+        name: RouteNames.signUpScreen,
         builder: (context, state) {
           return const SignUpScreen();
         },
