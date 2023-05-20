@@ -137,10 +137,7 @@ class SignUpScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Consumer<SignUpNotifier>(builder: (context, ref, child) {
-              return CheckboxListTile(
-                controlAffinity: ListTileControlAffinity.leading,
-                contentPadding: EdgeInsets.zero,
-                dense: true,
+              return Checkbox(
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.all(primaryColor),
@@ -148,13 +145,15 @@ class SignUpScreen extends StatelessWidget {
                 onChanged: (value) {
                   ref.toggleAgree();
                 },
-                title: TextWidget(
-                  text1: 'I have read and accept terms and conditions',
-                  size1: 12.sp,
-                  fontWeight1: FontWeight.w400,
-                ),
               );
             }),
+            Flexible(
+              child: TextWidget(
+                text1: 'I have read and accept terms and conditions',
+                size1: 12.sp,
+                fontWeight1: FontWeight.w400,
+              ),
+            ),
           ],
         ),
         const SizedBox(height: 30.0),
