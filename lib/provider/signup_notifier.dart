@@ -38,12 +38,17 @@ class SignUpNotifier extends ChangeNotifier {
     }
   }
 
-  void createUserWithEmailAndPassword(context) async {
-    UserCredential? credentails = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
+  void createUserWithEmailAndPassword(BuildContext context) async {
+    UserCredential? credentails =
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
     if (credentails.user != null) {
-      onNextScreen(context);
+      credentails.user?.updateDisplayName(
+          '${firstNameController.text} ${lastNameController.text}');
+      // ignore: use_build_context_synchronously
+      context.pushReplacementNamed(RouteNames.signInScreen);
     }
   }
 
@@ -53,7 +58,7 @@ class SignUpNotifier extends ChangeNotifier {
         lastNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      context.pushReplacementNamed(RouteNames.signInScreen);
+      createUserWithEmailAndPassword(context);
       //  dispose();
     } else if (firstNameController.text.isEmpty &&
         lastNameController.text.isEmpty &&
