@@ -5,10 +5,12 @@ import 'package:qwise/auth/password/forgot_password.dart';
 import 'package:qwise/auth/password/verify_otp_screen.dart';
 import 'package:qwise/auth/sign_in/sign_in.dart';
 import 'package:qwise/auth/signup/signup_screen.dart';
+import 'package:qwise/home/home_screen.dart';
+import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/router/routes_names.dart';
 
 final appRoute = GoRouter(
-    initialLocation: RouteNames.onBoarding,
+    initialLocation: RouteNames.home,
     // agree ? RouteNames.onBoarding : RouteNames.welcomeScreen,
     routes: [
       GoRoute(
@@ -46,7 +48,6 @@ final appRoute = GoRouter(
           return const VerifyOtpScreen();
         },
       ),
-
       GoRoute(
         path: RouteNames.createNewPassword,
         name: RouteNames.createNewPassword,
@@ -54,12 +55,25 @@ final appRoute = GoRouter(
           return const CreateNewPassword();
         },
       ),
-
       GoRoute(
         path: RouteNames.updatePassword,
         name: RouteNames.updatePassword,
         builder: (context, state) {
           return const CreateNewPassword();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.main,
+        name: RouteNames.main,
+        builder: (context, state) {
+          return const MainScreen();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.home,
+        name: RouteNames.home,
+        builder: (context, state) {
+          return const HomeScreen();
         },
       ),
     ]);

@@ -6,4 +6,6 @@ class RouteNames {
   static const String verifyOTPScreen = '/verifyOTP';
   static const String createNewPassword = '/createNewPassword';
   static const String updatePassword = '/updatePassword';
+  static const String main = '/main';
+  static const String home = '/home';
 }
