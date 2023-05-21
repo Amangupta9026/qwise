@@ -8,6 +8,7 @@ import 'package:qwise/auth/sign_in/sign_in.dart';
 import 'package:qwise/auth/signup/signup_screen.dart';
 import 'package:qwise/home/home_screen.dart';
 import 'package:qwise/home/main_screen.dart';
+import 'package:qwise/home/recommended_courses/course_view_screen.dart';
 import 'package:qwise/profile/edit_profile.dart';
 import 'package:qwise/router/routes_names.dart';
 
@@ -104,6 +105,13 @@ final appRoute = GoRouter(
         name: RouteNames.profileEdit,
         builder: (context, state) {
           return const EditProfile();
+        },
+      ),
+       GoRoute(
+        path: RouteNames.profileEdit,
+        name: RouteNames.profileEdit,
+        builder: (context, state) {
+          return const CourseView();
         },
       ),
     ]);
