@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:pod_player/pod_player.dart';
+import 'package:qwise/utils/colors.dart';
 
 class PodPlayerView extends StatefulWidget {
   final String videoUrl;
@@ -25,11 +26,24 @@ class _PodPlayerViewState extends State<PodPlayerView> {
   }
 
   @override
+  void dispose() {
+    podPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PodVideoPlayer(
       controller: podPlayerController,
+      podProgressBarConfig: const PodProgressBarConfig(
+        bufferedBarColor: primaryColor,
+        circleHandlerColor: primaryColor,
+        playingBarColor: primaryColor,
+      ),
       videoThumbnail: DecorationImage(
-          image: Image.network(widget.videoThumbnail).image, fit: BoxFit.cover),
+        image: Image.network(widget.videoThumbnail).image,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }
