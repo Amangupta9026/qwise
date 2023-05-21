@@ -1,14 +1,15 @@
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
-import 'package:flutter/material.dart';
-import 'package:qwise/utils/colors.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:qwise/profile/profile_screen.dart';
+import 'package:qwise/provider/page_index_selector.dart';
+import 'package:qwise/utils/file_collection.dart';
 
 import 'home_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  final int index;
-  const MainScreen({this.index = 0, super.key});
+  const MainScreen({ super.key});
 
-  Widget page() {
+  Widget page(index) {
     switch (index) {
       case 0:
         return const HomeScreen();
@@ -17,10 +18,7 @@ class MainScreen extends StatelessWidget {
       case 2:
         return const HomeScreen();
       case 3:
-        return const HomeScreen();
-
-      case 4:
-        return const HomeScreen();
+        return const ProfileScreen();
       default:
         return const HomeScreen();
     }
@@ -28,23 +26,28 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomBarBubble(
-        selectedIndex: index,
-        color: primaryColor,
-        backgroundColor: Colors.white,
-        items: [
-          BottomBarItem(iconData: Icons.home),
-          BottomBarItem(iconData: Icons.redeem),
-          BottomBarItem(
-            iconData: Icons.psychology_alt_rounded,
-          ),
-          BottomBarItem(iconData: Icons.notifications),
-          BottomBarItem(iconData: Icons.person_4_rounded),
-        ],
-        onSelect: (index) {},
-      ),
-      body: page(),
-    );
+    return Consumer<PageIndexSelectorNotifier>(builder: (context, ref, child) {
+      return Scaffold(
+        bottomNavigationBar: BottomBarBubble(
+          selectedIndex: ref.index,
+          color: primaryColor,
+          backgroundColor: Colors.white,
+          items: [
+            BottomBarItem(iconData: CupertinoIcons.home),
+            BottomBarItem(
+              iconData: CupertinoIcons.leaf_arrow_circlepath,
+            ),
+            BottomBarItem(
+              iconData: CupertinoIcons.plus_app,
+            ),
+            BottomBarItem(iconData: CupertinoIcons.person),
+          ],
+          onSelect: (index) {
+            ref.changeIndex(index);
+          },
+        ),
+        body: page(ref.index),
+      );
+    });
   }
 }
