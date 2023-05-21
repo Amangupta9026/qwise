@@ -1,7 +1,5 @@
 import 'dart:developer';
 
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../provider/google_sign_in.dart';
 import '../../utils/file_collection.dart';
 
@@ -18,7 +16,7 @@ class SignUpScreen extends StatelessWidget {
         child: SafeArea(
             child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 90.0),
+            padding: const EdgeInsets.fromLTRB(16.0, 30.0, 16.0, 90.0),
             child: signUp(context),
           ),
         )),
@@ -133,12 +131,11 @@ class SignUpScreen extends StatelessWidget {
           );
         }),
         const SizedBox(height: 30.0),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Consumer<SignUpNotifier>(builder: (context, ref, child) {
-              return Checkbox(
+        Consumer<SignUpNotifier>(
+          builder: (context, ref, child) {
+            return ListTile(
+              leading: Checkbox(
+                visualDensity: VisualDensity.compact,
                 materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 checkColor: Colors.white,
                 fillColor: MaterialStateProperty.all(primaryColor),
@@ -146,16 +143,23 @@ class SignUpScreen extends StatelessWidget {
                 onChanged: (value) {
                   ref.toggleAgree();
                 },
-              );
-            }),
-            Flexible(
-              child: TextWidget(
-                text1: 'I have read and accept terms and conditions',
-                size1: 12.sp,
-                fontWeight1: FontWeight.w400,
               ),
-            ),
-          ],
+              dense: true,
+              isThreeLine: false,
+              minVerticalPadding: 0,
+              minLeadingWidth: 0,
+              visualDensity: VisualDensity.compact,
+              contentPadding: EdgeInsets.zero,
+              horizontalTitleGap: 4,
+              onTap: () {
+                ref.toggleAgree();
+              },
+              title: const TextWidget(
+                text1: 'I have read and accept terms and conditions',
+                size1: 12,
+              ),
+            );
+          },
         ),
         const SizedBox(height: 30.0),
         Consumer<SignUpNotifier>(builder: (context, ref, child) {
