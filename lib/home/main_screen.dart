@@ -35,10 +35,10 @@ class MainScreen extends StatelessWidget {
           items: [
             BottomBarItem(iconData: CupertinoIcons.home),
             BottomBarItem(
-              iconData: CupertinoIcons.leaf_arrow_circlepath,
+              iconData: CupertinoIcons.play_circle,
             ),
             BottomBarItem(
-              iconData: CupertinoIcons.plus_app,
+              iconData: CupertinoIcons.chat_bubble_text,
             ),
             BottomBarItem(iconData: CupertinoIcons.person),
           ],
