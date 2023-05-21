@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class ForgotPasswordNotifier extends ChangeNotifier {
@@ -14,9 +15,14 @@ class ForgotPasswordNotifier extends ChangeNotifier {
     }
   }
 
+  void forgotPassword(BuildContext context) {
+    FirebaseAuth.instance.sendPasswordResetEmail(email: emailController.text);
+    context.pushNamed(RouteNames.updatedPasswordSuccess);
+  }
+
   void onNextScreen(BuildContext context) {
     if (emailController.text.isNotEmpty) {
-      context.pushNamed(RouteNames.verifyOTPScreen);
+      forgotPassword(context);
     }
   }
 }

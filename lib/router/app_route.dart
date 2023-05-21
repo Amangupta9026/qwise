@@ -9,6 +9,7 @@ import 'package:qwise/home/home_screen.dart';
 import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/router/routes_names.dart';
 
+import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
 
 final appRoute = GoRouter(
@@ -58,10 +59,10 @@ final appRoute = GoRouter(
         },
       ),
       GoRoute(
-        path: RouteNames.updatePassword,
-        name: RouteNames.updatePassword,
+        path: RouteNames.updatedPasswordSuccess,
+        name: RouteNames.updatedPasswordSuccess,
         builder: (context, state) {
-          return const CreateNewPassword();
+          return const PasswordUpdatedSuccessfullyScreen();
         },
       ),
       GoRoute(

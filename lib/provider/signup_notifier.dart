@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../utils/file_collection.dart';
 
@@ -13,6 +15,8 @@ class SignUpNotifier extends ChangeNotifier {
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  final firestore = FirebaseFirestore.instance;
 
   void toggle() {
     _obscureText = !_obscureText;
@@ -39,6 +43,7 @@ class SignUpNotifier extends ChangeNotifier {
   }
 
   void createUserWithEmailAndPassword(BuildContext context) async {
+    EasyLoading.show(status: 'loading...');
     UserCredential? credentails =
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: emailController.text,
@@ -50,6 +55,18 @@ class SignUpNotifier extends ChangeNotifier {
       // ignore: use_build_context_synchronously
       context.pushReplacementNamed(RouteNames.home);
     }
+    EasyLoading.dismiss();
+  }
+
+  void createUser() {
+    firestore.collection('signup').add({
+      'id': FirebaseAuth.instance.currentUser!.uid,
+      'firstName': firstNameController.text,
+      'lastName': lastNameController.text,
+      'email': emailController.text,
+      'password': passwordController.text,
+      'servertime': FieldValue.serverTimestamp(),
+    });
   }
 
   void onNextScreen(BuildContext context) {
@@ -58,6 +75,7 @@ class SignUpNotifier extends ChangeNotifier {
         lastNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
+      createUser();
       createUserWithEmailAndPassword(context);
       //  dispose();
     } else if (firstNameController.text.isEmpty &&

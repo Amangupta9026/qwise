@@ -1,7 +1,8 @@
 import '../utils/file_collection.dart';
 
-Future<void> showMyDialog(BuildContext context, String? labelText1,
-    String? contentText1, tap1) async {
+Future<void> showMyDialog(
+    BuildContext context, String? labelText1, String? contentText1, tap1,
+    {bool? istwobutton = true}) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -28,29 +29,38 @@ Future<void> showMyDialog(BuildContext context, String? labelText1,
               color: Colors.grey,
               thickness: 1.0,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  TextButton(
-                    onPressed: tap1,
-                    child: const Text('Confirm'),
-                  ),
-                  Container(
-                    height: 30.0,
-                    width: 1.5,
-                    color: Colors.grey,
-                  ),
-                  TextButton(
-                    child: const Text('Cancel'),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
-                ],
+            if (istwobutton == true)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0, 20.0, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      onPressed: tap1,
+                      child: const Text('Confirm'),
+                    ),
+                    Container(
+                      height: 30.0,
+                      width: 1.5,
+                      color: Colors.grey,
+                    ),
+                    TextButton(
+                      child: const Text('Cancel'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
+            if (istwobutton == false)
+              Align(
+                alignment: Alignment.bottomRight,
+                child: TextButton(
+                  onPressed: tap1,
+                  child: const Text('OK'),
+                ),
+              ),
           ],
         ),
       );

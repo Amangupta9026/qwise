@@ -95,7 +95,7 @@ class CreateNewPassword extends StatelessWidget {
                   // ref.nextScreen(context);
                   if (ref.userNameController.text ==
                       ref.passwordController.text) {
-                    context.pushNamed(RouteNames.updatePassword);
+                    context.pushNamed(RouteNames.updatedPasswordSuccess);
                   } else {
                     showMyDialog(
                       context,

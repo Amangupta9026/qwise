@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class SigninNotifer extends ChangeNotifier {
@@ -41,13 +42,23 @@ class SigninNotifer extends ChangeNotifier {
   }
 
   void login(BuildContext context) async {
-    final UserCredential credential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(
-            email: userNameController.text, password: passwordController.text);
-    if (credential.user != null) {
-      // ignore: use_build_context_synchronously
-      context.pushNamed(RouteNames.home);
+    try {
+      EasyLoading.show(status: 'loading...');
+      final UserCredential credential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: userNameController.text,
+              password: passwordController.text);
+      if (credential.user != null) {
+        // ignore: use_build_context_synchronously
+        context.pushNamed(RouteNames.home);
+      }
+    } catch (e) {
+      showMyDialog(
+          context, 'Invalid Credentials', 'Please enter valid credentials', () {
+        Navigator.of(context).pop();
+      }, istwobutton: false);
     }
+    EasyLoading.dismiss();
   }
 
   // next Screen on Button Click

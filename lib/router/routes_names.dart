@@ -5,7 +5,7 @@ class RouteNames {
   static const String forgotPasswordScreen = '/forgotPassword';
   static const String verifyOTPScreen = '/verifyOTP';
   static const String createNewPassword = '/createNewPassword';
-  static const String updatePassword = '/updatePassword';
+  static const String updatedPasswordSuccess = '/updatePassword';
   static const String main = '/main';
   static const String home = '/home';
   static const String courseCategory = '/courseCategory';

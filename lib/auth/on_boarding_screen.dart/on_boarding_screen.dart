@@ -37,7 +37,6 @@ class OnBoarding extends StatelessWidget {
                     ? GestureDetector(
                         onTap: () {
                           ref.previos(context);
-                          
                         },
                         child: Container(
                             padding: const EdgeInsets.all(12.0),

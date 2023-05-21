@@ -1,8 +1,8 @@
 import '../../utils/file_collection.dart';
 import '../../widget/animation_check.dart';
 
-class PasswordUpdateScreen extends StatelessWidget {
-  const PasswordUpdateScreen({super.key});
+class PasswordUpdatedSuccessfullyScreen extends StatelessWidget {
+  const PasswordUpdatedSuccessfullyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class PasswordUpdateScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'Password Updated',
+          'Reset Link Sent',
           style: TextStyle(
             color: primaryColor,
             fontSize: 24.0,
@@ -36,7 +36,7 @@ class PasswordUpdateScreen extends StatelessWidget {
         ),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'Your password has been Successfully updated!',
+          text1: 'We have successfully sent an email\nPlease check',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),
@@ -53,8 +53,7 @@ class PasswordUpdateScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     )),
                     foregroundColor: MaterialStateProperty.all(primaryColor),
-                    backgroundColor: MaterialStateProperty.all(
-                        ref.colorChange ? primaryColor : Colors.grey)),
+                    backgroundColor: MaterialStateProperty.all(primaryColor)),
                 onPressed: () {
                   // ref.nextScreen(context);
                   if (ref.userNameController.text ==
@@ -62,7 +61,8 @@ class PasswordUpdateScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const PasswordUpdateScreen(),
+                        builder: (context) =>
+                            const PasswordUpdatedSuccessfullyScreen(),
                       ),
                     );
                   } else {
