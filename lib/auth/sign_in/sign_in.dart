@@ -1,3 +1,5 @@
+import 'package:qwise/provider/google_sign_in.dart';
+
 import '../../utils/file_collection.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -143,10 +145,10 @@ class SignInScreen extends StatelessWidget {
               ref.iconReplaceFun(MdiIcons.google, () {
                 showMyDialog(
                   context,
-                  '“Wiseup” Wants to use “google.com” to sign in',
+                  '“QWise Learning” Wants to use “google.com” to sign in',
                   'This allows the app and website to share information about you.',
                   () {
-                    Navigator.of(context).pop();
+                    onTapGoogle(context);
                   },
                 );
               }),
@@ -154,7 +156,7 @@ class SignInScreen extends StatelessWidget {
               ref.iconReplaceFun(MdiIcons.facebook, () {
                 showMyDialog(
                   context,
-                  '“Wiseup” Wants to use facebook.com” to sign in',
+                  '“QWise Learning” Wants to use facebook.com” to sign in',
                   'This allows the app and website to share information about you.',
                   () {
                     Navigator.of(context).pop();
@@ -165,7 +167,7 @@ class SignInScreen extends StatelessWidget {
               ref.iconReplaceFun(MdiIcons.twitter, () {
                 showMyDialog(
                   context,
-                  '“Wiseup” Wants to use twitter.com” to sign in',
+                  '“QWise Learning” Wants to use twitter.com” to sign in',
                   'This allows the app and website to share information about you.',
                   () {
                     Navigator.of(context).pop();
@@ -176,7 +178,7 @@ class SignInScreen extends StatelessWidget {
               ref.iconReplaceFun(MdiIcons.linkedin, () {
                 showMyDialog(
                   context,
-                  '“Wiseup” Wants to use linkedin.com” to sign in',
+                  '“QWise Learning” Wants to use linkedin.com” to sign in',
                   'This allows the app and website to share information about you.',
                   () {
                     Navigator.of(context).pop();

@@ -8,7 +8,7 @@ void onTapGoogle(context) async {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   if (auth.currentUser != null) {
-   GoRouter.of(context).pushReplacementNamed(RouteNames.home);
+   GoRouter.of(context).pushReplacementNamed(RouteNames.main);
   } else {
     await googleSignIn.signIn();
     final GoogleSignInAccount? googleUser = googleSignIn.currentUser;
@@ -23,7 +23,7 @@ void onTapGoogle(context) async {
       UserCredential userCredential =
           await auth.signInWithCredential(credential);
       if (userCredential.user != null) {
-        GoRouter.of(context).pushReplacementNamed(RouteNames.home);
+        GoRouter.of(context).pushReplacementNamed(RouteNames.main);
       }
     }
   }
