@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qwise/utils/file_collection.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
+import '../../provider/course_videos_notifier.dart';
+
 CollectionReference<Map<String, dynamic>> courseCollection =
     FirebaseFirestore.instance.collection("course");
 
@@ -27,7 +29,19 @@ class RecommendedCourses extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   InkWell(
-                    onTap: () {},
+                    onTap: () async {
+                      List<Video> videos = [];
+                      await for (var video in yt.playlists.getVideos(
+                          Uri.parse(data?[0]["course_playlist"] ?? "")
+                                  .queryParameters["list"] ??
+                              "")) {
+                        videos.add(video);
+                      }
+                      context.read<CourseVideoNotifier>().setVideos(videos);
+                      context.push(
+                        RouteNames.courseView,
+                      );
+                    },
                     child: SizedBox(
                       height: 140,
                       child: Card(

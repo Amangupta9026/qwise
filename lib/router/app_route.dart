@@ -99,7 +99,6 @@ final appRoute = GoRouter(
           return const CourseCategory();
         },
       ),
-
       GoRoute(
         path: RouteNames.profileEdit,
         name: RouteNames.profileEdit,
@@ -107,9 +106,9 @@ final appRoute = GoRouter(
           return const EditProfile();
         },
       ),
-       GoRoute(
-        path: RouteNames.profileEdit,
-        name: RouteNames.profileEdit,
+      GoRoute(
+        path: RouteNames.courseView,
+        name: RouteNames.courseView,
         builder: (context, state) {
           return const CourseView();
         },
