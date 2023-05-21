@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qwise/auth/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:qwise/auth/password/create_new_password.dart';
@@ -12,8 +13,9 @@ import 'package:qwise/router/routes_names.dart';
 import '../home/course_category/course_category.dart';
 
 final appRoute = GoRouter(
-    initialLocation: RouteNames.onBoarding,
-    // agree ? RouteNames.onBoarding : RouteNames.welcomeScreen,
+    initialLocation: FirebaseAuth.instance.currentUser != null
+        ? RouteNames.main
+        : RouteNames.onBoarding,
     routes: [
       GoRoute(
         path: RouteNames.onBoarding,
@@ -78,7 +80,6 @@ final appRoute = GoRouter(
           return const HomeScreen();
         },
       ),
-
       GoRoute(
         path: RouteNames.courseCategory,
         name: RouteNames.courseCategory,

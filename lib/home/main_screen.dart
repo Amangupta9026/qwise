@@ -1,17 +1,48 @@
-import 'package:qwise/utils/file_collection.dart';
+import 'package:bottom_bar_matu/bottom_bar_matu.dart';
+import 'package:flutter/material.dart';
+
+import 'home_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  final int selectedIndex;
-  const MainScreen({this.selectedIndex = 0, super.key});
+  final int index;
+  const MainScreen({this.index = 0, super.key});
+
+  Widget page() {
+    switch (index) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return const HomeScreen();
+      case 2:
+        return const HomeScreen();
+      case 3:
+        return const HomeScreen();
+
+      case 4:
+        return const HomeScreen();
+      default:
+        return const HomeScreen();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [],
-        ),
+    return Scaffold(
+      bottomNavigationBar: BottomBarBubble(
+        selectedIndex: index,
+        backgroundColor: Colors.white,
+        items: [
+          BottomBarItem(iconData: Icons.home),
+          BottomBarItem(iconData: Icons.redeem),
+          BottomBarItem(
+            iconData: Icons.psychology_alt_rounded,
+          ),
+          BottomBarItem(iconData: Icons.notifications),
+          BottomBarItem(iconData: Icons.person_4_rounded),
+        ],
+        onSelect: (index) {},
       ),
+      body: page(),
     );
   }
 }
