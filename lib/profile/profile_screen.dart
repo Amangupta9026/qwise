@@ -2,6 +2,8 @@ import 'dart:developer';
 
 import 'package:qwise/utils/file_collection.dart';
 
+import '../widget/bottom_navigationbar_widget.dart';
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
@@ -24,26 +26,11 @@ class ProfileScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(40),
         child: HeaderWidget(text1: 'Profile', isCenterTitle: true),
       ),
-      bottomNavigationBar: Container(
-        height: 60,
-        decoration: const BoxDecoration(
-          color: colorGradient2,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight: Radius.circular(30),
-          ),
-        ),
-        child: TextButton(
-          onPressed: () {
-            logout(context);
-          },
-          child: const TextWidget(
-            color1: colortext,
-            text1: 'Logout',
-            size1: 18,
-            fontWeight1: FontWeight.w700,
-          ),
-        ),
+      bottomNavigationBar: BottomNavigationBarWidget(
+        buttonName: 'Logout',
+        onButtonPressed: () {
+          logout(context);
+        },
       ),
       body: Container(
         decoration: AppUtils.decoration1(),

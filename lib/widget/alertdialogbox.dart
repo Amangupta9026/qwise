@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 
 import '../utils/file_collection.dart';
 
-Future<void> showMyDialog(BuildContext context, String? labelText1,
-    String? contentText1, actiontap2, {actiontap1,
+Future<void> showMyDialog(
+    BuildContext context, String? labelText1, String? contentText1, actiontap2,
+    {actiontap1,
     String? actionButtonText1,
     String? actionButtonText2,
     bool? istwobutton = true}) async {
@@ -15,18 +16,30 @@ Future<void> showMyDialog(BuildContext context, String? labelText1,
         title: TextWidget(
           text1: labelText1,
           color1: primaryColor,
-          size1: 22.0,
+          size1: 20.0,
           fontWeight1: FontWeight.w600,
         ),
         actions: [
           if (istwobutton == true) ...{
             CupertinoDialogAction(
               onPressed: actiontap1,
-              child: Text(actionButtonText1 ?? 'Cancel'),
+              child: Text(
+                actionButtonText1 ?? 'Cancel',
+                style: const TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             CupertinoDialogAction(
                 onPressed: actiontap2,
-                child: Text(actionButtonText2 ?? 'Confirm')),
+                child: Text(
+                  actionButtonText2 ?? 'Confirm',
+                  style: const TextStyle(
+                    color: primaryColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )),
           } else ...{
             CupertinoDialogAction(
                 onPressed: actiontap2, child: const Text('Okay')),
@@ -37,6 +50,7 @@ Future<void> showMyDialog(BuildContext context, String? labelText1,
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+            const SizedBox(height: 8),
             TextWidget(
               text1: contentText1,
               size1: 16.0,

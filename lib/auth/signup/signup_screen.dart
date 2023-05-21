@@ -118,11 +118,11 @@ class SignUpScreen extends StatelessWidget {
               ref.buttonColorChange();
             },
             controller1: ref.passwordController,
-            obsecureText1: !ref.obscureText,
+            obsecureText1: ref.obscureText,
             iconButton1: IconButton(
               icon: Icon(
                 color: primaryColor,
-                !ref.obscureText ? Icons.visibility_off : Icons.visibility,
+                ref.obscureText ? Icons.visibility_off : Icons.visibility,
               ),
               onPressed: () {
                 ref.toggle();
@@ -208,46 +208,58 @@ class SignUpScreen extends StatelessWidget {
           children: [
             iconReplaceFun(MdiIcons.google, () {
               showMyDialog(
-                context,
-                '“QWise Learning” Wants to use “google.com” to sign up',
-                'This allows the app and website to share information about you.',
-                () {
-                  onTapGoogle(context);
-                },
-              );
+                  context,
+                  '“QWise Learning” Wants to use “google.com” to sign up',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    onTapGoogle(context);
+                  },
+                  istwobutton: true,
+                  actiontap1: () {
+                    context.pop();
+                  });
             }),
             const SizedBox(width: 20.0),
             iconReplaceFun(MdiIcons.facebook, () {
               showMyDialog(
-                context,
-                '“QWise Learning” Wants to use facebook.com” to sign up',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
+                  context,
+                  '“QWise Learning” Wants to use facebook.com” to sign up',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                  istwobutton: true,
+                  actiontap1: () {
+                    context.pop();
+                  });
             }),
             const SizedBox(width: 20.0),
             iconReplaceFun(MdiIcons.twitter, () {
               showMyDialog(
-                context,
-                '“QWise Learning” Wants to use twitter.com” to sign up',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
+                  context,
+                  '“QWise Learning” Wants to use twitter.com” to sign up',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                  istwobutton: true,
+                  actiontap1: () {
+                    context.pop();
+                  });
             }),
             const SizedBox(width: 20.0),
             iconReplaceFun(MdiIcons.linkedin, () {
               showMyDialog(
-                context,
-                '“QWise Learning” Wants to use linkedin.com” to sign up',
-                'This allows the app and website to share information about you.',
-                () {
-                  Navigator.of(context).pop();
-                },
-              );
+                  context,
+                  '“QWise Learning” Wants to use linkedin.com” to sign up',
+                  'This allows the app and website to share information about you.',
+                  () {
+                    Navigator.of(context).pop();
+                  },
+                  istwobutton: true,
+                  actiontap1: () {
+                    context.pop();
+                  });
             }),
           ],
         ),

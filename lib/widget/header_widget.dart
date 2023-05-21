@@ -5,18 +5,19 @@ class HeaderWidget extends StatelessWidget {
   final String? text1;
   final IconData? actions1;
   final bool? isCenterTitle;
+  final Function? onActionPressed;
 
   const HeaderWidget(
       {super.key,
       this.leading1,
       this.text1,
       this.actions1,
-      this.isCenterTitle});
+      this.isCenterTitle,
+      this.onActionPressed});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leadingWidth: 35,
       centerTitle: isCenterTitle ?? false,
       elevation: 0,
       backgroundColor: colorGradient2,
@@ -40,7 +41,7 @@ class HeaderWidget extends StatelessWidget {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: onActionPressed as void Function()?,
           icon: Icon(
             actions1,
             color: colortext,

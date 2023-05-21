@@ -28,27 +28,32 @@ class EnrolledCourses extends StatelessWidget {
                 const SizedBox(height: 30.0),
                 Stack(
                   children: [
-                    Container(
-                      margin: EdgeInsets.zero,
-                      padding: EdgeInsets.zero,
-                      height: MediaQuery.of(context).size.height * 0.30,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: const [
-                          BoxShadow(color: Colors.grey, blurRadius: 10)
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10.0, 12, 10, 0),
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              'assets/images/course1.png',
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ),
+                    InkWell(
+                      onTap: () {
+                        context.pushNamed(RouteNames.courseDetails);
+                      },
+                      child: Container(
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
+                        height: MediaQuery.of(context).size.height * 0.30,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.grey, blurRadius: 10)
                           ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10.0, 12, 10, 0),
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/images/course1.png',
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),

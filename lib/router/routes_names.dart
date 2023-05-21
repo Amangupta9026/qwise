@@ -11,4 +11,5 @@ class RouteNames {
   static const String courseCategory = '/courseCategory';
   static const String profileEdit = '/profileEdit';
   static const String courseView = '/courseView';
+  static const String courseDetails = '/courseDetails';
 }

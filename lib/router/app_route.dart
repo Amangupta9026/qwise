@@ -14,6 +14,7 @@ import 'package:qwise/router/routes_names.dart';
 
 import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
+import '../home/recommended_courses/course_details/course_details.dart';
 
 String getInitialRoute() {
   switch (FirebaseAuth.instance.currentUser) {
@@ -111,6 +112,13 @@ final appRoute = GoRouter(
         name: RouteNames.courseView,
         builder: (context, state) {
           return const CourseView();
+        },
+      ),
+      GoRoute(
+        path: RouteNames.courseDetails,
+        name: RouteNames.courseDetails,
+        builder: (context, state) {
+          return const CourseDetails();
         },
       ),
     ]);

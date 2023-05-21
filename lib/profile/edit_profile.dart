@@ -3,6 +3,8 @@ import 'package:qwise/provider/edit_profile_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 import 'package:random_avatar/random_avatar.dart';
 
+import '../widget/bottom_navigationbar_widget.dart';
+
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
 
@@ -18,25 +20,10 @@ class EditProfile extends StatelessWidget {
             leading1: Icons.arrow_back,
           ),
         ),
-        bottomNavigationBar: Container(
-          height: 60,
-          decoration: const BoxDecoration(
-            color: colorGradient2,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(30),
-              topRight: Radius.circular(30),
-            ),
-          ),
-          child: TextButton(
-            onPressed: () {},
-            child: const TextWidget(
-              color1: colortext,
-              text1: 'Submit',
-              size1: 18,
-              fontWeight1: FontWeight.w700,
-            ),
-          ),
-        ),
+        bottomNavigationBar: BottomNavigationBarWidget(
+        buttonName: 'Submit',
+        onButtonPressed: () {},
+      ),
         body: Container(
             decoration: AppUtils.decoration1(),
             height: double.infinity,
