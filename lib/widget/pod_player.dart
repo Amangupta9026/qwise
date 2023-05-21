@@ -1,24 +1,27 @@
-import 'package:flutter/widgets.dart';
 import 'package:pod_player/pod_player.dart';
-import 'package:qwise/utils/colors.dart';
+import 'package:qwise/provider/course_videos_notifier.dart';
+import 'package:qwise/utils/file_collection.dart';
 
 class PodPlayerView extends StatefulWidget {
   final String videoUrl;
   final String videoThumbnail;
-  const PodPlayerView(
-      {required this.videoUrl, required this.videoThumbnail, super.key});
+  PodPlayerController? podPlayerController;
+  PodPlayerView(
+      {required this.videoUrl,
+      required this.videoThumbnail,
+      required this.podPlayerController,
+      super.key});
 
   @override
   State<PodPlayerView> createState() => _PodPlayerViewState();
 }
 
 class _PodPlayerViewState extends State<PodPlayerView> {
-  late PodPlayerController podPlayerController;
   @override
   void initState() {
     super.initState();
-    podPlayerController = PodPlayerController(
-      podPlayerConfig: const PodPlayerConfig(autoPlay: false),
+    widget.podPlayerController = PodPlayerController(
+      podPlayerConfig: const PodPlayerConfig(autoPlay: true),
       playVideoFrom: PlayVideoFrom.youtube(
         widget.videoUrl,
       ),
@@ -26,15 +29,13 @@ class _PodPlayerViewState extends State<PodPlayerView> {
   }
 
   @override
-  void dispose() {
-    podPlayerController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    if (widget.podPlayerController == null) {
+      Provider.of<CourseVideoNotifier>(context).init();
+    }
     return PodVideoPlayer(
-      controller: podPlayerController,
+      key: ValueKey(widget.videoUrl),
+      controller: widget.podPlayerController!,
       podProgressBarConfig: const PodProgressBarConfig(
         bufferedBarColor: primaryColor,
         circleHandlerColor: primaryColor,

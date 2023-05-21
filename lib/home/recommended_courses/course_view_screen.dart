@@ -18,6 +18,7 @@ class CourseView extends StatelessWidget {
                 videoUrl: ref.currentVideo?.url ?? ref.videos[0].url,
                 videoThumbnail: ref.currentVideo?.thumbnails.standardResUrl ??
                     ref.videos[0].thumbnails.standardResUrl,
+                podPlayerController: ref.podPlayerController,
               ),
               const SizedBox(
                 height: 12,
