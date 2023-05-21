@@ -9,4 +9,5 @@ class RouteNames {
   static const String main = '/main';
   static const String home = '/home';
   static const String courseCategory = '/courseCategory';
+  static const String profileEdit = '/profileEdit';
 }

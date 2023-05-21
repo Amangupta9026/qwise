@@ -1,8 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:developer';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -14,23 +10,141 @@ class ProfileScreen extends StatelessWidget {
     } catch (e) {
       log("e");
     }
+
+    // ignore: use_build_context_synchronously
     context.pushNamed(RouteNames.signInScreen);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              ElevatedButton(
-                onPressed: () {
-                  logout(context);
-                },
-                child: const Text('Logout'),
-              ),
-            ],
+      backgroundColor: colorGradient2,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(40),
+        child: HeaderWidget(text1: 'Profile', isCenterTitle: true),
+      ),
+      bottomNavigationBar: Container(
+        height: 60,
+        decoration: const BoxDecoration(
+          color: colorGradient2,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
+          ),
+        ),
+        child: TextButton(
+          onPressed: () {
+            logout(context);
+          },
+          child: const TextWidget(
+            color1: colortext,
+            text1: 'Logout',
+            size1: 18,
+            fontWeight1: FontWeight.w700,
+          ),
+        ),
+      ),
+      body: Container(
+        decoration: AppUtils.decoration1(),
+        height: double.infinity,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        height: 120,
+                        width: 120,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          border: Border.fromBorderSide(
+                            BorderSide(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                          ),
+                          image: DecorationImage(
+                            image: AssetImage(
+                              'assets/images/solmon_boi.jpg',
+                            ),
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      TextWidget(
+                        text1: currentUser?.displayName ?? '',
+                        color1: colortext,
+                        size1: 18,
+                        fontWeight1: FontWeight.w700,
+                      ),
+                      TextWidget(
+                        text1: currentUser?.email ?? '',
+                        color1: colortext,
+                        size1: 16,
+                        fontWeight1: FontWeight.w500,
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    context.pushNamed(RouteNames.profileEdit);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                      vertical: 10,
+                    ),
+                  ),
+                  child: const TextWidget(
+                    text1: 'Edit Profile',
+                    color1: Colors.white,
+                    size1: 16,
+                    fontWeight1: FontWeight.w500,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20.0, 30, 20, 60),
+                  child: Column(
+                    children: [
+                      TextFormFieldWidget(
+                        isReadOnly: true,
+                        controller1: TextEditingController(
+                          text: currentUser?.displayName ?? '',
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormFieldWidget(
+                        isReadOnly: true,
+                        controller1: TextEditingController(
+                          text: currentUser?.email ?? '',
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const TextFormFieldWidget(
+                        isReadOnly: true,
+                        hinttext1: 'Enter your phone number',
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormFieldWidget(
+                        isReadOnly: true,
+                        controller1: TextEditingController(
+                          text: currentUser?.displayName ?? '',
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

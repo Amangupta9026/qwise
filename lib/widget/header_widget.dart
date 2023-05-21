@@ -4,14 +4,15 @@ class HeaderWidget extends StatelessWidget {
   final IconData? leading1;
   final String? text1;
   final IconData? actions1;
+  final bool? isCenterTitle;
 
-  const HeaderWidget({super.key, this.leading1, this.text1, this.actions1});
+  const HeaderWidget({super.key, this.leading1, this.text1, this.actions1, this.isCenterTitle});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
       leadingWidth: 35,
-      centerTitle: false,
+      centerTitle: isCenterTitle ?? false,
       elevation: 0,
       backgroundColor: colorGradient2,
       leading: IconButton(

@@ -6,14 +6,22 @@ class TextFormFieldWidget extends StatelessWidget {
   final bool? obsecureText1;
   final TextEditingController? controller1;
   final Function? onChanged1;
+  final bool? isReadOnly;
   const TextFormFieldWidget(
-      {super.key, this.hinttext1, this.iconButton1, this.obsecureText1, this.controller1, this.onChanged1});
+      {super.key,
+      this.hinttext1,
+      this.iconButton1,
+      this.obsecureText1,
+      this.controller1,
+      this.onChanged1,
+      this.isReadOnly});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller1,
-      onChanged: onChanged1 as void Function(String)?,
+        readOnly: isReadOnly ?? false,
+        controller: controller1,
+        onChanged: onChanged1 as void Function(String)?,
         style: const TextStyle(
           fontSize: 18,
         ),
@@ -25,13 +33,15 @@ class TextFormFieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           hintText: hinttext1 ?? '',
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-            borderSide: const BorderSide(
-              width: 3,
-              color: primaryColor,
-            ),
-          ),
+          focusedBorder: isReadOnly == true
+              ? OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: const BorderSide(
+                    width: 3,
+                    color: primaryColor,
+                  ),
+                )
+              : null,
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(
@@ -41,6 +51,5 @@ class TextFormFieldWidget extends StatelessWidget {
           ),
           suffixIcon: iconButton1 ?? const SizedBox(),
         ));
-        
   }
 }

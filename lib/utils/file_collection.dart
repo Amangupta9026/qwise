@@ -17,5 +17,13 @@ export '../provider/onboarding_notifier.dart';
 export 'package:go_router/go_router.dart';
 export '../../router/routes_names.dart';
 export '../auth/password/forgot_password.dart';
+export '../utils/global.dart';
+export '../widget/header_widget.dart';
+export 'package:firebase_auth/firebase_auth.dart';
+export '../home/component/banner.dart';
+export '../home/component/home_header.dart';
+export '../home/component/search_courses.dart';
+
+
 
 
