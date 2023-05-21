@@ -88,7 +88,9 @@ class SignUpNotifier extends ChangeNotifier {
         'All fields are required to fill',
         () {
           context.pop();
+        
         },
+        
       );
     } else if (firstNameController.text.isEmpty) {
       showMyDialog(

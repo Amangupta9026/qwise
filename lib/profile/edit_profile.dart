@@ -1,3 +1,4 @@
+import 'package:qwise/provider/edit_profile_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class EditProfile extends StatelessWidget {
@@ -12,6 +13,7 @@ class EditProfile extends StatelessWidget {
           child: HeaderWidget(
             text1: 'Edit Profile',
             isCenterTitle: true,
+            leading1: Icons.arrow_back,
           ),
         ),
         bottomNavigationBar: Container(
@@ -27,7 +29,7 @@ class EditProfile extends StatelessWidget {
             onPressed: () {},
             child: const TextWidget(
               color1: colortext,
-              text1: 'Edit Profile',
+              text1: 'Submit',
               size1: 18,
               fontWeight1: FontWeight.w700,
             ),
@@ -39,17 +41,27 @@ class EditProfile extends StatelessWidget {
             child: SafeArea(
                 child: SingleChildScrollView(
                     child: Column(children: [
-              Center(
-                  child: Container(
-                      margin: const EdgeInsets.only(top: 20),
-                      height: 120,
-                      width: 120,
-                      decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/solmon_boi.jpg'),
-                            fit: BoxFit.cover,
-                          )))),
+              Consumer<EditProfileNotifier>(builder: (context, ref, child) {
+                return InkWell(
+                  onTap: () {
+                    ref.imagePicker(context);
+                  },
+                  child: Center(
+                      child: Container(
+                          margin: const EdgeInsets.only(top: 20),
+                          height: 120,
+                          width: 120,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: ref.selectedImage != null
+                                    ? Image.file(ref.selectedImage!).image
+                                    : const AssetImage(
+                                        'assets/images/solmon_boi.jpg'),
+                                fit: BoxFit.cover,
+                              )))),
+                );
+              }),
               Padding(
                 padding: const EdgeInsets.fromLTRB(20.0, 30, 20, 60),
                 child: Column(
