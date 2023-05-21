@@ -12,25 +12,22 @@ class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   Widget page(index) {
-    switch (index) {
-      case 0:
-        return const HomeScreen();
-      case 1:
-        return const EnrolledCourses();
-      case 2:
-        return const AiChatScreen();
-      case 3:
-        return const ProfileScreen();
-      default:
-        return const HomeScreen();
-    }
+    return IndexedStack(
+      index: index,
+      children: const [
+        HomeScreen(),
+        EnrolledCourses(),
+        AiChatScreen(),
+        ProfileScreen(),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<PageIndexSelectorNotifier>(builder: (context, ref, child) {
       return Scaffold(
-        bottomNavigationBar: BottomBarBubble(
+        bottomNavigationBar: BottomBarDoubleBullet(
           selectedIndex: ref.index,
           color: primaryColor,
           backgroundColor: Colors.white,

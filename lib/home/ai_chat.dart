@@ -28,8 +28,6 @@ class AiChatScreenState extends State<AiChatScreen>
   final chatRoomCollection = FirebaseFirestore.instance.collection('bard');
   final sessionCollection = FirebaseFirestore.instance.collection('session');
   String sessionId = "";
-
-  bool isProgressRunning = false;
   final User? currentUser = FirebaseAuth.instance.currentUser;
 
   @override
@@ -66,11 +64,6 @@ class AiChatScreenState extends State<AiChatScreen>
   }
 
   Future<void> onSendMessage() async {
-    if (mounted) {
-      setState(() {
-        isProgressRunning = true;
-      });
-    }
     final bard = ChatBot(sessionId: sessionId);
     final result = await bard.ask(_chatController.text);
     Map<String, dynamic> messages = {
@@ -98,12 +91,6 @@ class AiChatScreenState extends State<AiChatScreen>
         .collection('chats')
         .add(messages2);
     log("$result");
-
-    if (mounted) {
-      setState(() {
-        isProgressRunning = false;
-      });
-    }
   }
 
   @override
@@ -144,7 +131,10 @@ class AiChatScreenState extends State<AiChatScreen>
                                         height: 200,
                                         width: 200,
                                       ),
-                                      const Text("Learn with me..."),
+                                      const Text(
+                                        "Hey there!, Glad to see you, Let's start your learning journey. Ask me anything!",
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ],
                                   ),
                                 );

@@ -49,7 +49,7 @@ class SigninNotifer extends ChangeNotifier {
               password: passwordController.text);
       if (credential.user != null) {
         // ignore: use_build_context_synchronously
-        context.pushNamed(RouteNames.home);
+        context.pushNamed(RouteNames.main);
       }
     } catch (e) {
       showMyDialog(
