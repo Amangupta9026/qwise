@@ -7,32 +7,31 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        toolbarHeight: 10,
-        backgroundColor: Colors.white,
-      ),
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const HomeHeader(),
-                const SizedBox(
-                  height: 18,
-                ),
-                const SearchCoursesTextField(),
-                const SizedBox(
-                  height: 18,
-                ),
-                HomeBanner(),
-                const SizedBox(
-                  height: 18,
-                ),
-                RecommendedCourses(),
-              ],
+      body: Container(
+        height: double.infinity,
+        decoration: AppUtils.decoration1(),
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const HomeHeader(),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  const SearchCoursesTextField(),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  HomeBanner(),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  RecommendedCourses(),
+                ],
+              ),
             ),
           ),
         ),
