@@ -16,6 +16,12 @@ class CourseVideoNotifier extends ChangeNotifier {
     )..initialise();
   }
 
+  @override
+  dispose() {
+    podPlayerController?.dispose();
+    super.dispose();
+  }
+
   void setCurrentVideo(Video video) {
     currentVideo = video;
     podPlayerController?.changeVideo(
