@@ -50,7 +50,7 @@ class ProfileScreen extends StatelessWidget {
                           shape: BoxShape.circle,
                           border: const Border.fromBorderSide(
                             BorderSide(
-                              color: Colors.black,
+                              color: primaryColor,
                               width: 2,
                             ),
                           ),

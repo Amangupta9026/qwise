@@ -1,4 +1,5 @@
 import 'package:provider/single_child_widget.dart';
+import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/provider/course_videos_notifier.dart';
 import 'package:qwise/provider/page_index_selector.dart';
 
@@ -16,4 +17,5 @@ final List<SingleChildWidget> multiProviderName = [
   ChangeNotifierProvider(create: (_) => PageIndexSelectorNotifier()),
   ChangeNotifierProvider(create: (_) => EditProfileNotifier()),
   ChangeNotifierProvider(create: (_) => CourseVideoNotifier()),
+  ChangeNotifierProvider(create: (_) => CourseDetailsNotifier()),
 ];

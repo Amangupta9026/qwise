@@ -21,9 +21,9 @@ class EditProfile extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBarWidget(
-        buttonName: 'Submit',
-        onButtonPressed: () {},
-      ),
+          buttonName: 'Submit',
+          onButtonPressed: () {},
+        ),
         body: Container(
             decoration: AppUtils.decoration1(),
             height: double.infinity,
@@ -45,7 +45,7 @@ class EditProfile extends StatelessWidget {
                         width: 120,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.black),
+                            border: Border.all(color: colortext),
                             image:
                                 FirebaseAuth.instance.currentUser?.photoURL !=
                                         null
@@ -76,7 +76,7 @@ class EditProfile extends StatelessWidget {
                           alignment: Alignment.bottomRight,
                           child: Container(
                             decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
+                              border: Border.all(color: primaryColor, width: 2),
                               color: Colors.white,
                               shape: BoxShape.circle,
                             ),
