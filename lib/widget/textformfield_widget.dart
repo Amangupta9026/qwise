@@ -33,15 +33,13 @@ class TextFormFieldWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
           ),
           hintText: hinttext1 ?? '',
-          focusedBorder: isReadOnly == true
-              ? OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: const BorderSide(
-                    width: 3,
-                    color: primaryColor,
-                  ),
-                )
-              : null,
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10.0),
+            borderSide: const BorderSide(
+              width: 3,
+              color: primaryColor,
+            ),
+          ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
             borderSide: const BorderSide(

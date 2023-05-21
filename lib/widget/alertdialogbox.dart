@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 import '../utils/file_collection.dart';
 
-Future<void> showMyDialog(
-    BuildContext context, String? labelText1, String? contentText1, tap1,
-    {bool? istwobutton = true}) async {
+Future<void> showMyDialog(BuildContext context, String? labelText1,
+    String? contentText1, actiontap2, {actiontap1,
+    String? actionButtonText1,
+    String? actionButtonText2,
+    bool? istwobutton = true}) async {
   return showCupertinoDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -19,14 +21,15 @@ Future<void> showMyDialog(
         actions: [
           if (istwobutton == true) ...{
             CupertinoDialogAction(
-                child: const Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
+              onPressed: actiontap1,
+              child: Text(actionButtonText1 ?? 'Cancel'),
+            ),
             CupertinoDialogAction(
-                onPressed: tap1, child: const Text('Confirm')),
+                onPressed: actiontap2,
+                child: Text(actionButtonText2 ?? 'Confirm')),
           } else ...{
-            CupertinoDialogAction(onPressed: tap1, child: const Text('Okay')),
+            CupertinoDialogAction(
+                onPressed: actiontap2, child: const Text('Okay')),
           }
         ],
         content: Column(
