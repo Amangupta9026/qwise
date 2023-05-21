@@ -1,5 +1,6 @@
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:flutter/material.dart';
+import 'package:qwise/utils/colors.dart';
 
 import 'home_screen.dart';
 
@@ -30,6 +31,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: BottomBarBubble(
         selectedIndex: index,
+        color: primaryColor,
         backgroundColor: Colors.white,
         items: [
           BottomBarItem(iconData: Icons.home),
