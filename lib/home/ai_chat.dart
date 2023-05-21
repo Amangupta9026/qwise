@@ -131,7 +131,10 @@ class AiChatScreenState extends State<AiChatScreen>
                                         height: 200,
                                         width: 200,
                                       ),
-                                      const Text("Learn with me..."),
+                                      const Text(
+                                        "Hey there!, Glad to see you, Let's start your learning journey. Ask me anything!",
+                                        textAlign: TextAlign.center,
+                                      ),
                                     ],
                                   ),
                                 );
