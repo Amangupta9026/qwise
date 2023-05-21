@@ -53,26 +53,35 @@ class EditProfile extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       Container(
-                          margin: const EdgeInsets.only(top: 20),
-                          height: 120,
-                          width: 120,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                image: ref.selectedImage != null
-                                    ? FileImage(ref.selectedImage!)
-                                    : FirebaseAuth
-                                        .instance.currentUser?.photoURL != null ?Image.network(FirebaseAuth.instance
-                                                .currentUser?.photoURL ??
-                                            "") 
-                                        .image : null,
-                                fit: BoxFit.cover,
-
-                              )),
-                              child: 
-                                        RandomAvatar('saytoonz', trBackground: true, height: 50, width: 50),
-                              
-                              ),
+                        margin: const EdgeInsets.only(top: 20),
+                        height: 120,
+                        width: 120,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.black),
+                            image:
+                                FirebaseAuth.instance.currentUser?.photoURL !=
+                                        null
+                                    ? DecorationImage(
+                                        image: ref.selectedImage != null
+                                            ? FileImage(ref.selectedImage!)
+                                            : Image.network(FirebaseAuth
+                                                        .instance
+                                                        .currentUser
+                                                        ?.photoURL ??
+                                                    "")
+                                                .image,
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null),
+                        child:
+                            FirebaseAuth.instance.currentUser?.photoURL == null
+                                ? RandomAvatar(
+                                    FirebaseAuth.instance.currentUser?.email ??
+                                        "xyz",
+                                  )
+                                : null,
+                      ),
                       Positioned.fill(
                         bottom: 0,
                         right: 4,
@@ -85,7 +94,7 @@ class EditProfile extends StatelessWidget {
                               shape: BoxShape.circle,
                             ),
                             child: const Padding(
-                              padding: EdgeInsets.all(4.0),
+                              padding: EdgeInsets.all(6.0),
                               child: Icon(
                                 CupertinoIcons.camera,
                                 color: Colors.black,
