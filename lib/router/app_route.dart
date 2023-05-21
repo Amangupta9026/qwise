@@ -14,6 +14,15 @@ import 'package:qwise/router/routes_names.dart';
 import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
 
+String getInitialRoute() {
+  switch (FirebaseAuth.instance.currentUser) {
+    case null:
+      return RouteNames.onBoarding;
+    default:
+      return RouteNames.main;
+  }
+}
+
 final appRoute = GoRouter(
     initialLocation: FirebaseAuth.instance.currentUser != null
         ? RouteNames.main
