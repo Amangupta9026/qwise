@@ -6,7 +6,12 @@ class HeaderWidget extends StatelessWidget {
   final IconData? actions1;
   final bool? isCenterTitle;
 
-  const HeaderWidget({super.key, this.leading1, this.text1, this.actions1, this.isCenterTitle});
+  const HeaderWidget(
+      {super.key,
+      this.leading1,
+      this.text1,
+      this.actions1,
+      this.isCenterTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +27,7 @@ class HeaderWidget extends StatelessWidget {
         icon: Icon(
           leading1,
           color: colortext,
+          size: 30,
         ),
       ),
       title: Text(
