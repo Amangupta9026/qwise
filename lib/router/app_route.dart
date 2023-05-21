@@ -13,79 +13,87 @@ import 'package:qwise/router/routes_names.dart';
 import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
 
+String getInitialRoute() {
+  switch (FirebaseAuth.instance.currentUser) {
+    case null:
+      return RouteNames.onBoarding;
+    default:
+      return RouteNames.main;
+  }
+}
+
 final appRoute = GoRouter(
-    initialLocation: FirebaseAuth.instance.currentUser != null
-        ? RouteNames.main
-        : RouteNames.onBoarding,
-    routes: [
-      GoRoute(
-        path: RouteNames.onBoarding,
-        name: RouteNames.onBoarding,
-        builder: (context, state) {
-          return const OnBoarding();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.signUpScreen,
-        name: RouteNames.signUpScreen,
-        builder: (context, state) {
-          return const SignUpScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.signInScreen,
-        name: RouteNames.signInScreen,
-        builder: (context, state) {
-          return const SignInScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.forgotPasswordScreen,
-        name: RouteNames.forgotPasswordScreen,
-        builder: (context, state) {
-          return const ForgotPasswordScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.verifyOTPScreen,
-        name: RouteNames.verifyOTPScreen,
-        builder: (context, state) {
-          return const VerifyOtpScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.createNewPassword,
-        name: RouteNames.createNewPassword,
-        builder: (context, state) {
-          return const CreateNewPassword();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.updatedPasswordSuccess,
-        name: RouteNames.updatedPasswordSuccess,
-        builder: (context, state) {
-          return const PasswordUpdatedSuccessfullyScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.main,
-        name: RouteNames.main,
-        builder: (context, state) {
-          return const MainScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.home,
-        name: RouteNames.home,
-        builder: (context, state) {
-          return const HomeScreen();
-        },
-      ),
-      GoRoute(
-        path: RouteNames.courseCategory,
-        name: RouteNames.courseCategory,
-        builder: (context, state) {
-          return const CourseCategory();
-        },
-      ),
-    ]);
+  initialLocation: getInitialRoute(),
+  routes: [
+    GoRoute(
+      path: RouteNames.onBoarding,
+      name: RouteNames.onBoarding,
+      builder: (context, state) {
+        return const OnBoarding();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.signUpScreen,
+      name: RouteNames.signUpScreen,
+      builder: (context, state) {
+        return const SignUpScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.signInScreen,
+      name: RouteNames.signInScreen,
+      builder: (context, state) {
+        return const SignInScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.forgotPasswordScreen,
+      name: RouteNames.forgotPasswordScreen,
+      builder: (context, state) {
+        return const ForgotPasswordScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.verifyOTPScreen,
+      name: RouteNames.verifyOTPScreen,
+      builder: (context, state) {
+        return const VerifyOtpScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.createNewPassword,
+      name: RouteNames.createNewPassword,
+      builder: (context, state) {
+        return const CreateNewPassword();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.updatedPasswordSuccess,
+      name: RouteNames.updatedPasswordSuccess,
+      builder: (context, state) {
+        return const PasswordUpdatedSuccessfullyScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.main,
+      name: RouteNames.main,
+      builder: (context, state) {
+        return const MainScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.home,
+      name: RouteNames.home,
+      builder: (context, state) {
+        return const HomeScreen();
+      },
+    ),
+    GoRoute(
+      path: RouteNames.courseCategory,
+      name: RouteNames.courseCategory,
+      builder: (context, state) {
+        return const CourseCategory();
+      },
+    ),
+  ],
+);
