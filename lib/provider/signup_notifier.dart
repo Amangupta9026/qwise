@@ -51,8 +51,9 @@ class SignUpNotifier extends ChangeNotifier {
     if (credentails.user != null) {
       await credentails.user?.updateDisplayName(
           '${firstNameController.text} ${lastNameController.text}');
+      createUser();
       // ignore: use_build_context_synchronously
-      context.pushReplacementNamed(RouteNames.home);
+      context.pushReplacementNamed(RouteNames.main);
     }
     EasyLoading.dismiss();
   }
@@ -74,7 +75,6 @@ class SignUpNotifier extends ChangeNotifier {
         lastNameController.text.isNotEmpty &&
         emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty) {
-      createUser();
       createUserWithEmailAndPassword(context);
       //  dispose();
     } else if (firstNameController.text.isEmpty &&
