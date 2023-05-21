@@ -60,7 +60,7 @@ class EditProfile extends StatelessWidget {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 image: ref.selectedImage != null
-                                    ? FileImage(ref.selectedImage!)
+                                    ? FileImage(ref.selectedImage!).image
                                     : FirebaseAuth
                                         .instance.currentUser?.photoURL != null ?Image.network(FirebaseAuth.instance
                                                 .currentUser?.photoURL ??
