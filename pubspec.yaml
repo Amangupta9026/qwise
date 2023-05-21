@@ -14,6 +14,7 @@ dependencies:
 
   #B
   bottom_bar_matu: ^1.3.0
+  bard_api: ^1.0.0
 
   #C
   cupertino_icons: ^1.0.5
@@ -46,6 +47,9 @@ dependencies:
   provider: ^6.0.5
   pin_code_fields: ^7.4.0
   pod_player: ^0.1.2
+
+  #T
+  timeago: ^3.4.0
 
   #Y
   youtube_explode_dart: ^1.12.4

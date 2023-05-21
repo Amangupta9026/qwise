@@ -1,5 +1,7 @@
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:qwise/home/ai_chat.dart';
+import 'package:qwise/home/enrolled_courses.dart';
 import 'package:qwise/profile/profile_screen.dart';
 import 'package:qwise/provider/page_index_selector.dart';
 import 'package:qwise/utils/file_collection.dart';
@@ -14,9 +16,9 @@ class MainScreen extends StatelessWidget {
       case 0:
         return const HomeScreen();
       case 1:
-        return const HomeScreen();
+        return const EnrolledCourses();
       case 2:
-        return const HomeScreen();
+        return const AiChatScreen();
       case 3:
         return const ProfileScreen();
       default:
