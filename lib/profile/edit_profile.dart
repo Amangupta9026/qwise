@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:qwise/provider/edit_profile_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 
@@ -47,7 +48,10 @@ class EditProfile extends StatelessWidget {
                     ref.imagePicker(context);
                   },
                   child: Center(
-                      child: Container(
+                      child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      Container(
                           margin: const EdgeInsets.only(top: 20),
                           height: 120,
                           width: 120,
@@ -56,10 +60,35 @@ class EditProfile extends StatelessWidget {
                               image: DecorationImage(
                                 image: ref.selectedImage != null
                                     ? Image.file(ref.selectedImage!).image
-                                    : const AssetImage(
-                                        'assets/images/solmon_boi.jpg'),
+                                    : Image.network(FirebaseAuth.instance
+                                                .currentUser?.photoURL ??
+                                            "")
+                                        .image,
                                 fit: BoxFit.cover,
-                              )))),
+                              ))),
+                      Positioned.fill(
+                        bottom: 0,
+                        right: 4,
+                        child: Align(
+                          alignment: Alignment.bottomRight,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                            ),
+                            child: const Padding(
+                              padding: EdgeInsets.all(4.0),
+                              child: Icon(
+                                CupertinoIcons.camera,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
                 );
               }),
               Padding(
