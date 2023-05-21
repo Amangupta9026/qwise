@@ -1,3 +1,4 @@
+import 'package:qwise/home/recommended_courses/recomended_courses.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -26,8 +27,10 @@ class HomeScreen extends StatelessWidget {
                 height: 18,
               ),
               HomeBanner(),
-
-              // for navigation
+              const SizedBox(
+                height: 18,
+              ),
+              RecommendedCourses(),
             ],
           ),
         ),
