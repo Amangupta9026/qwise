@@ -205,7 +205,7 @@ class SignUpScreen extends StatelessWidget {
             iconReplaceFun(MdiIcons.google, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use “google.com” to sign up',
+                '“QWise Learning” Wants to use “google.com” to sign up',
                 'This allows the app and website to share information about you.',
                 () {
                   onTapGoogle(context);
@@ -216,7 +216,7 @@ class SignUpScreen extends StatelessWidget {
             iconReplaceFun(MdiIcons.facebook, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use facebook.com” to sign up',
+                '“QWise Learning” Wants to use facebook.com” to sign up',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();
@@ -227,7 +227,7 @@ class SignUpScreen extends StatelessWidget {
             iconReplaceFun(MdiIcons.twitter, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use twitter.com” to sign up',
+                '“QWise Learning” Wants to use twitter.com” to sign up',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();
@@ -238,7 +238,7 @@ class SignUpScreen extends StatelessWidget {
             iconReplaceFun(MdiIcons.linkedin, () {
               showMyDialog(
                 context,
-                '“QWise” Wants to use linkedin.com” to sign up',
+                '“QWise Learning” Wants to use linkedin.com” to sign up',
                 'This allows the app and website to share information about you.',
                 () {
                   Navigator.of(context).pop();

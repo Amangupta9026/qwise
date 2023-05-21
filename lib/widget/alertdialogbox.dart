@@ -36,8 +36,10 @@ Future<void> showMyDialog(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
-                      onPressed: tap1,
-                      child: const Text('Confirm'),
+                      child: const Text('Cancel'),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
                     ),
                     Container(
                       height: 30.0,
@@ -45,10 +47,8 @@ Future<void> showMyDialog(
                       color: Colors.grey,
                     ),
                     TextButton(
-                      child: const Text('Cancel'),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: tap1,
+                      child: const Text('Confirm'),
                     ),
                   ],
                 ),
