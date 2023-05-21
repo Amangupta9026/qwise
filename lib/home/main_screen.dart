@@ -7,7 +7,7 @@ import 'package:qwise/utils/file_collection.dart';
 import 'home_screen.dart';
 
 class MainScreen extends StatelessWidget {
-  const MainScreen({ super.key});
+  const MainScreen({super.key});
 
   Widget page(index) {
     switch (index) {
