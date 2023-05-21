@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:qwise/utils/file_collection.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -58,17 +59,17 @@ class ProfileScreen extends StatelessWidget {
                         margin: const EdgeInsets.only(top: 20),
                         height: 120,
                         width: 120,
-                        decoration: const BoxDecoration(
+                        decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          border: Border.fromBorderSide(
+                          border: const Border.fromBorderSide(
                             BorderSide(
-                              color: Colors.white,
+                              color: Colors.black,
                               width: 2,
                             ),
                           ),
                           image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/solmon_boi.jpg',
+                            image: NetworkImage(
+                              FirebaseAuth.instance.currentUser?.photoURL ?? "",
                             ),
                             fit: BoxFit.fill,
                           ),
