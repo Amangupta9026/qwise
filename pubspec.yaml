@@ -48,6 +48,9 @@ dependencies:
   pin_code_fields: ^7.4.0
   pod_player: ^0.1.2
 
+  #R
+  random_avatar: ^0.0.8
+
   #T
   timeago: ^3.4.0
 

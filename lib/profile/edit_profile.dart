@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:qwise/provider/edit_profile_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
+import 'package:random_avatar/random_avatar.dart';
 
 class EditProfile extends StatelessWidget {
   const EditProfile({super.key});
@@ -59,13 +60,19 @@ class EditProfile extends StatelessWidget {
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                 image: ref.selectedImage != null
-                                    ? Image.file(ref.selectedImage!).image
-                                    : Image.network(FirebaseAuth.instance
+                                    ? FileImage(ref.selectedImage!)
+                                    : FirebaseAuth
+                                        .instance.currentUser?.photoURL != null ?Image.network(FirebaseAuth.instance
                                                 .currentUser?.photoURL ??
-                                            "")
-                                        .image,
+                                            "") 
+                                        .image : null,
                                 fit: BoxFit.cover,
-                              ))),
+
+                              )),
+                              child: 
+                                        RandomAvatar('saytoonz', trBackground: true, height: 50, width: 50),
+                              
+                              ),
                       Positioned.fill(
                         bottom: 0,
                         right: 4,
