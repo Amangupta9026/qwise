@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../utils/file_collection.dart';
@@ -88,9 +87,7 @@ class SignUpNotifier extends ChangeNotifier {
         'All fields are required to fill',
         () {
           context.pop();
-        
         },
-        
       );
     } else if (firstNameController.text.isEmpty) {
       showMyDialog(

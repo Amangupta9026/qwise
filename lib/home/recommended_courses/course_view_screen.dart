@@ -13,7 +13,10 @@ class CourseView extends StatelessWidget {
         child: Consumer<CourseVideoNotifier>(builder: (context, ref, child) {
           return Column(
             children: [
-              PodPlayerView(videoUrl: ref.videos[0].url),
+              PodPlayerView(
+                videoUrl: ref.videos[0].url,
+                videoThumbnail: ref.videos[0].thumbnails.standardResUrl,
+              ),
               Expanded(
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),

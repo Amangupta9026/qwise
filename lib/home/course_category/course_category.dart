@@ -1,9 +1,6 @@
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:qwise/utils/file_collection.dart';
 
-import '../../widget/header_widget.dart';
-import '../component/search_courses.dart';
-
 class CourseCategory extends StatelessWidget {
   const CourseCategory({super.key});
 
@@ -50,7 +47,6 @@ class CourseCategory extends StatelessWidget {
                             Image.asset(
                               'assets/images/course1.png',
                               width: double.infinity,
-                            
                               fit: BoxFit.cover,
                             ),
                           ],
