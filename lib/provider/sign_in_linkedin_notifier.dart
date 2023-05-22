@@ -64,7 +64,7 @@ linkedInLogin(BuildContext context) async {
 }
 
 void linkedInLoginData() {
-  firestore.collection('signup').doc(result?['user_id']).set({
+  firestore.collection('signup').doc(result?['email']).set({
     'id': result?['user_id'],
     'firstName': result?['name'].toString().split(' ').first,
     'lastName': result?['name'].toString().split(' ').last,

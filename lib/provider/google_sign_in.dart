@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -24,9 +25,28 @@ void onTapGoogle(context) async {
       UserCredential userCredential =
           await auth.signInWithCredential(credential);
       if (userCredential.user != null) {
+        createUser(
+            userCredential.user?.displayName!.split(' ')[0] ?? '',
+            userCredential.user?.displayName!.split(' ')[1] ?? '',
+            userCredential.user?.email! ?? '',
+            userCredential.user?.photoURL ?? '');
         GoRouter.of(context).pushReplacementNamed(RouteNames.main);
       }
     }
     EasyLoading.dismiss();
   }
+}
+
+void createUser(
+    String firstName, String lastName, String email, String profilePic) async {
+  final firestore = FirebaseFirestore.instance;
+  firestore.collection('signup').doc(email).set({
+    'id': FirebaseAuth.instance.currentUser!.uid,
+    'firstName': firstName,
+    'lastName': lastName,
+    'email': email,
+    'password': ' ',
+    'pic_url': profilePic,
+    'servertime': FieldValue.serverTimestamp(),
+  });
 }

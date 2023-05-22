@@ -59,12 +59,13 @@ class SignUpNotifier extends ChangeNotifier {
   }
 
   void createUser() {
-    firestore.collection('signup').add({
+    firestore.collection('signup').doc(emailController.text).set({
       'id': FirebaseAuth.instance.currentUser!.uid,
       'firstName': firstNameController.text,
       'lastName': lastNameController.text,
       'email': emailController.text,
       'password': passwordController.text,
+      'pic_url': ' ',
       'servertime': FieldValue.serverTimestamp(),
     });
   }
