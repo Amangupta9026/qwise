@@ -34,7 +34,7 @@ class HomeHeader extends StatelessWidget {
                         context.push(RouteNames.adminPanel);
                       },
                       child: const Icon(
-                        CupertinoIcons.rectangle_3_offgrid_fill,
+                        Icons.dashboard,
                       ),
                     ),
                   ),
