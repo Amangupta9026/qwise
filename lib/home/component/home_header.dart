@@ -6,20 +6,20 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Welcome, ${currentUser?.displayName ?? ''}!",
-          style: const TextStyle(
+          "Welcome, Name of User!",
+          style: TextStyle(
             fontSize: 14,
             color: lightBlueColor,
           ),
         ),
-        const SizedBox(
+        SizedBox(
           height: 18,
         ),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(

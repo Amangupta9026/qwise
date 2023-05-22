@@ -100,13 +100,13 @@ class EditProfile extends StatelessWidget {
                   children: [
                     TextFormFieldWidget(
                       controller1: TextEditingController(
-                        text: currentUser?.displayName ?? '',
+                        text: "",
                       ),
                     ),
                     const SizedBox(height: 20),
                     TextFormFieldWidget(
                       controller1: TextEditingController(
-                        text: currentUser?.email ?? '',
+                        text: "",
                       ),
                     ),
                     const SizedBox(height: 20),
@@ -116,7 +116,7 @@ class EditProfile extends StatelessWidget {
                     const SizedBox(height: 20),
                     TextFormFieldWidget(
                       controller1: TextEditingController(
-                        text: currentUser?.displayName ?? '',
+                        text: "",
                       ),
                     ),
                   ],
