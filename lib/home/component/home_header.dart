@@ -17,12 +17,28 @@ class HomeHeader extends StatelessWidget {
                 .snapshots(),
             builder: (context, snapshot) {
               final userData = snapshot.data?.data();
-              return Text(
-                "Welcome, ${userData?['firstName'] ?? ''}!",
-                style: const TextStyle(
-                  fontSize: 16,
-                  color: lightBlueColor,
-                ),
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Welcome, ${userData?['firstName'] ?? ''}!",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: lightBlueColor,
+                    ),
+                  ),
+                  Visibility(
+                    visible: adminList.contains(userData?['email'] ?? ''),
+                    child: InkWell(
+                      onTap: () {
+                        context.push(RouteNames.adminPanel);
+                      },
+                      child: const Icon(
+                        CupertinoIcons.rectangle_3_offgrid_fill,
+                      ),
+                    ),
+                  ),
+                ],
               );
             }),
         const SizedBox(
