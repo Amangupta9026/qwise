@@ -182,6 +182,9 @@ class EnrolledCourses extends StatelessWidget {
                     ),
                   ],
                 ),
+                const SizedBox(
+                  height: 38,
+                ),
               ],
             ),
           ),

@@ -36,6 +36,9 @@ dependencies:
   google_fonts: ^4.0.4
   go_router: ^7.0.2
 
+  #L
+  linkedin_login: ^2.2.1
+
   #I
   image_picker_pro: ^0.0.1+1
 
@@ -56,6 +59,7 @@ dependencies:
 
   #Y
   youtube_explode_dart: ^1.12.4
+  dio: ^5.1.2
 
 dev_dependencies:
   flutter_test:

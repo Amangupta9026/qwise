@@ -1,5 +1,6 @@
 import 'package:qwise/provider/google_sign_in.dart';
 
+import '../../provider/sign_in_linkedin_notifier.dart';
 import '../../utils/file_collection.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -190,7 +191,7 @@ class SignInScreen extends StatelessWidget {
                     '“QWise Learning” Wants to use linkedin.com” to sign in',
                     'This allows the app and website to share information about you.',
                     () {
-                      Navigator.of(context).pop();
+                      linkedInLogin(context);
                     },
                     istwobutton: true,
                     actiontap1: () {
