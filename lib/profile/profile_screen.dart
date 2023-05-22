@@ -45,6 +45,9 @@ class ProfileScreen extends StatelessWidget {
                     .doc(FirebaseAuth.instance.currentUser?.email)
                     .snapshots(),
                 builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
                   final userData = snapshot.data?.data();
 
                   return Column(

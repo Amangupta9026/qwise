@@ -5,12 +5,15 @@ import 'package:qwise/router/multi_provider_name.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 import 'firebase_options.dart';
+import 'local/prefs.dart';
+
+void checkUserLoggedIn() async {}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await SharedPreference.init();
-  // await AppUtils.handleNotificationPermission(Permission.notification);
+  await Prefs.init();
+  // await AppUtils.handleNotificationPermission(Permission.notification)
 
   runApp(MultiProvider(providers: multiProviderName, child: const MyApp()));
 }
