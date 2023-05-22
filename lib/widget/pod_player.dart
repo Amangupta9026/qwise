@@ -5,8 +5,8 @@ import 'package:qwise/utils/file_collection.dart';
 class PodPlayerView extends StatefulWidget {
   final String videoUrl;
   final String videoThumbnail;
-  PodPlayerController? podPlayerController;
-  PodPlayerView(
+  final PodPlayerController? podPlayerController;
+  const PodPlayerView(
       {required this.videoUrl,
       required this.videoThumbnail,
       required this.podPlayerController,
@@ -17,21 +17,14 @@ class PodPlayerView extends StatefulWidget {
 }
 
 class _PodPlayerViewState extends State<PodPlayerView> {
-  @override
-  void initState() {
-    super.initState();
-    widget.podPlayerController = PodPlayerController(
-      podPlayerConfig: const PodPlayerConfig(autoPlay: true),
-      playVideoFrom: PlayVideoFrom.youtube(
-        widget.videoUrl,
-      ),
-    )..initialise();
-  }
 
   @override
   Widget build(BuildContext context) {
     if (widget.podPlayerController == null) {
       Provider.of<CourseVideoNotifier>(context).init();
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }
     return PodVideoPlayer(
       key: ValueKey(widget.videoUrl),

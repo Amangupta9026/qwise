@@ -7,7 +7,7 @@ class CourseVideoNotifier extends ChangeNotifier {
   Video? currentVideo;
   PodPlayerController? podPlayerController;
 
-  init() {
+  void init() {
     podPlayerController = PodPlayerController(
       podPlayerConfig: const PodPlayerConfig(autoPlay: true),
       playVideoFrom: PlayVideoFrom.youtube(
@@ -18,6 +18,7 @@ class CourseVideoNotifier extends ChangeNotifier {
 
   @override
   dispose() {
+    podPlayerController?.pause();
     podPlayerController?.dispose();
     super.dispose();
   }
