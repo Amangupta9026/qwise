@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qwise/utils/file_collection.dart';
 
@@ -6,20 +7,28 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Welcome, Name of User!",
-          style: TextStyle(
-            fontSize: 14,
-            color: lightBlueColor,
-          ),
+        StreamBuilder(
+            stream: FirebaseFirestore.instance
+                .collection('signup')
+                .doc(FirebaseAuth.instance.currentUser?.email)
+                .snapshots(),
+            builder: (context, snapshot) {
+              final userData = snapshot.data?.data();
+              return Text(
+                "Welcome, ${userData?['firstName'] ?? ''}!",
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: lightBlueColor,
+                ),
+              );
+            }),
+        const SizedBox(
+          height: 8,
         ),
-        SizedBox(
-          height: 18,
-        ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
