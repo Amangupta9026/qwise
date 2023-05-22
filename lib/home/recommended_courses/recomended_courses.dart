@@ -17,7 +17,17 @@ class RecommendedCourses extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text("Recommended Courses"),
+        const SizedBox(height: 16),
+        const Padding(
+          padding: EdgeInsets.only(left: 10.0),
+          child: TextWidget(
+            text1: "Recommended Courses",
+            size1: 16,
+            color1: lightBlueColor,
+            fontWeight1: FontWeight.w600,
+          ),
+        ),
+        const SizedBox(height: 10),
         StreamBuilder(
             stream: courseCollection.snapshots(),
             builder: (context, snapshot) {
@@ -59,7 +69,8 @@ class RecommendedCourses extends StatelessWidget {
                                     Text(
                                       data?[0]["type"] ?? "",
                                       style: const TextStyle(
-                                        color: Colors.grey,
+                                        color: colortext,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
                                     const SizedBox(
