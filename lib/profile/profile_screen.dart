@@ -92,9 +92,8 @@ class ProfileScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 10),
                             TextWidget(
-                              text1: userData?['firstName'] +
-                                  ' ' +
-                                  userData?['lastName'],
+                              text1:
+                                  "${userData?['firstName']} ${userData?['lastName']}",
                               color1: colortext,
                               size1: 18,
                               fontWeight1: FontWeight.w700,
