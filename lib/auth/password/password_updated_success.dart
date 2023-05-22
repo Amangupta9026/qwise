@@ -36,7 +36,7 @@ class PasswordUpdatedSuccessfullyScreen extends StatelessWidget {
         ),
         const SizedBox(height: 20.0),
         const TextWidget(
-          text1: 'We have successfully sent an email\nPlease check',
+          text1: 'We have successfully sent an email to you, Please check',
           size1: 18.0,
           fontWeight1: FontWeight.w400,
         ),

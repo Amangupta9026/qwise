@@ -15,6 +15,7 @@ Map<String, dynamic>? result;
 final firestore = FirebaseFirestore.instance;
 
 linkedInLogin(BuildContext context) async {
+  // EasyLoading.show(status: 'loading...');
   Navigator.push(
     context,
     MaterialPageRoute(
@@ -23,6 +24,8 @@ linkedInLogin(BuildContext context) async {
         clientId: clientId,
         clientSecret: clientSecret,
         onGetUserProfile: (linkedInUser) async {
+          // EasyLoading.dismiss();
+
           /// This api call retrives profile picture
           Response? response = await dio.get(
               "https://api.linkedin.com/v2/me?projection=(profilePicture(displayImage~:playableStreams))",
@@ -50,6 +53,8 @@ linkedInLogin(BuildContext context) async {
 
           result = postJson;
           linkedInLoginData();
+
+          // EasyLoading.dismiss();
 
           log(result.toString());
           result != null && result!.isNotEmpty

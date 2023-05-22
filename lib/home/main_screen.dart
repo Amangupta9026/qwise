@@ -14,11 +14,11 @@ class MainScreen extends StatelessWidget {
   Widget page(index) {
     return IndexedStack(
       index: index,
-      children: const [
-        HomeScreen(),
+      children: [
+        const HomeScreen(),
         EnrolledCourses(),
-        AiChatScreen(),
-        ProfileScreen(),
+        const AiChatScreen(),
+        const ProfileScreen(),
       ],
     );
   }

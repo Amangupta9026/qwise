@@ -1,3 +1,4 @@
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class ForgotPasswordNotifier extends ChangeNotifier {
@@ -29,6 +30,7 @@ class ForgotPasswordNotifier extends ChangeNotifier {
     bool isThereAnyError = false;
 
     try {
+      EasyLoading.show(status: 'loading...');
       await FirebaseAuth.instance
           .sendPasswordResetEmail(email: emailController.text);
     } catch (e) {
@@ -38,6 +40,7 @@ class ForgotPasswordNotifier extends ChangeNotifier {
         Navigator.of(context).pop();
       }, istwobutton: false);
     } finally {
+      EasyLoading.dismiss();
       if (!isThereAnyError) {
         context.pushNamed(RouteNames.updatedPasswordSuccess);
       }
