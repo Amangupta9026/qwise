@@ -142,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
                             TextFormFieldWidget(
                               isReadOnly: true,
                               controller1: TextEditingController(
-                                text: currentUser?.email ?? '',
+                                text: userData?['email'] ?? '',
                               ),
                             ),
                             const SizedBox(height: 20),
@@ -154,7 +154,7 @@ class ProfileScreen extends StatelessWidget {
                             TextFormFieldWidget(
                               isReadOnly: true,
                               controller1: TextEditingController(
-                                text: currentUser?.displayName ?? '',
+                                text: userData?['firstName'] ?? '',
                               ),
                             ),
                           ],
