@@ -1,11 +1,16 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker_pro/image_picker_pro.dart';
 
 import '../utils/file_collection.dart';
 
 class EditProfileNotifier extends ChangeNotifier {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  final firestore = FirebaseFirestore.instance;
+
   File? selectedImage;
   void imagePicker(BuildContext context) async {
     showMyDialog(
@@ -49,5 +54,30 @@ class EditProfileNotifier extends ChangeNotifier {
     }
     notifyListeners();
     EasyLoading.dismiss();
+  }
+
+  Future<void> getUserData() async {
+    final userData = await FirebaseFirestore.instance
+        .collection('signup')
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .get();
+
+    nameController =
+        TextEditingController(text: userData.data()?['firstName'] ?? '');
+    emailController =
+        TextEditingController(text: userData.data()?['email'] ?? '');
+  }
+
+  Future<void> editProfileUpdate() async {
+   // EasyLoading.show(status: 'loading...');
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    String? email = auth.currentUser?.email;
+
+    //  auth.currentUser?.up (nameController.text);
+    return firestore.collection('signup').doc(email).update({
+      'firstName': nameController,
+      'servertime': FieldValue.serverTimestamp(),
+    });
   }
 }

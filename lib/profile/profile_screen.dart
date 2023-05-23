@@ -110,7 +110,9 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
-                          context.pushNamed(RouteNames.profileEdit);
+                          context.pushNamed(RouteNames.profileEdit,
+                              
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
