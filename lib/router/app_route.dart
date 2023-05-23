@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
 import 'package:qwise/auth/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:qwise/auth/password/create_new_password.dart';
@@ -15,10 +16,9 @@ import '../admin/admin_routes.dart';
 import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
 import '../home/recommended_courses/course_details/course_details.dart';
-import '../utils/global.dart';
 
 String getInitialRoute() {
-  switch (isUserLoggedIn) {
+  switch (FirebaseAuth.instance.currentUser != null) {
     case false:
       return RouteNames.onBoarding;
     default:
