@@ -12,15 +12,18 @@ class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
 
   Widget page(index) {
-    return IndexedStack(
-      index: index,
-      children: [
-        const HomeScreen(),
-        EnrolledCourses(),
-        const AiChatScreen(),
-        const ProfileScreen(),
-      ],
-    );
+    switch (index) {
+      case 0:
+        return const HomeScreen();
+      case 1:
+        return EnrolledCourses();
+      case 2:
+        return const AiChatScreen();
+      case 3:
+        return const ProfileScreen();
+      default:
+        return const HomeScreen();
+    }
   }
 
   @override
