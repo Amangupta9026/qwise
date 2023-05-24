@@ -1,6 +1,5 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qwise/provider/profile_screen_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 import 'package:random_avatar/random_avatar.dart';
 
@@ -8,17 +7,6 @@ import '../widget/bottom_navigationbar_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  logout(BuildContext context) async {
-    try {
-      await FirebaseAuth.instance.signOut();
-    } catch (e) {
-      log("e");
-    }
-
-    // ignore: use_build_context_synchronously
-    context.pushNamed(RouteNames.signInScreen);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +16,15 @@ class ProfileScreen extends StatelessWidget {
         preferredSize: Size.fromHeight(40),
         child: HeaderWidget(text1: 'Profile', isCenterTitle: true),
       ),
-      bottomNavigationBar: BottomNavigationBarWidget(
-        buttonName: 'Logout',
-        onButtonPressed: () {
-          logout(context);
-        },
-      ),
+      bottomNavigationBar:
+          Consumer<ProfileScreenNotifier>(builder: (context, ref, child) {
+        return BottomNavigationBarWidget(
+          buttonName: 'Logout',
+          onButtonPressed: () {
+            ref.logout(context, FirebaseAuth.instance.currentUser?.email ?? '');
+          },
+        );
+      }),
       body: Container(
         decoration: AppUtils.decoration1(),
         height: double.infinity,
@@ -110,8 +101,8 @@ class ProfileScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       ElevatedButton(
                         onPressed: () {
-                          context.pushNamed(RouteNames.profileEdit,
-                              
+                          context.pushNamed(
+                            RouteNames.profileEdit,
                           );
                         },
                         style: ElevatedButton.styleFrom(

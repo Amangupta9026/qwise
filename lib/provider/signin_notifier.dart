@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:qwise/utils/file_collection.dart';
 
@@ -9,6 +10,7 @@ class SigninNotifer extends ChangeNotifier {
   final TextEditingController passwordController = TextEditingController();
 
   bool colorChange = false;
+  final firestore = FirebaseFirestore.instance;
 
   void toggle() {
     _obscureText = !_obscureText;
@@ -94,5 +96,12 @@ class SigninNotifer extends ChangeNotifier {
         },
       );
     }
+  }
+
+  void signInLoginData() {
+    firestore.collection('signup').doc(userNameController.text).update({
+      'servertime': FieldValue.serverTimestamp(),
+      'isUserLogedIn': true,
+    });
   }
 }

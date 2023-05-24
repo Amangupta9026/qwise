@@ -48,5 +48,6 @@ void createUser(
     'password': ' ',
     'pic_url': profilePic,
     'servertime': FieldValue.serverTimestamp(),
+    'isUserLogedIn': true,
   });
 }

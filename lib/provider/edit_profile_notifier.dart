@@ -69,14 +69,13 @@ class EditProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> editProfileUpdate() async {
-   // EasyLoading.show(status: 'loading...');
+    // EasyLoading.show(status: 'loading...');
 
     final FirebaseAuth auth = FirebaseAuth.instance;
     String? email = auth.currentUser?.email;
 
-    //  auth.currentUser?.up (nameController.text);
     return firestore.collection('signup').doc(email).update({
-      'firstName': nameController,
+      'firstName': nameController.text,
       'servertime': FieldValue.serverTimestamp(),
     });
   }

@@ -77,5 +77,6 @@ void linkedInLoginData() {
     'pic_url': result?['pic_url'],
     'password': ' ',
     'servertime': FieldValue.serverTimestamp(),
+    'isUserLogedIn': true,
   });
 }

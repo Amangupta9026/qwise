@@ -2,6 +2,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/provider/course_videos_notifier.dart';
 import 'package:qwise/provider/page_index_selector.dart';
+import 'package:qwise/provider/profile_screen_notifier.dart';
 
 import '../provider/edit_profile_notifier.dart';
 import '../provider/forgot_password_notifier.dart';
@@ -18,4 +19,5 @@ final List<SingleChildWidget> multiProviderName = [
   ChangeNotifierProvider(create: (_) => EditProfileNotifier()),
   ChangeNotifierProvider(create: (_) => CourseVideoNotifier()),
   ChangeNotifierProvider(create: (_) => CourseDetailsNotifier()),
+  ChangeNotifierProvider(create: (_) => ProfileScreenNotifier()),
 ];
