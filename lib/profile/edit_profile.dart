@@ -25,6 +25,7 @@ class EditProfile extends StatelessWidget {
           return BottomNavigationBarWidget(
             buttonName: 'Submit',
             onButtonPressed: () {
+              
               ref.editProfileUpdate();
             },
           );

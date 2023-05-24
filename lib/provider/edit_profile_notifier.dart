@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker_pro/image_picker_pro.dart';
 
@@ -10,6 +11,8 @@ class EditProfileNotifier extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   final firestore = FirebaseFirestore.instance;
+
+  final storage = FirebaseStorage.instance;
 
   File? selectedImage;
   void imagePicker(BuildContext context) async {
@@ -69,14 +72,32 @@ class EditProfileNotifier extends ChangeNotifier {
   }
 
   Future<void> editProfileUpdate() async {
-    // EasyLoading.show(status: 'loading...');
+    EasyLoading.show(status: 'loading...');
 
     final FirebaseAuth auth = FirebaseAuth.instance;
     String? email = auth.currentUser?.email;
 
-    return firestore.collection('signup').doc(email).update({
+    await firestore.collection('signup').doc(email).update({
       'firstName': nameController.text,
+      'email': emailController.text,
       'servertime': FieldValue.serverTimestamp(),
+    });
+    if (selectedImage != null) {
+      sendFileImage();
+    }
+    EasyLoading.dismiss();
+  }
+
+  void sendFileImage() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    String? email = auth.currentUser?.email;
+
+    final ref = storage.ref().child('profile').child(email!);
+    await ref.putFile(selectedImage!);
+    final url = await ref.getDownloadURL();
+    auth.currentUser?.updatePhotoURL(url);
+    await firestore.collection('signup').doc(email).update({
+      'pic_url': url,
     });
   }
 }
