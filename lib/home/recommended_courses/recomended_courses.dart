@@ -18,15 +18,13 @@ class RecommendedCourses extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 16),
-        const Padding(
-          padding: EdgeInsets.only(left: 10.0, bottom: 20),
-          child: TextWidget(
-            text1: "Recommended Courses",
-            size1: 16,
-            color1: lightBlueColor,
-            fontWeight1: FontWeight.w600,
-          ),
+        const TextWidget(
+          text1: "Recommended Courses",
+          size1: 16,
+          color1: lightBlueColor,
+          fontWeight1: FontWeight.w600,
         ),
+        const SizedBox(height: 10),
         StreamBuilder(
             stream: courseCollection.snapshots(),
             builder: (context, snapshot) {
@@ -71,10 +69,16 @@ class RecommendedCourses extends StatelessWidget {
                                   ),
                                   Positioned.fill(
                                     bottom: -20,
-                                    right: 20,
+                                    right: 10,
                                     child: Align(
                                       alignment: Alignment.bottomRight,
                                       child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: darkBlueColor,
+                                            shape: const RoundedRectangleBorder(
+                                                side: BorderSide(
+                                              color: Colors.white,
+                                            ))),
                                         onPressed: () {},
                                         child: const Text("View Details"),
                                       ),
@@ -90,8 +94,9 @@ class RecommendedCourses extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const TextWidget(
-                                      text1: 'Learn Principle of UX & U...',
+                                    TextWidget(
+                                      text1:
+                                          courses?[index]["course_name"] ?? "",
                                       color1: primaryColor,
                                       size1: 18,
                                       fontWeight1: FontWeight.bold,
