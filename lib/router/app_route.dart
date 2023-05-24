@@ -118,7 +118,10 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
     path: RouteNames.courseDetails,
     name: RouteNames.courseDetails,
     builder: (context, state) {
-      return const CourseDetails();
+      final String courseId = state.queryParameters['courseId'] ?? '';
+      return CourseDetails(
+        courseId: courseId,
+      );
     },
   ),
   ...adminRoutes,
