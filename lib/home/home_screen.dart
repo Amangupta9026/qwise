@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   RecommendedCourses(),
                 ],
-              ),
+              )
             ),
           ),
         ),
