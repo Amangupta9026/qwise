@@ -67,6 +67,7 @@ class SignUpNotifier extends ChangeNotifier {
       'password': passwordController.text,
       'pic_url': ' ',
       'servertime': FieldValue.serverTimestamp(),
+      'isUserLogedIn': true,
     });
   }
 
