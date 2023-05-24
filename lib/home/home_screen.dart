@@ -10,8 +10,8 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         height: double.infinity,
         decoration: AppUtils.decoration1(),
-        child: SingleChildScrollView(
-          child: SafeArea(
+        child: SafeArea(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(

@@ -31,27 +31,26 @@ class RecommendedCourses extends StatelessWidget {
               onTap: () {
                 context.pushNamed(RouteNames.courseDetails);
               },
-              child: Container(
-                margin: const EdgeInsets.only(left: 8.0, right: 8.0),
-                padding: EdgeInsets.zero,
-                height: MediaQuery.of(context).size.height * 0.30,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(12),
-                  boxShadow: const [
-                    BoxShadow(color: Colors.grey, blurRadius: 10)
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 0),
-                  child: Column(
-                    children: [
-                      Image.asset(
-                        'assets/images/course1.png',
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
+              child: Card(
+                margin: EdgeInsets.zero,
+                child: Container(
+                  padding: EdgeInsets.zero,
+                  height: MediaQuery.of(context).size.height * 0.30,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 0),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          'assets/images/course1.png',
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
