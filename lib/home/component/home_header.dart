@@ -49,7 +49,7 @@ class HomeHeader extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                "Discover, Enrol & Enhance",
+                "Discover, Enroll & Enhance",
                 style: TextStyle(
                   fontSize: 24,
                   color: darkBlueColor,
