@@ -105,7 +105,7 @@ class RecommendedCourses extends StatelessWidget {
                                       children: [
                                         RatingBar.builder(
                                           ignoreGestures: true,
-                                          initialRating: 5.0,
+                                          initialRating: 4.7,
                                           minRating: 1,
                                           direction: Axis.horizontal,
                                           allowHalfRating: true,
@@ -118,7 +118,7 @@ class RecommendedCourses extends StatelessWidget {
                                               const Icon(
                                             Icons.star,
                                             color: yellowColor,
-                                            size: 2,
+                                            size: 3,
                                           ),
                                           onRatingUpdate: (rating) {},
                                         ),
