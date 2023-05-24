@@ -8,7 +8,7 @@ final List<RouteBase> adminRoutes = [
     path: RouteNames.adminPanel,
     name: RouteNames.adminPanel,
     builder: (context, state) {
-      return const AdminPanel();
+      return  AdminPanel();
     },
   ),
 ];
