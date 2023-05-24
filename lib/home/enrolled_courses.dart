@@ -34,16 +34,6 @@ class EnrolledCourses extends StatelessWidget {
               children: [
                 const SearchCoursesTextField(),
                 const SizedBox(height: 30.0),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: TextWidget(
-                    text1: "Recommended Courses",
-                    size1: 16,
-                    color1: lightBlueColor,
-                    fontWeight1: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 10),
                 StreamBuilder(
                     stream: courseCollection.snapshots(),
                     builder: (context, snapshot) {
