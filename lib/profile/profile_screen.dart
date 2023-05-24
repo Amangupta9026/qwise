@@ -37,7 +37,16 @@ class ProfileScreen extends StatelessWidget {
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (!snapshot.hasData) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Align(
+                      alignment: Alignment.center,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(height: 60),
+                          CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
                   }
                   final userData = snapshot.data?.data();
 
