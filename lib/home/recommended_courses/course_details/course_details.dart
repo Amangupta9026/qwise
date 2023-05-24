@@ -31,27 +31,22 @@ class CourseDetails extends StatelessWidget {
             final userData = snapshot.data?.data();
             return BottomNavigationBarWidget(
               buttonName: (userData?.containsKey("enroll_courses") ?? false) &&
-                      (userData?["enroll_courses"] as List)
-                          .contains(courseId)
+                      (userData?["enroll_courses"] as List).contains(courseId)
                   ? "Go To Course"
                   : "Enroll Now",
               onButtonPressed: () async {
-                if((userData?.containsKey("enroll_courses") ?? false) &&
-                      (userData?["enroll_courses"] as List)
-                          .contains(courseId)) {
-
-                          } else {
-                            await signUpFirestoreDoc.update(
-                  {
-                    "enroll_courses":
-                        (userData?.containsKey("enroll_courses") ?? false)
-                            ? [...userData?['enroll_courses'], courseId]
-                            : [courseId]
-                  },
-                );
-
-                          }
-                
+                if ((userData?.containsKey("enroll_courses") ?? false) &&
+                    (userData?["enroll_courses"] as List).contains(courseId)) {
+                } else {
+                  await signUpFirestoreDoc.update(
+                    {
+                      "enroll_courses":
+                          (userData?.containsKey("enroll_courses") ?? false)
+                              ? [...userData?['enroll_courses'], courseId]
+                              : [courseId]
+                    },
+                  );
+                }
               },
             );
           }),
