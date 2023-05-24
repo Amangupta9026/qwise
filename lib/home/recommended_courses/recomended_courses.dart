@@ -39,7 +39,10 @@ class RecommendedCourses extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        context.pushNamed(RouteNames.courseDetails);
+                        context.pushNamed(RouteNames.courseDetails,
+                            queryParameters: {
+                              "courseId": courses?[index]["course_id"] ?? ""
+                            });
                       },
                       child: Card(
                         margin: EdgeInsets.zero,

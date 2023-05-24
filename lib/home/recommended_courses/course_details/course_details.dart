@@ -1,10 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 import '../../../widget/bottom_navigationbar_widget.dart';
 
+final signUpFirestore = FirebaseFirestore.instance.collection("signup");
+final signUpFirestoreDoc =
+    signUpFirestore.doc(FirebaseAuth.instance.currentUser?.email);
+
 class CourseDetails extends StatelessWidget {
-  const CourseDetails({super.key});
+  final String courseId;
+  const CourseDetails({required this.courseId, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +25,36 @@ class CourseDetails extends StatelessWidget {
             actions1: MdiIcons.bell,
             onActionPressed: () {},
           )),
-      bottomNavigationBar: BottomNavigationBarWidget(
-        buttonName: 'Enroll Now',
-        onButtonPressed: () {},
-      ),
+      bottomNavigationBar: StreamBuilder(
+          stream: signUpFirestoreDoc.snapshots(),
+          builder: (context, snapshot) {
+            final userData = snapshot.data?.data();
+            return BottomNavigationBarWidget(
+              buttonName: (userData?.containsKey("enroll_courses") ?? false) &&
+                      (userData?["enroll_courses"] as List)
+                          .contains(courseId)
+                  ? "Go To Course"
+                  : "Enroll Now",
+              onButtonPressed: () async {
+                if((userData?.containsKey("enroll_courses") ?? false) &&
+                      (userData?["enroll_courses"] as List)
+                          .contains(courseId)) {
+
+                          } else {
+                            await signUpFirestoreDoc.update(
+                  {
+                    "enroll_courses":
+                        (userData?.containsKey("enroll_courses") ?? false)
+                            ? [...userData?['enroll_courses'], courseId]
+                            : [courseId]
+                  },
+                );
+
+                          }
+                
+              },
+            );
+          }),
       body: Container(
         decoration: AppUtils.decoration1(),
         height: double.infinity,
@@ -43,32 +75,27 @@ class CourseDetails extends StatelessWidget {
                   const SizedBox(height: 20.0),
                   Stack(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          context.pushNamed(RouteNames.courseDetails);
-                        },
-                        child: Container(
-                          margin: EdgeInsets.zero,
-                          padding: EdgeInsets.zero,
-                          height: MediaQuery.of(context).size.height * 0.284,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: const [
-                              BoxShadow(color: Colors.grey, blurRadius: 10)
+                      Container(
+                        margin: EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
+                        height: MediaQuery.of(context).size.height * 0.284,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.grey, blurRadius: 10)
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(10.0, 12, 10, 0),
+                          child: Column(
+                            children: [
+                              Image.asset(
+                                'assets/images/course1.png',
+                                width: double.infinity,
+                                fit: BoxFit.cover,
+                              ),
                             ],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(10.0, 12, 10, 0),
-                            child: Column(
-                              children: [
-                                Image.asset(
-                                  'assets/images/course1.png',
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
-                              ],
-                            ),
                           ),
                         ),
                       ),
