@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qwise/utils/file_collection.dart';
 
@@ -51,8 +52,11 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
     }
   }
 
-  void addAddCourseData() async {
-    await firestore.collection('course').doc('3').set({
+  Future<void> addAddCourseData() async {
+    // QuerySnapshot docRef = await firestore.collection('course').get();
+    // int docId = docRef.docs[index].id.toInt() + 1;
+    // String getdocId = docId.toString();
+    await firestore.collection('course').doc('4').set({
       'course_id': courseIdController.text,
       'course_name': courseNameController.text,
       'course_playlist': coursePlaylistController.text,
