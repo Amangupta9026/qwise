@@ -65,6 +65,7 @@ dependencies:
   #Y
   youtube_explode_dart: ^1.12.4
   dio: ^5.1.2
+  flutter_native_splash: ^2.3.0
 
 dev_dependencies:
   flutter_test:
