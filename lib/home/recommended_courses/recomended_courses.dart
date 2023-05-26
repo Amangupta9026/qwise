@@ -37,100 +37,105 @@ class RecommendedCourses extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: courses?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        context.pushNamed(RouteNames.courseDetails,
-                            queryParameters: {
-                              "courseId": courses?[index]["course_id"] ?? ""
-                            });
-                      },
-                      child: Card(
-                        margin: EdgeInsets.zero,
-                        child: Container(
-                          padding: EdgeInsets.zero,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(12),
-                                      topRight: Radius.circular(12),
-                                    ),
-                                    child: Image.network(
-                                      courses?[index]["image"] ?? "",
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                      height: 130,
-                                    ),
-                                  ),
-                                  Positioned.fill(
-                                    bottom: -20,
-                                    right: 10,
-                                    child: Align(
-                                      alignment: Alignment.bottomRight,
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                            backgroundColor: darkBlueColor,
-                                            shape: const RoundedRectangleBorder(
-                                                side: BorderSide(
-                                              color: Colors.white,
-                                            ))),
-                                        onPressed: () {},
-                                        child: const Text("View Details"),
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: InkWell(
+                        onTap: () {
+                          context.pushNamed(RouteNames.courseDetails,
+                              queryParameters: {
+                                "courseId": courses?[index]["course_id"] ?? ""
+                              });
+                        },
+                        child: Card(
+                          margin: EdgeInsets.zero,
+                          child: Container(
+                            padding: EdgeInsets.zero,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(12),
+                                        topRight: Radius.circular(12),
+                                      ),
+                                      child: Image.network(
+                                        courses?[index]["image"] ?? "",
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                        height: 130,
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 16,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    TextWidget(
-                                      text1:
-                                          courses?[index]["course_name"] ?? "",
-                                      color1: primaryColor,
-                                      size1: 18,
-                                      fontWeight1: FontWeight.bold,
-                                    ),
-                                    Row(
-                                      children: [
-                                        RatingBar.builder(
-                                          ignoreGestures: true,
-                                          initialRating: 4.7,
-                                          minRating: 1,
-                                          direction: Axis.horizontal,
-                                          allowHalfRating: true,
-                                          itemCount: 5,
-                                          itemSize: 16,
-                                          itemPadding:
-                                              const EdgeInsets.symmetric(
-                                                  horizontal: 1.0),
-                                          itemBuilder: (context, _) =>
-                                              const Icon(
-                                            Icons.star,
-                                            color: yellowColor,
-                                            size: 3,
-                                          ),
-                                          onRatingUpdate: (rating) {},
+                                    Positioned.fill(
+                                      bottom: -20,
+                                      right: 10,
+                                      child: Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                              backgroundColor: darkBlueColor,
+                                              shape:
+                                                  const RoundedRectangleBorder(
+                                                      side: BorderSide(
+                                                color: Colors.white,
+                                              ))),
+                                          onPressed: () {},
+                                          child: const Text("View Details"),
                                         ),
-                                      ],
+                                      ),
                                     )
                                   ],
                                 ),
-                              ),
-                            ],
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      TextWidget(
+                                        text1: courses?[index]["course_name"] ??
+                                            "",
+                                        color1: primaryColor,
+                                        size1: 18,
+                                        fontWeight1: FontWeight.bold,
+                                      ),
+                                      Row(
+                                        children: [
+                                          RatingBar.builder(
+                                            ignoreGestures: true,
+                                            initialRating: 4.7,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: 16,
+                                            itemPadding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 1.0),
+                                            itemBuilder: (context, _) =>
+                                                const Icon(
+                                              Icons.star,
+                                              color: yellowColor,
+                                              size: 3,
+                                            ),
+                                            onRatingUpdate: (rating) {},
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
