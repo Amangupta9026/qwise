@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
+import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
+import '../../../provider/course_videos_notifier.dart';
 import '../../../widget/bottom_navigationbar_widget.dart';
 
 final signUpFirestore = FirebaseFirestore.instance.collection("signup");
@@ -10,7 +12,9 @@ final signUpFirestoreDoc =
 
 class CourseDetails extends StatelessWidget {
   final String courseId;
-  const CourseDetails({required this.courseId, super.key});
+  CourseDetails({required this.courseId, super.key});
+
+  final yt = YoutubeExplode();
 
   @override
   Widget build(BuildContext context) {
@@ -32,11 +36,28 @@ class CourseDetails extends StatelessWidget {
             return BottomNavigationBarWidget(
               buttonName: (userData?.containsKey("enroll_courses") ?? false) &&
                       (userData?["enroll_courses"] as List).contains(courseId)
-                  ? "Go To Course"
+                  ? "Get Started"
                   : "Enroll Now",
               onButtonPressed: () async {
                 if ((userData?.containsKey("enroll_courses") ?? false) &&
                     (userData?["enroll_courses"] as List).contains(courseId)) {
+                  List<Video> videos = [];
+                  final data = await FirebaseFirestore.instance
+                      .collection("courses")
+                      .doc(courseId)
+                      .get()
+                      .then((value) => value.data());
+                  await for (var video in yt.playlists.getVideos(
+                      Uri.parse(data?[0]["course_playlist"] ?? "")
+                              .queryParameters["list"] ??
+                          "")) {
+                    videos.add(video);
+                  }
+
+                  context.read<CourseVideoNotifier>().setVideos(videos);
+                  context.push(
+                    RouteNames.courseView,
+                  );
                 } else {
                   await signUpFirestoreDoc.update(
                     {
