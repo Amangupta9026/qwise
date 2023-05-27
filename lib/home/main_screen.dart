@@ -2,11 +2,13 @@ import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qwise/home/ai_chat.dart';
 import 'package:qwise/home/enrolled_courses.dart';
+import 'package:qwise/in_app_update/in_app_update.dart';
 import 'package:qwise/profile/profile_screen.dart';
 import 'package:qwise/provider/page_index_selector.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 import 'home_screen.dart';
+import 'notification/push_notification/firebase_messaging.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -28,6 +30,8 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Messaging.showMessage();
+    UpdateChecker.checkForUpdate();
     return Consumer<PageIndexSelectorNotifier>(builder: (context, ref, child) {
       return Scaffold(
         bottomNavigationBar: BottomBarDoubleBullet(

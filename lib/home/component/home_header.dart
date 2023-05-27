@@ -44,10 +44,10 @@ class HomeHeader extends StatelessWidget {
         const SizedBox(
           height: 8,
         ),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(
+            const Expanded(
               child: Text(
                 "Discover, Enroll & Enhance",
                 style: TextStyle(
@@ -57,9 +57,14 @@ class HomeHeader extends StatelessWidget {
                 ),
               ),
             ),
-            Icon(
-              CupertinoIcons.bell_circle,
-              size: 30,
+            InkWell(
+              onTap: () {
+                context.pushNamed(RouteNames.bellNotification);
+              },
+              child: const Icon(
+                CupertinoIcons.bell_circle,
+                size: 30,
+              ),
             ),
           ],
         ),

@@ -9,18 +9,22 @@ class AdminPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorGradient2,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(40),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(40),
         child: HeaderWidget(
           text1: 'Add Courses',
           isCenterTitle: true,
+          actions1: MdiIcons.bell,
+          onActionPressed: () {
+            context.pushNamed(RouteNames.sendNotificationFromAdmin);
+          },
         ),
       ),
       bottomNavigationBar:
           Consumer<AdminAddCategoryNotifier>(builder: (context, ref, child) {
         return BottomNavigationBarWidget(
           buttonName: 'Submit',
-          color1: ref.colorChange ? primaryColor : Colors.grey,
+          color1: primaryColor,
           onButtonPressed: () {
             ref.onSubmitButton(context);
           },

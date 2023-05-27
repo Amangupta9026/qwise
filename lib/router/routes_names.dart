@@ -13,7 +13,9 @@ class RouteNames {
   static const String courseView = '/courseView';
   static const String courseDetails = '/courseDetails';
   static const String searchCourse = '/searchCourse';
+  static const String bellNotification = '/bellNotification';
 
   static const String adminPanel = '/adminPanel';
+  static const String sendNotificationFromAdmin = '/sendNotificationFromAdmin';
   
 }

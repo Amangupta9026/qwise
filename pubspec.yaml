@@ -32,6 +32,7 @@ dependencies:
   flutter_rating_bar: ^4.0.1
   flutter_easyloading: ^3.0.5
   firebase_storage: ^11.2.1
+  flutter_local_notifications: ^14.1.0
 
   #G
   google_sign_in: ^6.1.2
@@ -43,6 +44,7 @@ dependencies:
 
   #I
   image_picker_pro: ^0.0.1+1
+  in_app_update: ^4.0.1
 
   #M
   material_design_icons_flutter: ^6.0.7096
@@ -66,6 +68,8 @@ dependencies:
   youtube_explode_dart: ^1.12.4
   dio: ^5.1.2
   flutter_native_splash: ^2.3.0
+  firebase_messaging: ^14.6.1
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:

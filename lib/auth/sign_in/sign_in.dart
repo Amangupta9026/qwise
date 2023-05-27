@@ -10,6 +10,31 @@ class SignInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      bottomNavigationBar: Container(
+        decoration: AppUtils.decoration1(),
+        height: 60,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text("Don't have an account?"),
+            const SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: () {
+                context.pushNamed(RouteNames.signUpScreen);
+              },
+              child: const Text(
+                "Sign Up",
+                style: TextStyle(
+                  color: primaryColor,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
       body: Container(
         height: double.infinity,
         decoration: AppUtils.decoration1(),
@@ -138,7 +163,7 @@ class SignInScreen extends StatelessWidget {
             fontWeight1: FontWeight.w400,
           ),
         ),
-        const SizedBox(height: 10.0),
+        const SizedBox(height: 20.0),
         Consumer<SigninNotifer>(builder: (context, ref, child) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -150,34 +175,6 @@ class SignInScreen extends StatelessWidget {
                     'This allows the app and website to share information about you.',
                     () {
                       onTapGoogle(context);
-                    },
-                    istwobutton: true,
-                    actiontap1: () {
-                      context.pop();
-                    });
-              }),
-              const SizedBox(width: 20.0),
-              ref.iconReplaceFun(MdiIcons.facebook, () {
-                showMyDialog(
-                    context,
-                    '“QWise Learning” Wants to use facebook.com” to sign in',
-                    'This allows the app and website to share information about you.',
-                    () {
-                      Navigator.of(context).pop();
-                    },
-                    istwobutton: true,
-                    actiontap1: () {
-                      context.pop();
-                    });
-              }),
-              const SizedBox(width: 20.0),
-              ref.iconReplaceFun(MdiIcons.twitter, () {
-                showMyDialog(
-                    context,
-                    '“QWise Learning” Wants to use twitter.com” to sign in',
-                    'This allows the app and website to share information about you.',
-                    () {
-                      Navigator.of(context).pop();
                     },
                     istwobutton: true,
                     actiontap1: () {
@@ -201,30 +198,6 @@ class SignInScreen extends StatelessWidget {
             ],
           );
         }),
-        const SizedBox(
-          height: 50,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text("Don't have an account?"),
-            const SizedBox(
-              width: 8,
-            ),
-            InkWell(
-              onTap: () {
-                context.pushNamed(RouteNames.signUpScreen);
-              },
-              child: const Text(
-                "Sign Up",
-                style: TextStyle(
-                  color: primaryColor,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-          ],
-        ),
       ],
     );
   }

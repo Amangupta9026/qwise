@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../utils/file_collection.dart';
@@ -61,6 +62,7 @@ class SignUpNotifier extends ChangeNotifier {
   }
 
   void createUser() async {
+     String? token = await FirebaseMessaging.instance.getToken();
     await firestore
         .collection('signup')
         .doc(emailController.text)
@@ -73,6 +75,7 @@ class SignUpNotifier extends ChangeNotifier {
           'pic_url': ' ',
           'servertime': FieldValue.serverTimestamp(),
           'isUserLogedIn': true,
+          'devicetoken': token,
         })
         .then((value) => log('User Added'))
         .catchError(
@@ -86,6 +89,7 @@ class SignUpNotifier extends ChangeNotifier {
               'pic_url': ' ',
               'servertime': FieldValue.serverTimestamp(),
               'isUserLogedIn': true,
+              'devicetoken': token,
             });
           },
         );

@@ -26,64 +26,81 @@ class _CourseSearchScreenState extends State<CourseSearchScreen> {
           isCenterTitle: true,
         ),
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Consumer<SearchCourseNotifier>(builder: (context, ref, child) {
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 30.0, 20.0, 50.0),
-              child: SizedBox(
-                height: 50,
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10.0, right: 10),
-                  child: TextFormField(
-                    keyboardType: TextInputType.text,
-                    onChanged: (value) async {
-                      setState(() {
-                        searchKey = value;
-                        streamQuery = firestore
-                            .collection('course')
-                            .orderBy("course_id")
-                            .where('course_name',
-                                isGreaterThanOrEqualTo: searchKey)
-                            .where('course_name',
-                                isLessThanOrEqualTo: searchKey)
-                            .startAt([searchKey]).endAt(
-                                ['${searchKey ?? ''}\uf8ff']).snapshots();
+      body: Container(
+        decoration: AppUtils.decoration1(),
+        height: double.infinity,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child:
+                Consumer<SearchCourseNotifier>(builder: (context, ref, child) {
+              return StreamBuilder(
+                stream: FirebaseFirestore.instance
+                .collection('course')
+                .doc('course_id')
+                .snapshots(),
+                builder: (context, snapshot) {
+                  return Padding(
+                    padding: const EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 50.0),
+                    child: SizedBox(
+                      height: 50,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 10.0, right: 10),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) async {
+                            setState(() {
+                              searchKey = value;
+                              streamQuery = firestore
+                                  .collection('course')
+                                  .orderBy("course_id")
+                                  .where('course_name',
+                                      isGreaterThanOrEqualTo: searchKey)
+                                  .where('course_name',
+                                      isLessThanOrEqualTo: searchKey)
+                                  .startAt([searchKey]).endAt(
+                                      ['${searchKey ?? ''}\uf8ff']).snapshots();
 
-                        log(streamQuery.toString(), name: 'streamQuery');
-                      });
-                    },
-                    controller: ref.searchController,
-                    focusNode: ref.searchFocusNode,
-                    decoration: InputDecoration(
-                        isDense: true,
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          size: 20,
-                        ),
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            ref.searchController.text = "";
+                              log(streamQuery.toString(), name: 'streamQuery');
+                            });
                           },
-                          child: const Icon(
-                            Icons.close,
-                            size: 20,
-                          ),
+                          controller: ref.searchController,
+                          focusNode: ref.searchFocusNode,
+                          decoration: InputDecoration(
+                              hintText: 'Search Course',
+                              isDense: true,
+                              prefixIcon: const Icon(
+                                Icons.search,
+                                size: 20,
+                              ),
+                              suffixIcon: InkWell(
+                                onTap: () {
+                                  ref.searchController.text = "";
+                                },
+                                child: const Icon(
+                                  Icons.close,
+                                  size: 20,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                  borderSide:
+                                      const BorderSide(color: Colors.black))),
                         ),
-                        enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: const BorderSide(color: Colors.black)),
-                        focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: const BorderSide(color: Colors.black)),
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25),
-                            borderSide: const BorderSide(color: Colors.black))),
-                  ),
-                ),
-              ),
-            );
-          }),
+                      ),
+                    ),
+                  );
+                }
+              );
+            }),
+          ),
         ),
       ),
     );

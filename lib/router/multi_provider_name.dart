@@ -6,6 +6,7 @@ import 'package:qwise/provider/page_index_selector.dart';
 import 'package:qwise/provider/profile_screen_notifier.dart';
 import 'package:qwise/provider/search_course_notifier.dart';
 
+import '../admin/admin_provider/send_notification_from_admin_notifier.dart';
 import '../provider/edit_profile_notifier.dart';
 import '../provider/forgot_password_notifier.dart';
 import '../provider/verify_otp_screen_notifier.dart';
@@ -24,5 +25,6 @@ final List<SingleChildWidget> multiProviderName = [
   ChangeNotifierProvider(create: (_) => ProfileScreenNotifier()),
   ChangeNotifierProvider(create: (_) => AdminAddCategoryNotifier()),
   ChangeNotifierProvider(create: (_) => SearchCourseNotifier()),
+  ChangeNotifierProvider(create: (_) => SendNotificationfromAdminNotifier()),
 
 ];

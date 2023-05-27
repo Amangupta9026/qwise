@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:linkedin_login/linkedin_login.dart';
 import 'package:qwise/utils/file_collection.dart';
 
@@ -69,6 +70,7 @@ linkedInLogin(BuildContext context) async {
 }
 
 void linkedInLoginData() async {
+  String? token = await FirebaseMessaging.instance.getToken();
   await firestore
       .collection('signup')
       .doc(result?['email'])
@@ -81,6 +83,7 @@ void linkedInLoginData() async {
         'password': ' ',
         'servertime': FieldValue.serverTimestamp(),
         'isUserLogedIn': true,
+        'devicetoken': token,
       })
       .then((value) => null)
       .catchError((e) async {
@@ -93,6 +96,7 @@ void linkedInLoginData() async {
           'password': ' ',
           'servertime': FieldValue.serverTimestamp(),
           'isUserLogedIn': true,
+          'devicetoken': token,
         });
       });
 }

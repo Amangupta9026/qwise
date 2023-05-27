@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -40,6 +41,7 @@ void onTapGoogle(context) async {
 void createUser(
     String firstName, String lastName, String email, String profilePic) async {
   final firestore = FirebaseFirestore.instance;
+   String? token = await FirebaseMessaging.instance.getToken();
   await firestore
       .collection('signup')
       .doc(email)
@@ -52,6 +54,7 @@ void createUser(
         'pic_url': profilePic,
         'servertime': FieldValue.serverTimestamp(),
         'isUserLogedIn': true,
+       'devicetoken': token,
       })
       .then((value) {})
       .catchError((error) async {
@@ -64,6 +67,7 @@ void createUser(
           'pic_url': profilePic,
           'servertime': FieldValue.serverTimestamp(),
           'isUserLogedIn': true,
+          'devicetoken': token,
         });
       });
 }
