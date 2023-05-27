@@ -13,26 +13,27 @@ class HomeScreen extends StatelessWidget {
         child: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const HomeHeader(),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  const SearchCoursesTextField(),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  HomeBanner(),
-                  const SizedBox(
-                    height: 18,
-                  ),
-                  RecommendedCourses(),
-                ],
-              )
-            ),
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const HomeHeader(),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    InkWell(
+                        onTap: () => context.pushNamed(RouteNames.searchCourse),
+                        child: const SearchCoursesTextField()),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    HomeBanner(),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    RecommendedCourses(),
+                  ],
+                )),
           ),
         ),
       ),

@@ -1,4 +1,3 @@
-
 import 'package:go_router/go_router.dart';
 import 'package:qwise/auth/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:qwise/auth/password/create_new_password.dart';
@@ -11,6 +10,7 @@ import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/home/recommended_courses/course_view_screen.dart';
 import 'package:qwise/profile/edit_profile.dart';
 import 'package:qwise/router/routes_names.dart';
+import 'package:qwise/search/course_search_screen.dart';
 
 import '../admin/admin_routes.dart';
 import '../auth/password/password_updated_success.dart';
@@ -20,7 +20,6 @@ import '../home/recommended_courses/course_details/course_details.dart';
 bool isUserLogin = false;
 
 String getInitialRoute() {
-  
   switch (isUserLogin) {
     case false:
       return RouteNames.onBoarding;
@@ -122,6 +121,13 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
       return CourseDetails(
         courseId: courseId,
       );
+    },
+  ),
+  GoRoute(
+    path: RouteNames.searchCourse,
+    name: RouteNames.searchCourse,
+    builder: (context, state) {
+      return const CourseSearchScreen();
     },
   ),
   ...adminRoutes,

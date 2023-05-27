@@ -58,13 +58,7 @@ class PasswordUpdatedSuccessfullyScreen extends StatelessWidget {
                   // ref.nextScreen(context);
                   if (ref.userNameController.text ==
                       ref.passwordController.text) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            const PasswordUpdatedSuccessfullyScreen(),
-                      ),
-                    );
+                    context.pushReplacementNamed(RouteNames.signInScreen);
                   } else {
                     showMyDialog(
                       context,
