@@ -38,6 +38,7 @@ class RecommendedCourses extends StatelessWidget {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: courses?.length ?? 0,
+                  
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
