@@ -34,9 +34,9 @@ dependencies:
   firebase_storage: ^11.2.1
 
   #G
-  google_sign_in: ^6.1.0
-  google_fonts: ^4.0.4
-  go_router: ^7.0.2
+  google_sign_in: ^6.1.2
+  google_fonts: ^4.0.4 # http 1.0.0 in 4.0.5 which is not compatible with pod_player
+  go_router: ^7.1.1
 
   #L
   linkedin_login: ^2.2.1
@@ -51,7 +51,7 @@ dependencies:
   permission_handler: ^10.2.0
   provider: ^6.0.5
   pin_code_fields: ^7.4.0
-  pod_player: ^0.1.2
+  pod_player: ^0.1.4
 
   #R
   random_avatar: ^0.0.8
