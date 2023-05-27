@@ -10,12 +10,14 @@ class UpdateChecker {
             info.immediateUpdateAllowed) {
           InAppUpdate.performImmediateUpdate().catchError((e) {
             log("$e");
+            return AppUpdateResult.inAppUpdateFailed;
           });
         } else if (info.updateAvailability ==
                 UpdateAvailability.updateAvailable &&
             info.flexibleUpdateAllowed) {
           InAppUpdate.startFlexibleUpdate().catchError((e) {
             log("$e");
+            return AppUpdateResult.inAppUpdateFailed;
           });
         }
       }).catchError((e) {
