@@ -13,14 +13,14 @@ class OnBoardingNotifier extends ChangeNotifier {
   List<String> titles = [
     'Access learning as per your schedule.',
     'Discover passion. Learn with joy.',
-    'Learn from home',
+    'Learn from the best.',
   ];
 
   // Get Description
   final List<String> descriptions = [
-    'We are here to teach you \nOur mentor are available and \nmonitor your skills 24 hrs/Day',
-    'always attend online classes and Excel your career by gaining new skills.',
-    'to avoid the spread of covid 19. \nyou can do learn work from home and\nalways be close to your family',
+    'We are here to guide you \nOur mentor are available and \nmonitor your skills 24 hrs/day',
+    'Always attend online classes and Excel your career by gaining new skills.',
+    'We have the best mentors from all over the world.',
   ];
 
   String getImage() {

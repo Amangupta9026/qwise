@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -58,17 +60,35 @@ class SignUpNotifier extends ChangeNotifier {
     EasyLoading.dismiss();
   }
 
-  void createUser() {
-    firestore.collection('signup').doc(emailController.text).set({
-      'id': FirebaseAuth.instance.currentUser!.uid,
-      'firstName': firstNameController.text,
-      'lastName': lastNameController.text,
-      'email': emailController.text,
-      'password': passwordController.text,
-      'pic_url': ' ',
-      'servertime': FieldValue.serverTimestamp(),
-      'isUserLogedIn': true,
-    });
+  void createUser() async {
+    await firestore
+        .collection('signup')
+        .doc(emailController.text)
+        .update({
+          'id': FirebaseAuth.instance.currentUser!.uid,
+          'firstName': firstNameController.text,
+          'lastName': lastNameController.text,
+          'email': emailController.text,
+          'password': passwordController.text,
+          'pic_url': ' ',
+          'servertime': FieldValue.serverTimestamp(),
+          'isUserLogedIn': true,
+        })
+        .then((value) => log('User Added'))
+        .catchError(
+          (error) async {
+            await firestore.collection('signup').doc(emailController.text).set({
+              'id': FirebaseAuth.instance.currentUser!.uid,
+              'firstName': firstNameController.text,
+              'lastName': lastNameController.text,
+              'email': emailController.text,
+              'password': passwordController.text,
+              'pic_url': ' ',
+              'servertime': FieldValue.serverTimestamp(),
+              'isUserLogedIn': true,
+            });
+          },
+        );
   }
 
   void onNextScreen(BuildContext context) {

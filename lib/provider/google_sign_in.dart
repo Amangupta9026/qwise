@@ -40,14 +40,30 @@ void onTapGoogle(context) async {
 void createUser(
     String firstName, String lastName, String email, String profilePic) async {
   final firestore = FirebaseFirestore.instance;
-  firestore.collection('signup').doc(email).set({
-    'id': FirebaseAuth.instance.currentUser!.uid,
-    'firstName': firstName,
-    'lastName': lastName,
-    'email': email,
-    'password': ' ',
-    'pic_url': profilePic,
-    'servertime': FieldValue.serverTimestamp(),
-    'isUserLogedIn': true,
-  });
+  await firestore
+      .collection('signup')
+      .doc(email)
+      .update({
+        'id': FirebaseAuth.instance.currentUser!.uid,
+        'firstName': firstName,
+        'lastName': lastName,
+        'email': email,
+        'password': ' ',
+        'pic_url': profilePic,
+        'servertime': FieldValue.serverTimestamp(),
+        'isUserLogedIn': true,
+      })
+      .then((value) {})
+      .catchError((error) async {
+        await firestore.collection('signup').doc(email).set({
+          'id': FirebaseAuth.instance.currentUser!.uid,
+          'firstName': firstName,
+          'lastName': lastName,
+          'email': email,
+          'password': ' ',
+          'pic_url': profilePic,
+          'servertime': FieldValue.serverTimestamp(),
+          'isUserLogedIn': true,
+        });
+      });
 }

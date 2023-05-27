@@ -68,15 +68,31 @@ linkedInLogin(BuildContext context) async {
   );
 }
 
-void linkedInLoginData() {
-  firestore.collection('signup').doc(result?['email']).set({
-    'id': result?['user_id'],
-    'firstName': result?['name'].toString().split(' ').first,
-    'lastName': result?['name'].toString().split(' ').last,
-    'email': result?['email'],
-    'pic_url': result?['pic_url'],
-    'password': ' ',
-    'servertime': FieldValue.serverTimestamp(),
-    'isUserLogedIn': true,
-  });
+void linkedInLoginData() async {
+  await firestore
+      .collection('signup')
+      .doc(result?['email'])
+      .update({
+        'id': result?['user_id'],
+        'firstName': result?['name'].toString().split(' ').first,
+        'lastName': result?['name'].toString().split(' ').last,
+        'email': result?['email'],
+        'pic_url': result?['pic_url'],
+        'password': ' ',
+        'servertime': FieldValue.serverTimestamp(),
+        'isUserLogedIn': true,
+      })
+      .then((value) => null)
+      .catchError((e) async {
+        await firestore.collection('signup').doc(result?['email']).set({
+          'id': result?['user_id'],
+          'firstName': result?['name'].toString().split(' ').first,
+          'lastName': result?['name'].toString().split(' ').last,
+          'email': result?['email'],
+          'pic_url': result?['pic_url'],
+          'password': ' ',
+          'servertime': FieldValue.serverTimestamp(),
+          'isUserLogedIn': true,
+        });
+      });
 }

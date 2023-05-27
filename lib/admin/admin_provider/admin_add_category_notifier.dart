@@ -60,7 +60,7 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
     final docId =
         (int.tryParse(docRef.docs.first.data()['course_id']) ?? -1) + 1;
 
-    await firestore.collection('course').doc(docId.toString()).set({
+    await firestore.collection('course').doc(docId.toString()).update({
       'course_id': docId.toString(),
       'course_name': courseNameController.text,
       'course_playlist': coursePlaylistController.text,

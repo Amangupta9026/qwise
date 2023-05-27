@@ -69,7 +69,8 @@ class RecommendedCourses extends StatelessWidget {
                                         courses?[index]["image"] ?? "",
                                         width: double.infinity,
                                         fit: BoxFit.cover,
-                                        height: 130,
+                                        height: 160,
+                                        alignment: Alignment.topCenter,
                                       ),
                                     ),
                                     Positioned.fill(
