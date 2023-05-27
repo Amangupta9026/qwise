@@ -26,7 +26,9 @@ class RecommendedCourses extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         StreamBuilder(
-            stream: courseCollection.snapshots(),
+            stream: courseCollection
+                .orderBy("course_id", descending: true)
+                .snapshots(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
                 return const Center(child: CircularProgressIndicator());
