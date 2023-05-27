@@ -1,10 +1,10 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bard_api/bard_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../utils/colors.dart';
@@ -29,6 +29,7 @@ class AiChatScreenState extends State<AiChatScreen>
   final sessionCollection = FirebaseFirestore.instance.collection('session');
   String sessionId = "";
   final User? currentUser = FirebaseAuth.instance.currentUser;
+  bool isProgressRunning = false;
 
   @override
   void initState() {
@@ -63,21 +64,15 @@ class AiChatScreenState extends State<AiChatScreen>
     );
   }
 
-  Future<void> onSendMessage() async {
+  sendBardMessage(chatMessage) async {
+    if (mounted) {
+      setState(() {
+        isProgressRunning = true;
+      });
+    }
     final bard = ChatBot(sessionId: sessionId);
-    final result = await bard.ask(_chatController.text);
-    Map<String, dynamic> messages = {
-      "name": _auth.currentUser?.displayName?.split(" ")[0] ?? "",
-      "email_id": _auth.currentUser?.email ?? "",
-      "photo_url": _auth.currentUser?.photoURL ?? "",
-      "message": _chatController.text,
-      "time": FieldValue.serverTimestamp(),
-    };
-    _chatController.clear();
-    chatRoomCollection
-        .doc(FirebaseAuth.instance.currentUser?.email)
-        .collection('chats')
-        .add(messages);
+    final result = await bard.ask(chatMessage);
+
     Map<String, dynamic> messages2 = {
       "name": "AI Learning",
       "email_id": "aibot@gmail.com",
@@ -86,11 +81,33 @@ class AiChatScreenState extends State<AiChatScreen>
       "message": result["content"],
       "time": FieldValue.serverTimestamp(),
     };
-    chatRoomCollection
+    await chatRoomCollection
         .doc(FirebaseAuth.instance.currentUser?.email)
         .collection('chats')
         .add(messages2);
-    log("$result");
+    if (mounted) {
+      setState(() {
+        isProgressRunning = false;
+      });
+    }
+  }
+
+  Future<void> onSendMessage() async {
+    final chatMessage = _chatController.text.trim();
+    _chatController.clear();
+
+    Map<String, dynamic> messages = {
+      "name": _auth.currentUser?.displayName?.split(" ")[0] ?? "",
+      "email_id": _auth.currentUser?.email ?? "",
+      "photo_url": _auth.currentUser?.photoURL ?? "",
+      "message": chatMessage,
+      "time": FieldValue.serverTimestamp(),
+    };
+    await chatRoomCollection
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection('chats')
+        .add(messages);
+    sendBardMessage(chatMessage);
   }
 
   @override
@@ -238,19 +255,28 @@ class AiChatScreenState extends State<AiChatScreen>
                                                     ],
                                                   ),
                                                   const SizedBox(height: 8),
-                                                  Text(
-                                                    chatData?['message'],
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 16.0,
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                      left: 8.0,
+                                                      right: 8.0,
                                                     ),
-                                                    textAlign:
-                                                        chatData?['email_id'] ==
-                                                                _auth
-                                                                    .currentUser
-                                                                    ?.email
-                                                            ? TextAlign.right
-                                                            : TextAlign.left,
+                                                    child: Text(
+                                                      chatData?['message'],
+                                                      style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 15.0,
+                                                        fontFamily: GoogleFonts
+                                                                .robotoFlex()
+                                                            .fontFamily,
+                                                      ),
+                                                      textAlign: chatData?[
+                                                                  'email_id'] ==
+                                                              _auth.currentUser
+                                                                  ?.email
+                                                          ? TextAlign.right
+                                                          : TextAlign.left,
+                                                    ),
                                                   ),
                                                   Text(
                                                     timeago.format(
@@ -263,6 +289,7 @@ class AiChatScreenState extends State<AiChatScreen>
                                                       color: Colors.black,
                                                       fontSize: 10.0,
                                                     ),
+                                                    textAlign: TextAlign.right,
                                                   ),
                                                 ],
                                               ),
@@ -281,6 +308,41 @@ class AiChatScreenState extends State<AiChatScreen>
                               return Container();
                             }
                           }),
+                      isProgressRunning
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 80.0),
+                                    child: Image.asset(
+                                      "assets/images/ai_learning.webp",
+                                      height: 200,
+                                      width: 200,
+                                    ),
+                                  ),
+                                  const Positioned.fill(
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Card(
+                                        color: darkBlueColor,
+                                        child: Padding(
+                                          padding: EdgeInsets.all(8.0),
+                                          child: Text(
+                                            "Looking for answers...",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          : Container(),
                     ],
                   ),
                 ),
