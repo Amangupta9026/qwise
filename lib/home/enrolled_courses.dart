@@ -39,12 +39,11 @@ class EnrolledCourses extends StatelessWidget {
                 const SizedBox(height: 30.0),
                 StreamBuilder(
                     stream: signUpCollection
-                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .doc(FirebaseAuth.instance.currentUser!.email)
                         .snapshots(),
                     builder: (context, signUp) {
                       final data = signUp.data?.data();
-                      if (!(data?.containsKey("enroll_courses") ??
-                          false)) {
+                      if (!(data?.containsKey("enroll_courses") ?? false)) {
                         return const Center(
                           child: Text("No Courses Enrolled"),
                         );
@@ -53,8 +52,12 @@ class EnrolledCourses extends StatelessWidget {
                           shrinkWrap: true,
                           itemCount: data?["enroll_courses"].length,
                           itemBuilder: (context, index) {
+                            final courseIds = data?["enroll_courses"];
                             return StreamBuilder(
-                                stream: courseCollection.snapshots(),
+                                stream: courseCollection
+                                    .where("course_id",
+                                        isEqualTo: courseIds[index])
+                                    .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return const Center(
@@ -84,7 +87,6 @@ class EnrolledCourses extends StatelessWidget {
                                           );
                                         },
                                         child: SizedBox(
-                                          height: 140,
                                           child: Card(
                                             surfaceTintColor: Colors.white,
                                             color: Colors.white,
