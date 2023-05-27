@@ -43,18 +43,19 @@ class CourseDetails extends StatelessWidget {
                     (userData?["enroll_courses"] as List).contains(courseId)) {
                   List<Video> videos = [];
                   final data = await FirebaseFirestore.instance
-                      .collection("courses")
+                      .collection("course")
                       .doc(courseId)
-                      .get()
-                      .then((value) => value.data());
-                  await for (var video in yt.playlists.getVideos(
-                      Uri.parse(data?[0]["course_playlist"] ?? "")
-                              .queryParameters["list"] ??
-                          "")) {
+                      .get();
+                  final String? playListUrl = data.data()?["course_playlist"];
+                  if (playListUrl == null) return;
+                  await for (var video
+                      in yt.playlists.getVideos(Uri.parse(playListUrl))) {
                     videos.add(video);
                   }
 
+                  // ignore: use_build_context_synchronously
                   context.read<CourseVideoNotifier>().setVideos(videos);
+                  // ignore: use_build_context_synchronously
                   context.push(
                     RouteNames.courseView,
                   );
