@@ -75,13 +75,16 @@ class EnrolledCourses extends StatelessWidget {
                             final courseIds = data?["enroll_courses"];
                             return StreamBuilder(
                                 stream: courseCollection
-                                    .where("course_id",
-                                        isEqualTo: courseIds[index])
+                                    .where(
+                                      "course_id",
+                                      isEqualTo: courseIds[index],
+                                    )
                                     .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return const Center(
-                                        child: CircularProgressIndicator());
+                                      child: CircularProgressIndicator(),
+                                    );
                                   }
                                   final data = snapshot.data?.docs;
                                   return Column(
