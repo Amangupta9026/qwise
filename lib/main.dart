@@ -15,7 +15,7 @@ Future<void> main() async {
   await Prefs.init();
   // await AppUtils.handleNotificationPermission(Permission.notification)
 
-  runApp(MultiProvider(providers: multiProviderName, child: const MyApp()));
+  runApp(MultiProvider(providers: multiProviderNames, child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {

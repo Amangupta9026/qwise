@@ -12,7 +12,7 @@ import '../provider/forgot_password_notifier.dart';
 import '../provider/verify_otp_screen_notifier.dart';
 import '../utils/file_collection.dart';
 
-final List<SingleChildWidget> multiProviderName = [
+final List<SingleChildWidget> multiProviderNames = [
   ChangeNotifierProvider(create: (_) => OnBoardingNotifier()),
   ChangeNotifierProvider(create: (_) => SignUpNotifier()),
   ChangeNotifierProvider(create: (_) => SigninNotifer()),
