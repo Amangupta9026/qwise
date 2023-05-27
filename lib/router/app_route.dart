@@ -9,8 +9,6 @@ import 'package:qwise/home/home_screen.dart';
 import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/home/notification/notification.dart';
 import 'package:qwise/home/recommended_courses/course_view_screen.dart';
-import 'package:qwise/local/pref_names.dart';
-import 'package:qwise/local/prefs.dart';
 import 'package:qwise/profile/edit_profile.dart';
 import 'package:qwise/router/routes_names.dart';
 import 'package:qwise/search/course_search_screen.dart';
@@ -20,7 +18,7 @@ import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
 import '../home/recommended_courses/course_details/course_details.dart';
 
-bool isUserLogin = Prefs.getBool(PrefNames.isLogin) ?? false;
+bool isUserLogin = false;
 
 String getInitialRoute() {
   switch (isUserLogin) {
@@ -85,7 +83,6 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
     path: RouteNames.main,
     name: RouteNames.main,
     builder: (context, state) {
-      Prefs.setBool(PrefNames.isLogin, true);
       return const MainScreen();
     },
   ),
@@ -141,5 +138,6 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
       return const NotificationScreen();
     },
   ),
+  
   ...adminRoutes,
 ]);
