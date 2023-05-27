@@ -86,7 +86,15 @@ class RecommendedCourses extends StatelessWidget {
                                                       side: BorderSide(
                                                 color: Colors.white,
                                               ))),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            context.pushNamed(
+                                                RouteNames.courseDetails,
+                                                queryParameters: {
+                                                  "courseId": courses?[index]
+                                                          ["course_id"] ??
+                                                      ""
+                                                });
+                                          },
                                           child: const Text("View Details"),
                                         ),
                                       ),
