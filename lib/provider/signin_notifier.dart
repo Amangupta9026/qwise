@@ -20,7 +20,8 @@ class SigninNotifer extends ChangeNotifier {
   Widget iconReplaceFun(IconData? icon1, onPressed1) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey[100],
+        color: Colors.white,
+        border: Border.all(color: Colors.grey),
         borderRadius: BorderRadius.circular(12),
       ),
       child: IconButton(
