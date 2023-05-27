@@ -5,7 +5,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:linkedin_login/linkedin_login.dart';
+import 'package:qwise/local/prefs.dart';
 import 'package:qwise/utils/file_collection.dart';
+
+import '../local/pref_names.dart';
 
 const String redirectUrl = 'http://youtube.com/callback';
 const String clientId = '77ayi7wb8bmtdw';
@@ -58,6 +61,7 @@ linkedInLogin(BuildContext context) async {
           // EasyLoading.dismiss();
 
           log(result.toString());
+           Prefs.setBool(PrefNames.isLogin, true);
           result != null && result!.isNotEmpty
               // ignore: use_build_context_synchronously
               ? context.pushNamed(RouteNames.main)

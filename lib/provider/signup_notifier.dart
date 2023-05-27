@@ -1,8 +1,12 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:qwise/local/pref_names.dart';
+import 'package:qwise/local/prefs.dart';
 
 import '../utils/file_collection.dart';
 
@@ -55,7 +59,8 @@ class SignUpNotifier extends ChangeNotifier {
       await credentails.user?.updateDisplayName(
           '${firstNameController.text} ${lastNameController.text}');
       createUser();
-      // ignore: use_build_context_synchronously
+      
+       Prefs.setBool(PrefNames.isLogin, true);
       context.pushReplacementNamed(RouteNames.main);
     }
     EasyLoading.dismiss();

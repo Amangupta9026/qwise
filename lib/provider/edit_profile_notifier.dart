@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,6 +12,8 @@ import '../utils/file_collection.dart';
 class EditProfileNotifier extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
   final firestore = FirebaseFirestore.instance;
 
   final storage = FirebaseStorage.instance;
@@ -69,9 +73,13 @@ class EditProfileNotifier extends ChangeNotifier {
         TextEditingController(text: userData.data()?['firstName'] ?? '');
     emailController =
         TextEditingController(text: userData.data()?['email'] ?? '');
+    phoneController = TextEditingController(
+        text: userData.data()?['phone_number'] ?? 'Enter your phone number');
+    cityController = TextEditingController(
+        text: userData.data()?['city'] ?? 'Enter your city');
   }
 
-  Future<void> editProfileUpdate() async {
+  Future<void> editProfileUpdate(BuildContext context) async {
     EasyLoading.show(status: 'loading...');
 
     final FirebaseAuth auth = FirebaseAuth.instance;
@@ -80,11 +88,14 @@ class EditProfileNotifier extends ChangeNotifier {
     await firestore.collection('signup').doc(email).update({
       'firstName': nameController.text,
       'email': emailController.text,
+      'phone_number': phoneController.text,
+      'city': cityController.text,
       'servertime': FieldValue.serverTimestamp(),
     });
     if (selectedImage != null) {
       sendFileImage();
     }
+    context.pushNamed(RouteNames.main);
     EasyLoading.dismiss();
   }
 

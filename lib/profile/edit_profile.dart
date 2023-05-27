@@ -25,8 +25,7 @@ class EditProfile extends StatelessWidget {
           return BottomNavigationBarWidget(
             buttonName: 'Submit',
             onButtonPressed: () {
-              
-              ref.editProfileUpdate();
+              ref.editProfileUpdate(context);
             },
           );
         }),
@@ -121,15 +120,12 @@ class EditProfile extends StatelessWidget {
                               controller1: ref.emailController,
                             ),
                             const SizedBox(height: 20),
-                            const TextFormFieldWidget(
-                              hinttext1: 'Enter your phone number',
+                            TextFormFieldWidget(
+                              controller1: ref.phoneController,
                             ),
                             const SizedBox(height: 20),
                             TextFormFieldWidget(
-                              controller1: TextEditingController(
-                                text: "",
-                              ),
-                            ),
+                                controller1: ref.cityController),
                           ],
                         ),
                       );

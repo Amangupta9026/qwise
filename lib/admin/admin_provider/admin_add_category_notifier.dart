@@ -1,4 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class AdminAddCategoryNotifier extends ChangeNotifier {
@@ -35,7 +38,7 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
         languageController.text.isNotEmpty &&
         priceController.text.isNotEmpty &&
         typeController.text.isNotEmpty) {
-      addAddCourseData();
+      addAddCourseData(context);
       notifyListeners();
     } else {
       showMyDialog(
@@ -51,7 +54,8 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> addAddCourseData() async {
+  Future<void> addAddCourseData(BuildContext context) async {
+    EasyLoading.show(status: 'loading...');
     final docRef = await firestore
         .collection('course')
         .orderBy("course_id", descending: true)
@@ -69,5 +73,23 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
       'price': priceController.text,
       'type': typeController.text
     });
+    showMyDialog(
+      context,
+      'Successfully Course Added',
+      '${courseNameController.text} is added, now you can see in client app',
+      () {
+        courseIdController.clear();
+        courseNameController.clear();
+        coursePlaylistController.clear();
+        imageController.clear();
+        languageController.clear();
+        priceController.clear();
+        typeController.clear();
+        context.pushReplacementNamed(RouteNames.adminPanel);
+      },
+      istwobutton: false,
+    );
+
+    EasyLoading.dismiss();
   }
 }

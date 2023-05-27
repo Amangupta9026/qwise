@@ -1,8 +1,12 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:qwise/local/prefs.dart';
 import 'package:qwise/provider/profile_screen_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 import 'package:random_avatar/random_avatar.dart';
 
+import '../local/pref_names.dart';
 import '../widget/bottom_navigationbar_widget.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -21,6 +25,7 @@ class ProfileScreen extends StatelessWidget {
         return BottomNavigationBarWidget(
           buttonName: 'Logout',
           onButtonPressed: () {
+            Prefs.setBool(PrefNames.isLogin, false);
             ref.logout(context, FirebaseAuth.instance.currentUser?.email ?? '');
           },
         );
@@ -132,35 +137,48 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20.0, 30, 20, 60),
-                        child: Column(
-                          children: [
-                            TextFormFieldWidget(
-                              isReadOnly: true,
-                              controller1: TextEditingController(
-                                text:
-                                    "${userData?['firstName'] ?? ""} ${userData?['lastName'] ?? ""}",
+                        child: InkWell(
+                          onTap: () {
+                            context.pushNamed(RouteNames.profileEdit);
+                            log('ddd');
+                          },
+                          child: Column(
+                            children: [
+                              TextFormFieldWidget(
+                                isReadOnly: true,
+                                controller1: TextEditingController(
+                                  text:
+                                      "${userData?['firstName'] ?? ""} ${userData?['lastName'] ?? ""}",
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 20),
-                            TextFormFieldWidget(
-                              isReadOnly: true,
-                              controller1: TextEditingController(
-                                text: userData?['email'] ?? '',
+                              const SizedBox(height: 20),
+                              TextFormFieldWidget(
+                                isReadOnly: true,
+                                controller1: TextEditingController(
+                                  text: userData?['email'] ?? '',
+                                ),
                               ),
-                            ),
-                            const SizedBox(height: 20),
-                            const TextFormFieldWidget(
-                              isReadOnly: true,
-                              hinttext1: 'Enter your phone number',
-                            ),
-                            const SizedBox(height: 20),
-                            TextFormFieldWidget(
-                              isReadOnly: true,
-                              controller1: TextEditingController(
-                                text: userData?['firstName'] ?? '',
+                              const SizedBox(height: 20),
+                              InkWell(
+                                onTap: () {
+                                  context.pushNamed(RouteNames.profileEdit);
+                                },
+                                child: TextFormFieldWidget(
+                                  isReadOnly: true,
+                                  controller1: TextEditingController(
+                                      text: userData?['phone_number'] ??
+                                          'Enter your phone number'),
+                                ),
                               ),
-                            ),
-                          ],
+                              const SizedBox(height: 20),
+                              TextFormFieldWidget(
+                                isReadOnly: true,
+                                controller1: TextEditingController(
+                                  text: userData?['city'] ?? 'City',
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ],

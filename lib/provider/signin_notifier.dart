@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:qwise/local/pref_names.dart';
+import 'package:qwise/local/prefs.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class SigninNotifer extends ChangeNotifier {
@@ -53,6 +55,7 @@ class SigninNotifer extends ChangeNotifier {
       if (credential.user != null) {
         // ignore: use_build_context_synchronously
         context.pushNamed(RouteNames.main);
+        Prefs.setBool(PrefNames.isLogin, true);
       }
     } catch (e) {
       showMyDialog(

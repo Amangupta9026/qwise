@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
@@ -23,11 +25,13 @@ class CourseDetails extends StatelessWidget {
       appBar: PreferredSize(
           preferredSize: const Size.fromHeight(40),
           child: HeaderWidget(
-            text1: 'Course Name',
+            text1: 'Course',
             isCenterTitle: true,
             leading1: Icons.arrow_back,
             actions1: MdiIcons.bell,
-            onActionPressed: () {},
+            onActionPressed: () {
+              context.push(RouteNames.bellNotification);
+            },
           )),
       bottomNavigationBar: StreamBuilder(
           stream: signUpFirestoreDoc.snapshots(),
@@ -53,9 +57,8 @@ class CourseDetails extends StatelessWidget {
                     videos.add(video);
                   }
 
-                  // ignore: use_build_context_synchronously
                   context.read<CourseVideoNotifier>().setVideos(videos);
-                  // ignore: use_build_context_synchronously
+
                   context.push(
                     RouteNames.courseView,
                   );
@@ -95,7 +98,7 @@ class CourseDetails extends StatelessWidget {
                       Container(
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.zero,
-                        height: MediaQuery.of(context).size.height * 0.284,
+                        height: MediaQuery.of(context).size.height * 0.233,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
@@ -117,8 +120,9 @@ class CourseDetails extends StatelessWidget {
                         ),
                       ),
                       Positioned.fill(
-                        top: 128.0,
+                        top: 125.0,
                         left: 30.0,
+                        right: 0,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -166,17 +170,10 @@ class CourseDetails extends StatelessWidget {
                                         child: const Padding(
                                             padding: EdgeInsets.all(10.0),
                                             child: TextWidget(
-                                              text1: 'Rs 5000/-  4.7(1.0k)',
+                                              text1: '4.7(1.0k)',
                                               color1: Colors.white,
                                             )))
                                   ]),
-                              const SizedBox(height: 12.0),
-                              const TextWidget(
-                                text1: 'Flutter Course by Aman Gupta',
-                                color1: colortext,
-                                size1: 20.0,
-                                fontWeight1: FontWeight.bold,
-                              ),
                             ]),
                       ),
                     ],

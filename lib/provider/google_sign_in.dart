@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:qwise/local/pref_names.dart';
+import 'package:qwise/local/prefs.dart';
 
 import '../utils/file_collection.dart';
 
@@ -10,6 +12,7 @@ void onTapGoogle(context) async {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   if (auth.currentUser != null) {
+     Prefs.setBool(PrefNames.isLogin, true);
     GoRouter.of(context).pushReplacementNamed(RouteNames.main);
   } else {
     EasyLoading.show(status: 'loading...');
