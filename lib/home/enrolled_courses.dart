@@ -69,18 +69,22 @@ class EnrolledCourses extends StatelessWidget {
                       }
                       return ListView.builder(
                           shrinkWrap: true,
+                          reverse: true,
                           itemCount: data?["enroll_courses"].length,
                           itemBuilder: (context, index) {
                             final courseIds = data?["enroll_courses"];
                             return StreamBuilder(
                                 stream: courseCollection
-                                    .where("course_id",
-                                        isEqualTo: courseIds[index])
+                                    .where(
+                                      "course_id",
+                                      isEqualTo: courseIds[index],
+                                    )
                                     .snapshots(),
                                 builder: (context, snapshot) {
                                   if (!snapshot.hasData) {
                                     return const Center(
-                                        child: CircularProgressIndicator());
+                                      child: CircularProgressIndicator(),
+                                    );
                                   }
                                   final data = snapshot.data?.docs;
                                   return Column(
