@@ -330,7 +330,7 @@ class AiChatScreenState extends State<AiChatScreen>
                                         child: Padding(
                                           padding: EdgeInsets.all(8.0),
                                           child: Text(
-                                            "Looking for answers...",
+                                            "Searching for answers...",
                                             style: TextStyle(
                                               color: Colors.white,
                                             ),
