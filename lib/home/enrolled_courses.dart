@@ -3,6 +3,8 @@ import 'package:qwise/provider/course_videos_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
+import '../provider/page_index_selector.dart';
+
 CollectionReference<Map<String, dynamic>> courseCollection =
     FirebaseFirestore.instance.collection("course");
 
@@ -44,8 +46,25 @@ class EnrolledCourses extends StatelessWidget {
                     builder: (context, signUp) {
                       final data = signUp.data?.data();
                       if (!(data?.containsKey("enroll_courses") ?? false)) {
-                        return const Center(
-                          child: Text("No Courses Enrolled"),
+                        return Center(
+                          child: Column(
+                            children: [
+                              const Text("No Courses Enrolled"),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Provider.of<PageIndexSelectorNotifier>(
+                                          context,
+                                          listen: false)
+                                      .changeIndex(0);
+                                },
+                                child:
+                                    const Text("Check out Recommended Courses"),
+                              )
+                            ],
+                          ),
                         );
                       }
                       return ListView.builder(
