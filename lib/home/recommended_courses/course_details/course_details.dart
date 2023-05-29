@@ -39,12 +39,14 @@ class CourseDetails extends StatelessWidget {
             final userData = snapshot.data?.data();
             return BottomNavigationBarWidget(
               buttonName: (userData?.containsKey("enroll_courses") ?? false) &&
-                      (userData?["enroll_courses"] as List).contains(courseId)
+                      (userData?["enroll_courses"] as List)
+                          .contains(int.tryParse(courseId))
                   ? "Get Started"
                   : "Enroll Now",
               onButtonPressed: () async {
                 if ((userData?.containsKey("enroll_courses") ?? false) &&
-                    (userData?["enroll_courses"] as List).contains(courseId)) {
+                    (userData?["enroll_courses"] as List)
+                        .contains(int.tryParse(courseId))) {
                   List<Video> videos = [];
                   final data = await FirebaseFirestore.instance
                       .collection("course")
