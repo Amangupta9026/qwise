@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bard_api/bard_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -45,7 +44,7 @@ class AiChatScreenState extends State<AiChatScreen>
     sessionCollection
         .doc("1")
         .get()
-        .then((value) => sessionId = value["session"]);
+        .then((value) => sessionId = value["session"].first);
   }
 
   @override
@@ -76,7 +75,11 @@ class AiChatScreenState extends State<AiChatScreen>
     try {
       result = await bard.ask(chatMessage);
     } catch (e) {
-      log("$e");
+      await sessionCollection.doc("1").get().then((value) async {
+        sessionId = value["session"][1];
+        final bard = ChatBot(sessionId: sessionId);
+        result = await bard.ask(chatMessage);
+      });
     }
 
     Map<String, dynamic> messages2 = {
