@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:qwise/utils/file_collection.dart';
 import 'package:http/http.dart' as http;
+import 'package:qwise/utils/file_collection.dart';
 
 class SendNotificationfromAdminNotifier extends ChangeNotifier {
   TextEditingController titleController = TextEditingController();
