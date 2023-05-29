@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bard_api/bard_api.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -71,14 +72,19 @@ class AiChatScreenState extends State<AiChatScreen>
       });
     }
     final bard = ChatBot(sessionId: sessionId);
-    final result = await bard.ask(chatMessage);
+    Map<String, dynamic>? result;
+    try {
+      result = await bard.ask(chatMessage);
+    } catch (e) {
+      log("$e");
+    }
 
     Map<String, dynamic> messages2 = {
       "name": "AI Learning",
       "email_id": "aibot@gmail.com",
       "photo_url":
           "https://png.pngtree.com/element_our/20200609/ourmid/pngtree-learning-machine-robot-image_2234559.jpg",
-      "message": result["content"],
+      "message": result?["content"],
       "time": FieldValue.serverTimestamp(),
     };
     await chatRoomCollection

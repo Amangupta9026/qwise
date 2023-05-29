@@ -67,8 +67,11 @@ class CourseDetails extends StatelessWidget {
                     {
                       "enroll_courses":
                           (userData?.containsKey("enroll_courses") ?? false)
-                              ? [...userData?['enroll_courses'], courseId]
-                              : [courseId]
+                              ? [
+                                  ...userData?['enroll_courses'],
+                                  int.tryParse(courseId)
+                                ]
+                              : [int.tryParse(courseId)]
                     },
                   );
                 }

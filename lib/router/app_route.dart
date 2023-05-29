@@ -85,6 +85,7 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
     path: RouteNames.main,
     name: RouteNames.main,
     builder: (context, state) {
+      Prefs.setBool(PrefNames.isLogin, true);
       return const MainScreen();
     },
   ),
@@ -140,6 +141,5 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
       return const NotificationScreen();
     },
   ),
-  
   ...adminRoutes,
 ]);
