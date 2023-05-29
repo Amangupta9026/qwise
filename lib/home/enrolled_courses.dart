@@ -70,6 +70,7 @@ class EnrolledCourses extends StatelessWidget {
                       return ListView.builder(
                           shrinkWrap: true,
                           reverse: true,
+                          physics: const NeverScrollableScrollPhysics(),
                           itemCount: data?["enroll_courses"].length,
                           itemBuilder: (context, index) {
                             final courseIds = data?["enroll_courses"];
