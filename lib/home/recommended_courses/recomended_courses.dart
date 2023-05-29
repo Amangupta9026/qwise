@@ -45,7 +45,9 @@ class RecommendedCourses extends StatelessWidget {
                         onTap: () {
                           context.pushNamed(RouteNames.courseDetails,
                               queryParameters: {
-                                "courseId": courses?[index]["course_id"] ?? ""
+                                "courseId":
+                                    courses?[index]["course_id"].toString() ??
+                                        ""
                               });
                         },
                         child: Card(

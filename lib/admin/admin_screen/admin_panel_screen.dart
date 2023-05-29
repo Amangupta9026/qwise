@@ -39,22 +39,11 @@ class AdminPanel extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(15.0, 20, 15, 60),
               child: Consumer<AdminAddCategoryNotifier>(
                   builder: (context, ref, child) {
+                ref.priceController.text = "0";
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const TextWidget(
-                      text1: 'Course Id',
-                      size1: 18.0,
-                      fontWeight1: FontWeight.w400,
-                    ),
-                    const SizedBox(height: 10.0),
-                    TextFormFieldWidget(
-                      controller1: ref.courseIdController,
-                      onChanged1: (value) {
-                        ref.onButtonColorChange();
-                      },
-                    ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 10),
                     const TextWidget(
                       text1: 'Course Name',
                       size1: 18.0,

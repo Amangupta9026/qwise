@@ -38,7 +38,7 @@ dependencies:
   google_sign_in: ^6.1.2
   google_fonts: ^4.0.4 # http 1.0.0 in 4.0.5 which is not compatible with pod_player
   go_router: ^7.1.1
-  google_mobile_ads: ^3.0.0
+  # google_mobile_ads: ^3.0.0
 
   #L
   linkedin_login: ^2.2.1

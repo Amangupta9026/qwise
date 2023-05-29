@@ -5,41 +5,38 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:qwise/utils/file_collection.dart';
 
 class AdminAddCategoryNotifier extends ChangeNotifier {
-  TextEditingController courseIdController = TextEditingController();
   TextEditingController courseNameController = TextEditingController();
   TextEditingController coursePlaylistController = TextEditingController();
   TextEditingController imageController = TextEditingController();
   TextEditingController languageController = TextEditingController();
-  TextEditingController priceController = TextEditingController();
+  TextEditingController priceController = TextEditingController(
+    text: "0",
+  );
   TextEditingController typeController = TextEditingController();
 
   bool colorChange = false;
   final firestore = FirebaseFirestore.instance;
 
   void onButtonColorChange() {
-    if (courseIdController.text.isNotEmpty &&
-        courseNameController.text.isNotEmpty &&
+    if (courseNameController.text.isNotEmpty &&
         coursePlaylistController.text.isNotEmpty &&
         languageController.text.isNotEmpty &&
         priceController.text.isNotEmpty &&
         typeController.text.isNotEmpty) {
       colorChange = true;
-      notifyListeners();
     } else {
       colorChange = false;
-      notifyListeners();
     }
+    notifyListeners();
   }
 
   void onSubmitButton(BuildContext context) {
-    if (courseIdController.text.isNotEmpty &&
-        courseNameController.text.isNotEmpty &&
+    if (courseNameController.text.isNotEmpty &&
         coursePlaylistController.text.isNotEmpty &&
         languageController.text.isNotEmpty &&
         priceController.text.isNotEmpty &&
         typeController.text.isNotEmpty) {
       addAddCourseData(context);
-      notifyListeners();
     } else {
       showMyDialog(
         context,
@@ -50,7 +47,6 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
         },
         istwobutton: false,
       );
-      notifyListeners();
     }
   }
 
@@ -62,10 +58,11 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
         .limit(1)
         .get();
     final docId =
-        (int.tryParse(docRef.docs.first.data()['course_id']) ?? -1) + 1;
+        (int.tryParse(docRef.docs.first.data()['course_id'].toString()) ?? -1) +
+            1;
 
     await firestore.collection('course').doc(docId.toString()).set({
-      'course_id': docId.toString(),
+      'course_id': docId,
       'course_name': courseNameController.text,
       'course_playlist': coursePlaylistController.text,
       "image": imageController.text,
@@ -78,7 +75,6 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
       'Successfully Course Added',
       '${courseNameController.text} is added, now you can see in client app',
       () {
-        courseIdController.clear();
         courseNameController.clear();
         coursePlaylistController.clear();
         imageController.clear();
