@@ -8,13 +8,11 @@ class HelpSupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(40),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(40),
         child: HeaderWidget(
           text1: 'Help & Support',
           isCenterTitle: true,
-          actions1: Icons.help,
-          onActionPressed: () {},
         ),
       ),
       body: Container(
