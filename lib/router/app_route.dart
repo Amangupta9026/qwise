@@ -11,6 +11,7 @@ import 'package:qwise/home/notification/notification.dart';
 import 'package:qwise/home/recommended_courses/course_view_screen.dart';
 import 'package:qwise/local/prefs.dart';
 import 'package:qwise/profile/edit_profile.dart';
+import 'package:qwise/profile/help.dart';
 import 'package:qwise/router/routes_names.dart';
 import 'package:qwise/search/course_search_screen.dart';
 
@@ -139,6 +140,13 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
     name: RouteNames.bellNotification,
     builder: (context, state) {
       return const NotificationScreen();
+    },
+  ),
+   GoRoute(
+    path: RouteNames.helpSupport,
+    name: RouteNames.helpSupport,
+    builder: (context, state) {
+      return const HelpSupport();
     },
   ),
   ...adminRoutes,

@@ -7,6 +7,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController? controller1;
   final Function? onChanged1;
   final bool? isReadOnly;
+  final int? maxLines;
   const TextFormFieldWidget(
       {super.key,
       this.hinttext1,
@@ -14,11 +15,13 @@ class TextFormFieldWidget extends StatelessWidget {
       this.obsecureText1,
       this.controller1,
       this.onChanged1,
-      this.isReadOnly});
+      this.isReadOnly,
+      this.maxLines});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        maxLines: maxLines ?? 1,
         readOnly: isReadOnly ?? false,
         controller: controller1,
         onChanged: onChanged1 as void Function(String)?,

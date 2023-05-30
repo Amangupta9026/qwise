@@ -16,9 +16,16 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: colorGradient2,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(40),
-        child: HeaderWidget(text1: 'Profile', isCenterTitle: true),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(40),
+        child: HeaderWidget(
+          text1: 'Profile',
+          isCenterTitle: true,
+          actions1: Icons.help,
+          onActionPressed: () {
+            context.pushNamed(RouteNames.helpSupport);
+          },
+        ),
       ),
       bottomNavigationBar:
           Consumer<ProfileScreenNotifier>(builder: (context, ref, child) {

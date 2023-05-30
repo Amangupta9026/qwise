@@ -2,6 +2,7 @@ import 'package:provider/single_child_widget.dart';
 import 'package:qwise/admin/admin_provider/admin_add_category_notifier.dart';
 import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/provider/course_videos_notifier.dart';
+import 'package:qwise/provider/help_support_notifier.dart';
 import 'package:qwise/provider/page_index_selector.dart';
 import 'package:qwise/provider/profile_screen_notifier.dart';
 import 'package:qwise/provider/search_course_notifier.dart';
@@ -26,5 +27,6 @@ final List<SingleChildWidget> multiProviderNames = [
   ChangeNotifierProvider(create: (_) => AdminAddCategoryNotifier()),
   ChangeNotifierProvider(create: (_) => SearchCourseNotifier()),
   ChangeNotifierProvider(create: (_) => SendNotificationfromAdminNotifier()),
+  ChangeNotifierProvider(create: (_) => HelpSupportNotifier()),
 
 ];

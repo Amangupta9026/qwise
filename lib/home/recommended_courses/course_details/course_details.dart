@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:qwise/provider/course_details_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../../../provider/course_videos_notifier.dart';
@@ -97,11 +98,23 @@ class CourseDetails extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextWidget(
-                          text1: data?["course_name"] ?? "",
-                          color1: colortext,
-                          size1: 20.0,
-                          fontWeight1: FontWeight.bold,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextWidget(
+                              text1: data?["course_name"] ?? "",
+                              color1: colortext,
+                              size1: 20.0,
+                              fontWeight1: FontWeight.bold,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Share.share(
+                                    'check out my website https://example.com');
+                              },
+                              child: const Icon(Icons.share),
+                            )
+                          ],
                         ),
                         const SizedBox(height: 20.0),
                         Stack(
