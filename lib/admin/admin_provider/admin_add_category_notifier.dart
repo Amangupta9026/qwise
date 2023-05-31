@@ -64,6 +64,7 @@ class AdminAddCategoryNotifier extends ChangeNotifier {
     await firestore.collection('course').doc(docId.toString()).set({
       'course_id': docId,
       'course_name': courseNameController.text,
+      'course_search': courseNameController.text.toLowerCase(),
       'course_playlist': coursePlaylistController.text,
       "image": imageController.text,
       'language': languageController.text,

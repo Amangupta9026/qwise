@@ -47,7 +47,7 @@ class RecommendedCourses extends StatelessWidget {
                               queryParameters: {
                                 "courseId":
                                     courses?[index]["course_id"].toString() ??
-                                        ""
+                                        "",
                               });
                         },
                         child: Card(

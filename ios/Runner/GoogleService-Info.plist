@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.qwise</string>
+	<string>com.learning.qwise</string>
 	<key>PROJECT_ID</key>
 	<string>qwise-learning</string>
 	<key>STORAGE_BUCKET</key>

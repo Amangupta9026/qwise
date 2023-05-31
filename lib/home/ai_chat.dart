@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:random_avatar/random_avatar.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../utils/colors.dart';
@@ -219,38 +220,77 @@ class AiChatScreenState extends State<AiChatScreen>
                                                     mainAxisSize:
                                                         MainAxisSize.min,
                                                     children: [
-                                                      Container(
-                                                        width: 30,
-                                                        height: 30,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          image:
-                                                              DecorationImage(
-                                                            image: chatData?[
-                                                                        'email_id'] ==
-                                                                    _auth
-                                                                        .currentUser
-                                                                        ?.email
-                                                                ? NetworkImage(
-                                                                    chatData?[
-                                                                            'photo_url'] ??
-                                                                        "",
-                                                                  )
-                                                                : Image.asset(
-                                                                    "assets/images/ai_learning.webp",
-                                                                    fit: BoxFit
-                                                                        .cover,
-                                                                  ).image,
-                                                            fit: BoxFit.cover,
+                                                      if (chatData?[
+                                                                  'email_id'] ==
+                                                              _auth.currentUser
+                                                                  ?.email &&
+                                                          chatData?[
+                                                                  'photo_url'] ==
+                                                              null) ...{
+                                                        Container(
+                                                          width: 30,
+                                                          height: 30,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            image:
+                                                                DecorationImage(
+                                                              image: chatData?[
+                                                                          'email_id'] ==
+                                                                      _auth
+                                                                          .currentUser
+                                                                          ?.email
+                                                                  ? NetworkImage(
+                                                                      chatData?[
+                                                                              'photo_url'] ??
+                                                                          "",
+                                                                    )
+                                                                  : Image.asset(
+                                                                      "assets/images/ai_learning.webp",
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ).image,
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                            border: Border.all(
+                                                              color:
+                                                                  primaryColor,
+                                                              width: 1,
+                                                            ),
+                                                            shape:
+                                                                BoxShape.circle,
                                                           ),
-                                                          border: Border.all(
-                                                            color: primaryColor,
-                                                            width: 1,
-                                                          ),
-                                                          shape:
-                                                              BoxShape.circle,
                                                         ),
-                                                      ),
+                                                      } else if (chatData?[
+                                                              'email_id'] ==
+                                                          _auth.currentUser
+                                                              ?.email) ...{
+                                                        Container(
+                                                          width: 30,
+                                                          height: 30,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color:
+                                                                  primaryColor,
+                                                              width: 1,
+                                                            ),
+                                                            shape:
+                                                                BoxShape.circle,
+                                                          ),
+                                                          child: RandomAvatar(
+                                                            FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser
+                                                                    ?.email ??
+                                                                "xyz",
+                                                          ),
+                                                        ),
+                                                      } else ...{
+                                                        Image.asset(
+                                                            "assets/images/ai_learning.webp",
+                                                            height: 40,
+                                                            width: 40)
+                                                      },
                                                       const SizedBox(width: 8),
                                                       Text(
                                                         chatData?['name'] ?? "",

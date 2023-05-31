@@ -49,35 +49,41 @@ class DefaultFirebaseOptions {
     messagingSenderId: '486735345213',
     projectId: 'qwise-learning',
     authDomain: 'qwise-learning.firebaseapp.com',
+    databaseURL: 'https://qwise-learning-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'qwise-learning.appspot.com',
     measurementId: 'G-HQYMSXWJ2C',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCC6VGb8fGcLfWP-aqZj7WhHwuC-lKKMrs',
-    appId: '1:486735345213:android:a84a7f854ecd8f14401c54',
+    appId: '1:486735345213:android:f9bbb842012df415401c54',
     messagingSenderId: '486735345213',
     projectId: 'qwise-learning',
+    databaseURL: 'https://qwise-learning-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'qwise-learning.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyCH5Ju1Eco5JY3Jc_jgpAXsSOlChh7fzYM',
-    appId: '1:486735345213:ios:31632988994f8fc4401c54',
+    appId: '1:486735345213:ios:7cc04e8d3c16f297401c54',
     messagingSenderId: '486735345213',
     projectId: 'qwise-learning',
+    databaseURL: 'https://qwise-learning-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'qwise-learning.appspot.com',
-    iosClientId: '486735345213-3qrkp5oddmdttg2dphlulkk6cki881qp.apps.googleusercontent.com',
-    iosBundleId: 'com.example.qwise',
+    androidClientId: '486735345213-1re5jiuvdvvrjk04d0fghf4e36d6dckj.apps.googleusercontent.com',
+    iosClientId: '486735345213-s6mtpq2tp35gvsg8nbu70vv2ed0oi2ft.apps.googleusercontent.com',
+    iosBundleId: 'com.learning.qwise',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyCH5Ju1Eco5JY3Jc_jgpAXsSOlChh7fzYM',
-    appId: '1:486735345213:ios:31632988994f8fc4401c54',
+    appId: '1:486735345213:ios:7cc04e8d3c16f297401c54',
     messagingSenderId: '486735345213',
     projectId: 'qwise-learning',
+    databaseURL: 'https://qwise-learning-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'qwise-learning.appspot.com',
-    iosClientId: '486735345213-3qrkp5oddmdttg2dphlulkk6cki881qp.apps.googleusercontent.com',
-    iosBundleId: 'com.example.qwise',
+    androidClientId: '486735345213-1re5jiuvdvvrjk04d0fghf4e36d6dckj.apps.googleusercontent.com',
+    iosClientId: '486735345213-s6mtpq2tp35gvsg8nbu70vv2ed0oi2ft.apps.googleusercontent.com',
+    iosBundleId: 'com.learning.qwise',
   );
 }

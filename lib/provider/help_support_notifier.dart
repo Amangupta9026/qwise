@@ -36,9 +36,9 @@ class HelpSupportNotifier extends ChangeNotifier {
         .get();
 
     await FirebaseFirestore.instance
-        .collection('help & Support')
-        .doc(userData.data()?['email'] ?? '')
-        .set({
+        .collection('help & Support') 
+        // .doc(userData.data()?['email'] ?? '')
+        .add({
           'id': FirebaseAuth.instance.currentUser!.uid,
           'subject': subjectController.text,
           'message': messageController.text,
@@ -50,8 +50,8 @@ class HelpSupportNotifier extends ChangeNotifier {
           (error) async {
             await FirebaseFirestore.instance
                 .collection('help & Support')
-                .doc(userData.data()?['email'] ?? '')
-                .set({
+                // .doc(userData.data()?['email'] ?? '')
+                .add({
               'id': FirebaseAuth.instance.currentUser!.uid,
               'subject': subjectController.text,
               'message': messageController.text,

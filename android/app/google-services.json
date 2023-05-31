@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "486735345213",
+    "firebase_url": "https://qwise-learning-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "qwise-learning",
     "storage_bucket": "qwise-learning.appspot.com"
   },
@@ -10,6 +11,66 @@
         "mobilesdk_app_id": "1:486735345213:android:a84a7f854ecd8f14401c54",
         "android_client_info": {
           "package_name": "com.example.qwise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "486735345213-1re5jiuvdvvrjk04d0fghf4e36d6dckj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.qwise",
+            "certificate_hash": "01f561c2cc0e33b1866a085c0d4c54791908e828"
+          }
+        },
+        {
+          "client_id": "486735345213-i9mqrjpo73rbmabuch0ti2c1hd0qej98.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.qwise",
+            "certificate_hash": "4d6534554ed7e48373d16d48eba44ef320bf52bc"
+          }
+        },
+        {
+          "client_id": "486735345213-v6230p3jnh0ik70f33j5mrq1i5atrtq0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.qwise",
+            "certificate_hash": "7ab732134fbf8e5b52044d9d568b7973c0ba08a8"
+          }
+        },
+        {
+          "client_id": "486735345213-arihh54gt580o44oud4osmb4tgapkj0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC6VGb8fGcLfWP-aqZj7WhHwuC-lKKMrs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "486735345213-arihh54gt580o44oud4osmb4tgapkj0r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "486735345213-3qrkp5oddmdttg2dphlulkk6cki881qp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.qwise"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:486735345213:android:f9bbb842012df415401c54",
+        "android_client_info": {
+          "package_name": "com.learning.qwise"
         }
       },
       "oauth_client": [

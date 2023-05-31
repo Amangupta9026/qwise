@@ -36,7 +36,6 @@ class _CourseSearchScreenState extends State<CourseSearchScreen> {
               return StreamBuilder(
                   stream: streamQuery,
                   builder: (context, snapshot) {
-                    log('data');
                     final courses = snapshot.data?.docs;
                     log(courses?.length.toString() ?? '0');
                     return Padding(
@@ -79,6 +78,22 @@ class _CourseSearchScreenState extends State<CourseSearchScreen> {
                                     suffixIcon: InkWell(
                                       onTap: () {
                                         ref.searchController.text = "";
+                                        setState(() {
+                                          searchKey = '';
+                                          streamQuery = firestore
+                                              .collection('course')
+                                              .where('course_search',
+                                                  isGreaterThanOrEqualTo:
+                                                      searchKey.trim())
+                                              .where('course_search',
+                                                  isLessThan:
+                                                      '${searchKey.trim()}z')
+                                              // .orderBy("course_id", descending: true)
+                                              .snapshots();
+
+                                          log(streamQuery.toString(),
+                                              name: 'streamQuery');
+                                        });
                                       },
                                       child: const Icon(
                                         Icons.close,
@@ -101,6 +116,9 @@ class _CourseSearchScreenState extends State<CourseSearchScreen> {
                             ),
                           ),
                           const SizedBox(height: 20),
+                          if (courses?.isEmpty ?? true) ...{
+                            const Center(child: Text('No courses found'))
+                          },
                           ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),

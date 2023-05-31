@@ -54,7 +54,7 @@ class SigninNotifer extends ChangeNotifier {
               password: passwordController.text);
       if (credential.user != null) {
         // ignore: use_build_context_synchronously
-        context.pushNamed(RouteNames.main);
+        context.pushReplacementNamed(RouteNames.main);
         Prefs.setBool(PrefNames.isLogin, true);
       }
     } catch (e) {

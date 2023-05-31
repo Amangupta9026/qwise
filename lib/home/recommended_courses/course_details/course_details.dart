@@ -99,112 +99,52 @@ class CourseDetails extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            TextWidget(
-                              text1: data?["course_name"] ?? "",
-                              color1: colortext,
-                              size1: 20.0,
-                              fontWeight1: FontWeight.bold,
+                            Expanded(
+                              child: TextWidget(
+                                text1: data?["course_name"] ?? "",
+                                color1: colortext,
+                                size1: 20.0,
+                                fontWeight1: FontWeight.bold,
+                              ),
                             ),
                             InkWell(
                               onTap: () {
                                 Share.share(
-                                    'check out my website https://example.com');
+                                    'hey! check out this learning app https://play.google.com/store/apps/details?id=com.learning.qwise&hl=en_IN&gl=US');
                               },
                               child: const Icon(Icons.share),
                             )
                           ],
                         ),
                         const SizedBox(height: 20.0),
-                        Stack(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.zero,
-                              padding: EdgeInsets.zero,
-                              height:
-                                  MediaQuery.of(context).size.height * 0.233,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: const [
-                                  BoxShadow(color: Colors.grey, blurRadius: 10)
-                                ],
-                              ),
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(10.0, 12, 10, 0),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/course1.png',
-                                      width: double.infinity,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ],
-                                ),
-                              ),
+                        Container(
+                          padding: const EdgeInsets.only(bottom: 13),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: const [
+                              BoxShadow(color: Colors.grey, blurRadius: 10)
+                            ],
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(10.0, 12, 10, 0),
+                            child: Column(
+                              children: [
+                                if (data?["image"] != null) ...{
+                                  Image.network(data?["image"] ?? ""),
+                                } else ...{
+                                  Image.asset(
+                                    'assets/images/course1.png',
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                },
+                              ],
                             ),
-                            Positioned.fill(
-                              top: 125.0,
-                              left: 30.0,
-                              right: 0,
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            decoration: BoxDecoration(
-                                              color: primaryColor,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              boxShadow: const [
-                                                BoxShadow(
-                                                    color: Colors.grey,
-                                                    blurRadius: 10)
-                                              ],
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Row(children: [
-                                                Image.asset(
-                                                    'assets/images/profile1.png'),
-                                                Image.asset(
-                                                    'assets/images/profile2.png'),
-                                                Image.asset(
-                                                    'assets/images/profile3.png'),
-                                              ]),
-                                            ),
-                                          ),
-
-                                          // another container for details
-                                          Container(
-                                              margin: const EdgeInsets.only(
-                                                  right: 30),
-                                              decoration: BoxDecoration(
-                                                color: primaryColor,
-                                                borderRadius:
-                                                    BorderRadius.circular(12),
-                                                boxShadow: const [
-                                                  BoxShadow(
-                                                      color: Colors.grey,
-                                                      blurRadius: 10)
-                                                ],
-                                              ),
-                                              child: const Padding(
-                                                  padding: EdgeInsets.all(10.0),
-                                                  child: TextWidget(
-                                                    text1: '4.7(1.0k)',
-                                                    color1: Colors.white,
-                                                  )))
-                                        ]),
-                                  ]),
-                            ),
-                          ],
+                          ),
                         ),
                         const SizedBox(height: 30.0),
                         const TextWidget(
@@ -214,9 +154,9 @@ class CourseDetails extends StatelessWidget {
                           fontWeight1: FontWeight.bold,
                         ),
                         const SizedBox(height: 10.0),
-                        const TextWidget(
+                        TextWidget(
                           text1:
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae nisi eget nunc aliquam aliquet. Sed vitae nisi eget nunc aliquam aliquet.',
+                              '${data?['course_name']} is an rapidly growing area in high demand. Statistics play a key role in the process of making sound business decisions that will generate higher profits. Without statistics, it\'s difficult to determine what your target audience wants and needs. ',
                           color1: colortext,
                           size1: 15.0,
                         ),
@@ -228,12 +168,12 @@ class CourseDetails extends StatelessWidget {
                           fontWeight1: FontWeight.bold,
                         ),
                         const SizedBox(height: 10.0),
-                        const TextWidget(
-                          text1:
-                              "Data Analytics is an rapidly growing area in high demand (e.g., McKinsey) Statistics play a key role in the process of making sound business decisions that will generate higher profits. Without statistics, it's difficult to determine what your target audience wants and needs.",
+                        TextWidget(
+                          text1: "${data?['course_name']} ",
                           color1: colortext,
                           size1: 15.0,
                         ),
+
                         const SizedBox(height: 20.0),
                         //Learn More
 
@@ -262,41 +202,34 @@ class CourseDetails extends StatelessWidget {
                               ),
                               const SizedBox(height: 14.0),
                               ref.isShowMore
-                                  ? const Column(
+                                  ? Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        TextWidget(
+                                        const TextWidget(
                                           text1: "What you'll learn",
                                           color1: colortext,
                                           size1: 20.0,
                                           fontWeight1: FontWeight.bold,
                                         ),
-                                        SizedBox(height: 10.0),
+                                        const SizedBox(height: 10.0),
                                         TextWidget(
                                           text1:
-                                              "In this course, you will gain proficiency in how to analyze a number of statistical procedures in SPSS. You will learn how to interpret the output of a number of different statistical tests Learn how to write the results of statistical analyses using APA format's guidelines",
+                                              "In this course about '${data?['course_name']}' you will gain proficiency how to analyze a number of statistical knowledge enhance. You will learn how to master in ${data?['course_name']} from beginning to advance pro level. The output/result you will get after completed this course ${data?['course_name']}. Its number of different statistical tests Learning about beginner to advance of statistical analyses using this app guidelines",
                                           color1: colortext,
                                           size1: 15.0,
                                         ),
-                                        SizedBox(height: 10.0),
-                                        TextWidget(
-                                          text1:
-                                              "You will learn how to create beautiful mobile & web user interfaces that you can then turn into live prototypes with the help of Figma. Figma is a leading design software, helping teams and individuals create designs faster and more efficiently. Figma is free and you can use it right on your web browser, on Mac and Windows.",
-                                          color1: Colors.black,
-                                          size1: 15.0,
-                                        ),
-                                        SizedBox(height: 20.0),
-                                        TextWidget(
+                                        const SizedBox(height: 10.0),
+                                        const TextWidget(
                                           text1: "Requirements",
                                           color1: colortext,
                                           size1: 20.0,
                                           fontWeight1: FontWeight.bold,
                                         ),
-                                        SizedBox(height: 10.0),
-                                        TextWidget(
+                                        const SizedBox(height: 10.0),
+                                        const TextWidget(
                                           text1:
-                                              "Laptop or PC with Internet Connection and a Browser (Chrome, Safari, Firefox, etc.), No prior knowledge of Figma is required, No prior knowledge of design is required\n\n1 Mobile Device (Android or iOS) to test your designs on a real device, No prior knowledge of Figma is required, No prior knowledge of design is required",
+                                              "Laptop or PC with Internet Connection and a Browser (Chrome, Safari, Firefox, etc.), No prior knowledge is required, You will learn from basic concept\n\n",
                                           color1: colortext,
                                           size1: 15.0,
                                         ),

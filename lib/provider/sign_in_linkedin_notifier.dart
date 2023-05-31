@@ -64,7 +64,7 @@ linkedInLogin(BuildContext context) async {
            Prefs.setBool(PrefNames.isLogin, true);
           result != null && result!.isNotEmpty
               // ignore: use_build_context_synchronously
-              ? context.pushNamed(RouteNames.main)
+              ? context.pushReplacementNamed(RouteNames.main)
               : null;
         },
       ),
