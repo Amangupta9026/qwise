@@ -1,4 +1,5 @@
 import 'package:qwise/provider/google_sign_in.dart';
+import 'package:qwise/widget/graph.dart';
 
 import '../../provider/sign_in_linkedin_notifier.dart';
 import '../../utils/file_collection.dart';
@@ -198,6 +199,15 @@ class SignInScreen extends StatelessWidget {
             ],
           );
         }),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const BarChartSample2()),
+              );
+            },
+            child: const Text('Chart'))
       ],
     );
   }

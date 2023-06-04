@@ -15,6 +15,7 @@ class RouteNames {
   static const String searchCourse = '/searchCourse';
   static const String bellNotification = '/bellNotification';
   static const String helpSupport = '/helpSupport';
+  static const String privacyPolicy = '/privacyPolicy';
 
   static const String adminPanel = '/adminPanel';
   static const String sendNotificationFromAdmin = '/sendNotificationFromAdmin';

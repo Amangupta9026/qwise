@@ -20,6 +20,7 @@ import '../auth/password/password_updated_success.dart';
 import '../home/course_category/course_category.dart';
 import '../home/recommended_courses/course_details/course_details.dart';
 import '../local/pref_names.dart';
+import '../privacy_policy.dart';
 
 bool isUserLogin = Prefs.getBool(PrefNames.isLogin) ?? false;
 
@@ -149,5 +150,13 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
       return const HelpSupport();
     },
   ),
+
+  GoRoute(
+    path: RouteNames.privacyPolicy,
+    builder: (context, state) {
+      return const PrivacyScreen();
+    },
+  ),
+ 
   ...adminRoutes,
 ]);

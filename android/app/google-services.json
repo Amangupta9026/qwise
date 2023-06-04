@@ -75,6 +75,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "486735345213-ogh4bsg8sjreo1n3df12b29sugbijq86.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.learning.qwise",
+            "certificate_hash": "7ab732134fbf8e5b52044d9d568b7973c0ba08a8"
+          }
+        },
+        {
+          "client_id": "486735345213-ul39useu8q35aif8v92mho1lpqcu4ddp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.learning.qwise",
+            "certificate_hash": "4d6534554ed7e48373d16d48eba44ef320bf52bc"
+          }
+        },
+        {
           "client_id": "486735345213-arihh54gt580o44oud4osmb4tgapkj0r.apps.googleusercontent.com",
           "client_type": 3
         }
