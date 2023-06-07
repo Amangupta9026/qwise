@@ -48,7 +48,7 @@ class BarChartSample2State extends State<BarChartSample2> {
   }
 
   Future<List<String>> getAllItems() async {
-    List<GetData> getdata = [];
+  
     final getAllData = await FirebaseFirestore.instance
         .collection('report')
         .doc(DateFormat('dd-MM-yyyy').format(date))

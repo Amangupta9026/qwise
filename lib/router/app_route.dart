@@ -143,20 +143,18 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
       return const NotificationScreen();
     },
   ),
-   GoRoute(
+  GoRoute(
     path: RouteNames.helpSupport,
     name: RouteNames.helpSupport,
     builder: (context, state) {
       return const HelpSupport();
     },
   ),
-
   GoRoute(
     path: RouteNames.privacyPolicy,
     builder: (context, state) {
       return const PrivacyScreen();
     },
   ),
- 
   ...adminRoutes,
 ]);

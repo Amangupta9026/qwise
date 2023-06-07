@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:qwise/provider/course_videos_notifier.dart';
 import 'package:qwise/utils/file_collection.dart';
-
-import '../../widget/pod_player.dart';
+import 'package:qwise/widget/pod_player.dart';
 
 class CourseView extends StatelessWidget {
   const CourseView({super.key});
@@ -20,6 +19,28 @@ class CourseView extends StatelessWidget {
             ref.init();
             return Column(
               children: [
+                Container(
+                  padding: const EdgeInsets.fromLTRB(20, 16, 16, 15),
+                  decoration: AppUtils.decoration1(),
+                  child: Row(children: [
+                    InkWell(
+                        onTap: () {
+                          context
+                              .read<CourseVideoNotifier>()
+                              .podPlayerController
+                              ?.pause();
+                          context.pop();
+                        },
+                        child: const Icon(Icons.arrow_back, size: 30)),
+                    const Spacer(),
+                    const Text('Video',
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: colortext,
+                            fontWeight: FontWeight.bold)),
+                    const Spacer(),
+                  ]),
+                ),
                 PodPlayerView(
                   videoUrl: ref.currentVideo?.url ?? ref.videos[0].url,
                   videoThumbnail: ref.currentVideo?.thumbnails.standardResUrl ??

@@ -18,7 +18,7 @@ class MainScreen extends StatelessWidget {
       case 0:
         return const HomeScreen();
       case 1:
-        return EnrolledCourses();
+        return EnrolledCourses(  );
       case 2:
         return const AiChatScreen();
       case 3:

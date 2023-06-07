@@ -70,9 +70,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     foregroundColor: MaterialStateProperty.all(primaryColor),
                     backgroundColor: MaterialStateProperty.all(
                       ref.colorChange ? primaryColor : Colors.grey,
-                      // ref.emailController.text.isNotEmpty
-                      //     ? primaryColor
-                      //     : Colors.grey
+                      
                     )),
                 onPressed: () {
                   ref.onNextScreen(context);

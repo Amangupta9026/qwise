@@ -108,6 +108,7 @@ class EnrolledCourses extends StatelessWidget {
                                               .setVideos(videos);
                                           context.push(
                                             RouteNames.courseView,
+                                            
                                           );
                                         },
                                         child: SizedBox(

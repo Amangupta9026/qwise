@@ -55,20 +55,7 @@ class PasswordUpdatedSuccessfullyScreen extends StatelessWidget {
                     foregroundColor: MaterialStateProperty.all(primaryColor),
                     backgroundColor: MaterialStateProperty.all(primaryColor)),
                 onPressed: () {
-                  // ref.nextScreen(context);
-                  if (ref.userNameController.text ==
-                      ref.passwordController.text) {
-                    context.pushReplacementNamed(RouteNames.signInScreen);
-                  } else {
-                    showMyDialog(
-                      context,
-                      'Password not match',
-                      'New and Confirm Password must be match',
-                      () {
-                        Navigator.of(context).pop();
-                      },
-                    );
-                  }
+                  context.pushReplacementNamed(RouteNames.signInScreen);
                 },
                 child: const Padding(
                   padding: EdgeInsets.symmetric(vertical: 15.0),
