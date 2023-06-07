@@ -57,8 +57,8 @@ class BarChartSample2State extends State<BarChartSample2> {
     List<String> items =
         getAllData.docs.map((e) => e.data()['title'].toString()).toList();
 
-       List<GetData> items =
-        getAllData.docs.map((e) => e.data()['title'].toString()).toList();
+    //  List<GetData> items =
+    //   getAllData.docs.map((e) => e.data()['title'].toString()).toList();
 
     final getEveningAllData = await FirebaseFirestore.instance
         .collection('report')
@@ -337,7 +337,7 @@ class BarChartSample2State extends State<BarChartSample2> {
                                 builder: (context, snapshot) {
                                   return ListView.builder(
                                       shrinkWrap: true,
-                                      itemCount: snapshot.data?.length,
+                                      itemCount: snapshot.data?.length ?? 0,
                                       itemBuilder: (context, int index) {
                                         return StreamBuilder(
                                             stream: FirebaseFirestore.instance
@@ -350,9 +350,10 @@ class BarChartSample2State extends State<BarChartSample2> {
                                             builder: (context, snapshot) {
                                               return Row(
                                                 children: [
-                                                  Text(
-                                                    snapshot.data?[index] ?? '',
-                                                    style: const TextStyle(
+                                                  const Text(
+                                                    'd',
+                                                    //   snapshot.data?[index] ?? '',
+                                                    style: TextStyle(
                                                       fontSize: 14,
                                                       color: Colors.black,
                                                       fontWeight:
