@@ -1,3 +1,5 @@
+// ignore_for_file: unrelated_type_equality_checks
+
 import 'package:go_router/go_router.dart';
 import 'package:qwise/auth/on_boarding_screen.dart/on_boarding_screen.dart';
 import 'package:qwise/auth/password/create_new_password.dart';
@@ -9,7 +11,6 @@ import 'package:qwise/home/home_screen.dart';
 import 'package:qwise/home/main_screen.dart';
 import 'package:qwise/home/notification/notification.dart';
 import 'package:qwise/home/recommended_courses/course_view_screen.dart';
-import 'package:qwise/local/prefs.dart';
 import 'package:qwise/profile/edit_profile.dart';
 import 'package:qwise/profile/help.dart';
 import 'package:qwise/router/routes_names.dart';
@@ -22,15 +23,21 @@ import '../home/recommended_courses/course_details/course_details.dart';
 import '../local/pref_names.dart';
 import '../privacy_policy.dart';
 
-bool isUserLogin = Prefs.getBool(PrefNames.isLogin) ?? false;
+//bool isUserLogin = Prefs.getBool(PrefNames.isLogin) ?? false;
 
 String getInitialRoute() {
-  switch (isUserLogin) {
-    case false:
-      return RouteNames.onBoarding;
-    default:
-      return RouteNames.main;
+  if (PrefNames.isLogin == 'isLogin') {
+    return RouteNames.main;
+  } else {
+    return RouteNames.onBoarding;
   }
+
+  // switch (isUserLogin) {
+  //   case false:
+  //     return RouteNames.onBoarding;
+  //   default:
+  //     return RouteNames.main;
+  // }
 }
 
 final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
@@ -87,7 +94,7 @@ final appRoute = GoRouter(initialLocation: getInitialRoute(), routes: [
     path: RouteNames.main,
     name: RouteNames.main,
     builder: (context, state) {
-      Prefs.setBool(PrefNames.isLogin, true);
+      //   Prefs.setValue(PrefNames.isLogin, 'true');
       return const MainScreen();
     },
   ),

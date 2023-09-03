@@ -12,13 +12,16 @@ void onTapGoogle(context) async {
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
   if (auth.currentUser != null) {
-     Prefs.setBool(PrefNames.isLogin, true);
+     Prefs.setValue(PrefNames.isLogin, 'true');
     GoRouter.of(context).pushReplacementNamed(RouteNames.main);
   } else {
+
     EasyLoading.show(status: 'loading...');
+       Prefs.setValue(PrefNames.isLogin, 'true');
     await googleSignIn.signIn();
     final GoogleSignInAccount? googleUser = googleSignIn.currentUser;
     if (googleUser != null) {
+       
       final GoogleSignInAuthentication googleAuth =
           await googleUser.authentication;
       final credential = GoogleAuthProvider.credential(

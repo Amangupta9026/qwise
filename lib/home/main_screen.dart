@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:qwise/home/ai_chat.dart';
@@ -7,6 +9,7 @@ import 'package:qwise/profile/profile_screen.dart';
 import 'package:qwise/provider/page_index_selector.dart';
 import 'package:qwise/utils/file_collection.dart';
 
+import '../local/pref_names.dart';
 import 'home_screen.dart';
 import 'notification/push_notification/firebase_messaging.dart';
 
@@ -32,6 +35,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Messaging.showMessage();
     UpdateChecker.checkForUpdate();
+    log(PrefNames.isLogin, name: 'isLogin');
     return Consumer<PageIndexSelectorNotifier>(builder: (context, ref, child) {
       return Scaffold(
         bottomNavigationBar: BottomBarDoubleBullet(

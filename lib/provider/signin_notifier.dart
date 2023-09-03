@@ -53,9 +53,9 @@ class SigninNotifer extends ChangeNotifier {
               email: userNameController.text,
               password: passwordController.text);
       if (credential.user != null) {
+        Prefs.setValue(PrefNames.isLogin, 'true');
         // ignore: use_build_context_synchronously
         context.pushReplacementNamed(RouteNames.main);
-        Prefs.setBool(PrefNames.isLogin, true);
       }
     } catch (e) {
       showMyDialog(

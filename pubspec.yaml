@@ -59,7 +59,7 @@ dependencies:
   random_avatar: ^0.0.8
 
   #S
-  shared_preferences: ^2.1.1
+  shared_preferences: ^2.1.2
 
   #T
   timeago: ^3.4.0

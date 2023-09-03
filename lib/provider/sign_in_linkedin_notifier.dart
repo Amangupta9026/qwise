@@ -61,7 +61,7 @@ linkedInLogin(BuildContext context) async {
           // EasyLoading.dismiss();
 
           log(result.toString());
-           Prefs.setBool(PrefNames.isLogin, true);
+           Prefs.setValue(PrefNames.isLogin, 'true');
           result != null && result!.isNotEmpty
               // ignore: use_build_context_synchronously
               ? context.pushReplacementNamed(RouteNames.main)

@@ -32,8 +32,10 @@ class ProfileScreen extends StatelessWidget {
         return BottomNavigationBarWidget(
           buttonName: 'Logout',
           onButtonPressed: () {
-            Prefs.setBool(PrefNames.isLogin, false);
-            ref.logout(context, FirebaseAuth.instance.currentUser?.email ?? '');
+            // Prefs.clearPrefs();
+            Prefs.setValue(PrefNames.isLogin, 'false');
+            log(PrefNames.isLogin);
+            //  ref.logout(context, FirebaseAuth.instance.currentUser?.email ?? '');
           },
         );
       }),

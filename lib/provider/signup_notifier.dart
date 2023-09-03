@@ -60,7 +60,7 @@ class SignUpNotifier extends ChangeNotifier {
           '${firstNameController.text} ${lastNameController.text}');
       createUser();
       
-       Prefs.setBool(PrefNames.isLogin, true);
+       Prefs.setValue(PrefNames.isLogin, 'true');
       context.pushReplacementNamed(RouteNames.main);
     }
     EasyLoading.dismiss();

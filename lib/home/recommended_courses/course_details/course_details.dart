@@ -17,7 +17,7 @@ class CourseDetails extends StatelessWidget {
   final String courseId;
   CourseDetails({required this.courseId, super.key});
 
-  final yt = YoutubeExplode();
+ final yt = YoutubeExplode();
 
   @override
   Widget build(BuildContext context) {

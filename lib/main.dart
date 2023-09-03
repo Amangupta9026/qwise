@@ -7,8 +7,6 @@ import 'package:qwise/utils/file_collection.dart';
 import 'firebase_options.dart';
 import 'local/prefs.dart';
 
-void checkUserLoggedIn() async {}
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);

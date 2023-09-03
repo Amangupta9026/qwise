@@ -1,7 +1,4 @@
 import 'dart:developer';
-
-import 'package:qwise/provider/sign_in_linkedin_notifier.dart';
-
 import '../../provider/google_sign_in.dart';
 import '../../utils/file_collection.dart';
 
@@ -221,20 +218,20 @@ class SignUpScreen extends StatelessWidget {
                     context.pop();
                   });
             }),
-            const SizedBox(width: 20.0),
-            iconReplaceFun(MdiIcons.linkedin, () {
-              showMyDialog(
-                  context,
-                  '“QWise Learning” Wants to use linkedin.com” to sign up',
-                  'This allows the app and website to share information about you.',
-                  () {
-                    linkedInLogin(context);
-                  },
-                  istwobutton: true,
-                  actiontap1: () {
-                    context.pop();
-                  });
-            }),
+            // const SizedBox(width: 20.0),
+            // iconReplaceFun(MdiIcons.linkedin, () {
+            //   showMyDialog(
+            //       context,
+            //       '“QWise Learning” Wants to use linkedin.com” to sign up',
+            //       'This allows the app and website to share information about you.',
+            //       () {
+            //         linkedInLogin(context);
+            //       },
+            //       istwobutton: true,
+            //       actiontap1: () {
+            //         context.pop();
+            //       });
+            // }),
           ],
         ),
       ],
